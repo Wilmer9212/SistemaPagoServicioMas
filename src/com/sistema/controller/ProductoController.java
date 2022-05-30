@@ -6,6 +6,7 @@
 package com.sistema.controller;
 
 import com.sistema.modelo.ProductoDTO;
+import com.sistema.modelo.UnidadesMedidaDTO;
 import com.sistema.util.conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -100,37 +101,10 @@ public class ProductoController {
         return modificados;
     }
 
-    public ProductoDTO productoReciente() {
-        ProductoDTO producto = new ProductoDTO();
-        connect = con.connectDatabase();
-        try {
-            sql = "SELECT * FROM productos ORDER BY idproducto DESC limit 1";
-            stmt = connect.createStatement();
-            rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                producto = new ProductoDTO();
-                producto.setIdproducto(rs.getInt(1));
-                producto.setNombre(rs.getString(2));
-                producto.setPrecio(rs.getDouble(3));
-                producto.setPreciocliente(rs.getDouble(4));
-                producto.setStock(rs.getInt(5));
-                producto.setActivarpreciocliente(rs.getBoolean(6));
-                producto.setPreciodeproveedor(rs.getDouble(7));
-                producto.setIdcategoria(rs.getInt(8));
-                producto.setIdproveedor(rs.getInt(9));
-                producto.setIdunidadm(rs.getInt(10));
-            }
-            connect.close();
-        } catch (Exception e) {
-            System.out.println("Error al obtener producto ordenado:" + e.getMessage());
-        }
-        return producto;
-    }
-
     public boolean save(ProductoDTO producto) {
         boolean bandera = false;
         connect = con.connectDatabase();
-        System.out.println(""+producto);
+        System.out.println("" + producto);
         try {
             sql = "INSERT INTO productos VALUES(?,?,?,?,?,?,?,?,?,?)";
             ps = connect.prepareStatement(sql);
@@ -151,5 +125,68 @@ public class ProductoController {
             System.out.println("Error al  al insertar producto:" + e.getMessage());
         }
         return bandera;
+    }
+
+    public boolean update(ProductoDTO producto) {
+        boolean bandera = false;
+        connect = con.connectDatabase();
+        try {
+            sql = "UPDATE productos set nombre=?,precio=?,preciocliente=?,stock=?,activarpreciocliente=?,preciodeproveedor=?,idcategoria=?,idproveedor=?,idunidadm=? WHERE idproducto=?";
+            ps = connect.prepareStatement(sql);
+            ps.setString(1, producto.getNombre());
+            ps.setDouble(2, producto.getPrecio());
+            ps.setDouble(3,producto.getPreciocliente());
+            ps.setInt(4,producto.getStock());
+            ps.setBoolean(5, producto.isActivarpreciocliente());
+            ps.setDouble(6, producto.getPreciodeproveedor());
+            ps.setInt(7,producto.getIdcategoria());
+            ps.setInt(8,producto.getIdproveedor());
+            ps.setInt(9,producto.getIdunidadm());
+            ps.setInt(10,producto.getIdproducto());
+            ps.executeUpdate();
+            connect.close();
+            bandera = true;
+        } catch (Exception e) {
+            System.out.println("Error al  al modificar producto:" + e.getMessage());
+        }
+        return bandera;
+    }
+    
+     public boolean detelete(int id) {
+        boolean bandera = false;
+        connect = con.connectDatabase();
+        try {
+            sql = "DELETE FROM productos WHERE idproducto=?";
+            ps = connect.prepareStatement(sql);
+            ps.setInt(1,id);
+            ps.executeUpdate();
+            connect.close();
+            bandera = true;
+        } catch (Exception e) {
+            System.out.println("Error al  al eliminar producto:" + e.getMessage());
+        }
+        return bandera;
+    }
+
+    public int generarSecuenciaId() {
+        int c = 0;
+        connect = con.connectDatabase();
+
+        try {
+            sql = "SELECT * FROM productos ORDER BY idproducto DESC LIMIT 1";
+            stmt = connect.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                c = rs.getInt(1);
+            }
+            if (c == 0) {
+                c = 1;
+            } else {
+                c = c + 1;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error al generar numeracion productos:" + ex.getMessage());
+        }
+        return c;
     }
 }

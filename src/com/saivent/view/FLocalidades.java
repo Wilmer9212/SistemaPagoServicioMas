@@ -5,6 +5,7 @@
  */
 package com.saivent.view;
 
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.management.remote.JMXConnectorFactory.connect;
+import javax.swing.JComponent;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -33,9 +35,18 @@ public class FLocalidades extends javax.swing.JInternalFrame {
         Generarnumeracion();
         desabilitar();
         llenartb("");
-        llenarCB();
+        llenarCB();diseñoVentana();
     }
-
+    
+    public void diseñoVentana(){
+        Dimension DimensionBarra = null;
+        JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        DimensionBarra = Barra.getPreferredSize();
+        Barra.setSize(0, 0);
+        Barra.setPreferredSize(new Dimension(0, 0));
+        repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -139,7 +150,7 @@ public class FLocalidades extends javax.swing.JInternalFrame {
         });
 
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir ventana.png"))); // NOI18N
-        btnsalir.setText("SALIR");
+        btnsalir.setText("CERRAR");
         btnsalir.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         btnsalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnsalir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);

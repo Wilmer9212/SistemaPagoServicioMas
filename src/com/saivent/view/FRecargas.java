@@ -13,6 +13,7 @@ import com.taecel.modelo.ProductsDTO;
 import com.taecel.modelo.carriersModelo;
 import com.taecel.modelo.productoModel;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -27,6 +28,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -53,6 +55,17 @@ public class FRecargas extends javax.swing.JInternalFrame {
 
     public FRecargas() {
         initComponents();
+        diseñoVentana();
+    }
+
+    public void diseñoVentana() {
+        Dimension DimensionBarra = null;
+        JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        DimensionBarra = Barra.getPreferredSize();
+        Barra.setSize(0, 0);
+        Barra.setPreferredSize(new Dimension(0, 0));
+        repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -87,6 +100,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
         cbProductos = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnsalir = new javax.swing.JButton();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -223,8 +237,8 @@ public class FRecargas extends javax.swing.JInternalFrame {
             .addGroup(loadingLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(porcentaje, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(porcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -264,19 +278,33 @@ public class FRecargas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir ventana.png"))); // NOI18N
+        btnsalir.setText("CERRAR");
+        btnsalir.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnsalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnsalir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnsalir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(250, Short.MAX_VALUE))))
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(167, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnsalir)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +314,9 @@ public class FRecargas extends javax.swing.JInternalFrame {
                     .addComponent(cbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -294,9 +324,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,9 +335,9 @@ public class FRecargas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProductosActionPerformed
-         jTable1.removeAll();
+        jTable1.removeAll();
         if (cbProductos.getSelectedIndex() == 0) {
-            
+
             loading.setSize(430, 90);
             loading.setLocationRelativeTo(null);
             loading.setVisible(true);
@@ -373,7 +401,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
             time.start();
         }///Aqui termina productos tiempo aire
         else if (cbProductos.getSelectedIndex() == 1) {
-           
+
             loading.setSize(430, 90);
             loading.setLocationRelativeTo(null);
             loading.setVisible(true);
@@ -400,7 +428,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
                             JLabel label = new JLabel();
                             Object[] fila = new Object[2];
                             carriersModelo carrier = carriers.get(i);
-                            System.out.println(""+carrier.getCategoria());
+                            System.out.println("" + carrier.getCategoria());
                             if (carrier.getCategoria().toLowerCase().contains("paque")) {
                                 try {
                                     System.setProperty("http.agent", "Chrome");
@@ -442,9 +470,9 @@ public class FRecargas extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int fila = jTable1.getSelectedRow();
-        
+
         try {
-            llenarComboProductos(jTable1.getValueAt(fila, 0).toString(),cbProductos.getSelectedItem().toString().toUpperCase());
+            llenarComboProductos(jTable1.getValueAt(fila, 0).toString(), cbProductos.getSelectedItem().toString().toUpperCase());
             JDialog dialogov = new JDialog(jdVender, "MONTO RECARGA", true);
             dialogov.add(jdVender.getContentPane());
             dialogov.setSize(310, 400);
@@ -471,7 +499,11 @@ public class FRecargas extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_cbMontoCompaActionPerformed
 
-    public void llenarComboProductos(String compa,String serv) {
+    private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnsalirActionPerformed
+
+    public void llenarComboProductos(String compa, String serv) {
         cbMontoCompa.removeAllItems();
         limpiarControlesRecargar();
         try {
@@ -510,14 +542,14 @@ public class FRecargas extends javax.swing.JInternalFrame {
     }
 
     public void showBarProgress(boolean bandera) {
-        try {            
+        try {
             JDialog dialogov = new JDialog(loading, "MONTO RECARGA", true);
             dialogov.add(loading.getContentPane());
             dialogov.setSize(430, 90);
             dialogov.setLocationRelativeTo(null);
             ///Border bordejpanel = new TitledBorder(new EtchedBorder(), jTable1.getValueAt(fila, 0).toString());
             //pnlVentas.setBorder(bordejpanel);
-        
+
             dialogov.setVisible(true);
 
         } catch (Exception e) {
@@ -526,14 +558,15 @@ public class FRecargas extends javax.swing.JInternalFrame {
 
     }
 
-    public void limpiarControlesRecargar(){
+    public void limpiarControlesRecargar() {
         jlabelCostoProducto.setText("");
         jlabelComisionServicio.setText("");
         jlabelVigencia.setText("");
         jTextArea1.setText("");
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnsalir;
     private javax.swing.JComboBox<String> cbMontoCompa;
     public javax.swing.JComboBox<String> cbProductos;
     private javax.swing.JButton jButton1;

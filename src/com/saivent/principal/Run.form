@@ -67,6 +67,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Pago de servicios"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -200,6 +203,9 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Noto Sans" size="12" style="1"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Unidades"/>
                   </Properties>
                   <Events>
@@ -208,6 +214,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Noto Sans" size="12" style="1"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Categorias"/>
                   </Properties>
                   <Events>
@@ -216,6 +225,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Noto Sans" size="12" style="1"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Estados"/>
                   </Properties>
                   <Events>
@@ -224,6 +236,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Noto Sans" size="12" style="1"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Municipios"/>
                   </Properties>
                   <Events>
@@ -232,6 +247,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem14">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Noto Sans" size="12" style="1"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Localidades"/>
                   </Properties>
                   <Events>

@@ -106,6 +106,9 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Verdana" size="14" style="1"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/recursos/aceptar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Aceptar"/>
               </Properties>
               <Events>
@@ -116,6 +119,9 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Verdana" size="14" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/recursos/cancelar.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
               </Properties>
@@ -169,14 +175,14 @@
                       </Group>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cbproveedor" alignment="0" pref="519" max="32767" attributes="0"/>
+                          <Component id="cbproveedor" alignment="0" pref="483" max="32767" attributes="0"/>
                           <Component id="spcantidad" alignment="0" max="32767" attributes="0"/>
                           <Component id="spppublico" max="32767" attributes="0"/>
                           <Component id="sppcliente" alignment="0" max="32767" attributes="0"/>
                           <Component id="cbunidad" alignment="1" max="32767" attributes="0"/>
                           <Component id="txtnombre" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtcod" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cbcategoria" alignment="0" pref="519" max="32767" attributes="0"/>
+                          <Component id="cbcategoria" alignment="0" pref="483" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
@@ -397,7 +403,7 @@
                           <Component id="btneliminar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="padquisicion" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="272" max="32767" attributes="0"/>
+                          <EmptySpace pref="234" max="32767" attributes="0"/>
                           <Component id="btnsalir" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -481,6 +487,7 @@
             <Property name="text" type="java.lang.String" value="ELIMINAR"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btneliminarMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btneliminarActionPerformed"/>
           </Events>
         </Component>
@@ -489,7 +496,10 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Verdana" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Salir"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/recursos/salir ventana.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="CERRAR"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnsalirActionPerformed"/>

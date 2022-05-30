@@ -10,6 +10,8 @@ import com.saivent.util.Validaciones;
 import com.sistema.controller.ProveedorController;
 import com.sistema.modelo.ProveedorDTO;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,7 +22,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Elliot
  */
 public class FProveedor extends javax.swing.JInternalFrame {
-    ProveedorController  proveedorController = new ProveedorController();
+
+    ProveedorController proveedorController = new ProveedorController();
     DefaultTableModel dtm = new DefaultTableModel();
     Validaciones val = new Validaciones();
 
@@ -31,8 +34,8 @@ public class FProveedor extends javax.swing.JInternalFrame {
     }
 
     private void carga_informacion_Prov(String nombre) {
-        List<ProveedorDTO>listaProv = null;
-        String[]titulos = {"CODIGO","NOMBRE","EMAIL","TELEFONO"};
+        List<ProveedorDTO> listaProv = null;
+        String[] titulos = {"CODIGO", "NOMBRE", "EMAIL", "TELEFONO"};
         dtm = new DefaultTableModel(null, titulos);
         try {
             Object o[] = null;
@@ -42,13 +45,13 @@ public class FProveedor extends javax.swing.JInternalFrame {
                 dtm.setValueAt(listaProv.get(i).getIdproveedor(), i, 0);
                 dtm.setValueAt(listaProv.get(i).getNombre(), i, 1);
                 dtm.setValueAt(listaProv.get(i).getMail(), i, 2);
-                dtm.setValueAt(listaProv.get(i).getTelefono(), i, 3);                 
+                dtm.setValueAt(listaProv.get(i).getTelefono(), i, 3);
             }
             tbcontenido.setModel(dtm);
 
         } catch (Exception e) {
-            System.out.println("Error al listar proveedores:"+e.getMessage());
-          }
+            System.out.println("Error al listar proveedores:" + e.getMessage());
+        }
     }
 
     private List<ProveedorDTO> buscarProv(String nombre) {
@@ -63,7 +66,7 @@ public class FProveedor extends javax.swing.JInternalFrame {
 
         txttelefono.setEnabled(false);
         txtemail.setEnabled(false);
-        empresa.setEnabled(false);
+        txtEmpresa.setEnabled(false);
         btnaceptar.setEnabled(false);
         btncancelar.setEnabled(false);
         btneliminar.setEnabled(false);
@@ -76,7 +79,7 @@ public class FProveedor extends javax.swing.JInternalFrame {
         txtcodigo.setEnabled(true);
         txttelefono.setEnabled(true);
         txtemail.setEnabled(true);
-        empresa.setEnabled(true);
+        txtEmpresa.setEnabled(true);
         btnaceptar.setEnabled(true);
         btncancelar.setEnabled(true);
 
@@ -86,7 +89,7 @@ public class FProveedor extends javax.swing.JInternalFrame {
 
         txttelefono.setText("");
         txtemail.setText("");
-        empresa.setText("");
+        txtEmpresa.setText("");
         txtcodigo.setText("");
     }
 
@@ -97,11 +100,11 @@ public class FProveedor extends javax.swing.JInternalFrame {
             msj += "NO SE INSERTO CODIGO \n";
             es = false;
         }
-        if (empresa.getText().isEmpty() == true) {
+        if (txtEmpresa.getText().isEmpty() == true) {
             msj += "NO SE INSERTO NOMBRE \n";
             es = false;
-        }     
-         
+        }
+
         if (msj.length() >= 6) {
             JOptionPane.showMessageDialog(null, msj, "", JOptionPane.WARNING_MESSAGE);
 
@@ -133,7 +136,7 @@ public class FProveedor extends javax.swing.JInternalFrame {
         j2 = new javax.swing.JLabel();
         txttelefono = new javax.swing.JTextField();
         j4 = new javax.swing.JLabel();
-        empresa = new javax.swing.JTextField();
+        txtEmpresa = new javax.swing.JTextField();
         j5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         pnlLista = new javax.swing.JPanel();
@@ -205,10 +208,10 @@ public class FProveedor extends javax.swing.JInternalFrame {
         j4.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         j4.setText("Telefono");
 
-        empresa.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        empresa.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtEmpresa.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        txtEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                empresaKeyReleased(evt);
+                txtEmpresaKeyReleased(evt);
             }
         });
 
@@ -238,14 +241,14 @@ public class FProveedor extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlDatosLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
+                                .addGap(12, 12, 12)
                                 .addComponent(btnaceptar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btncancelar))
                             .addComponent(txttelefono)
                             .addComponent(txtcodigo)
                             .addComponent(txtemail, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(empresa))))
+                            .addComponent(txtEmpresa))))
                 .addGap(15, 15, 15))
         );
         pnlDatosLayout.setVerticalGroup(
@@ -259,24 +262,21 @@ public class FProveedor extends javax.swing.JInternalFrame {
                     .addComponent(j1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(empresa, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 32, Short.MAX_VALUE)
                     .addComponent(j2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txttelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(txttelefono)
                     .addComponent(j4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(j5))
+                .addGap(18, 18, 18)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(j5)
-                        .addGap(23, 23, 23)
-                        .addComponent(btnaceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btncancelar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnaceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pnlLista.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -310,7 +310,7 @@ public class FProveedor extends javax.swing.JInternalFrame {
 
         btnsalir.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir ventana.png"))); // NOI18N
-        btnsalir.setText("Salir");
+        btnsalir.setText("CERRAR");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -364,7 +364,7 @@ public class FProveedor extends javax.swing.JInternalFrame {
                         .addComponent(btnmodificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btneliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                         .addComponent(btnsalir))
                     .addComponent(jScrollPane1)
                     .addGroup(pnlListaLayout.createSequentialGroup()
@@ -378,10 +378,10 @@ public class FProveedor extends javax.swing.JInternalFrame {
             .addGroup(pnlListaLayout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(pnlListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                 .addGroup(pnlListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlListaLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -410,7 +410,6 @@ public class FProveedor extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -423,20 +422,29 @@ public class FProveedor extends javax.swing.JInternalFrame {
     private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
         ProveedorDTO prov = new ProveedorDTO();
         if (this.ValEntradas() == true) {
-               try {
-              /*  prov.setIdproveedor(prov);
-                prov =new Proveedor(Integer.parseInt(txtcodigo.getText()),empresa.getText(),txttelefono.getText(),txtemail.getText());
+            try {
+                prov.setIdproveedor(Integer.parseInt(txtcodigo.getText()));
+                prov.setNombre(txtEmpresa.getText());
+                prov.setMail(txtemail.getText());
+                prov.setTelefono(txttelefono.getText());
+
                 int confirmar = JOptionPane.showConfirmDialog(null, "¿DATOS CORRECTOS?", "", JOptionPane.YES_NO_OPTION);
                 if (confirmar == JOptionPane.YES_NO_OPTION) {
-                    CProv.create(prov);
-                    carga_informacion_Prov("");
-                    limpiarC();
-                    Desabilitar();
-                }*/
+                    boolean guardar = proveedorController.save(prov);
+                    if (guardar) {
+                        new MetodosValidar().ok();
+                        carga_informacion_Prov("");
+                        limpiarC();
+                        Desabilitar();
+                    } else {
+                        new MetodosValidar().error();
+                    }
+
+                }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"Error al registrar proveedor:"+e.getMessage());
+                JOptionPane.showMessageDialog(null, "Error al registrar proveedor:" + e.getMessage());
             }
-            }
+        }
     }//GEN-LAST:event_btnaceptarActionPerformed
 
 
@@ -458,42 +466,51 @@ public class FProveedor extends javax.swing.JInternalFrame {
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         int fila = tbcontenido.getSelectedRow();
-        /*ProveedorJpaController CProv = new ProveedorJpaController();
-     
+            
             try {
                 int confirmar = JOptionPane.showConfirmDialog(null, "¿ELIMINAR DATOS?", "", JOptionPane.YES_NO_OPTION);
                 if (confirmar == JOptionPane.YES_NO_OPTION) {
-                    CProv.destroy(Integer.parseInt(txtcodigo.getText()));
+                    boolean b = proveedorController.delete(Integer.parseInt(txtcodigo.getText()));
+                    if(b){
                     Desabilitar();
                     limpiarC();
                     btnmodificar.setEnabled(false);
                     btneliminar.setEnabled(false);
                     carga_informacion_Prov("");
+                    new MetodosValidar().ok_eliminar();
+                    }else{
+                        new MetodosValidar().error_eliminar();
+                    }
                 }
             } catch (Exception ex) {
-                
-            }*/
+                System.out.println("Error al eliminar:"+ex.getMessage());
+            }
     }//GEN-LAST:event_btneliminarActionPerformed
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
-        /*Proveedor prov = new Proveedor();
-        ProveedorJpaController CProv = new ProveedorJpaController();
+        ProveedorDTO prov = new ProveedorDTO();
         if (ValEntradas() == true) {
             try {
                 prov.setIdproveedor(Integer.parseInt(txtcodigo.getText()));
-                prov.setNombre(empresa.getText());
+                prov.setNombre(txtEmpresa.getText());
                 prov.setTelefono(txttelefono.getText());
                 prov.setMail(txtemail.getText());
                 int confirmar = JOptionPane.showConfirmDialog(null, "¿DATOS CORRECTOS?", "", JOptionPane.YES_NO_OPTION);
                 if (confirmar == JOptionPane.YES_NO_OPTION) {
-                    CProv.edit(prov);
-                    carga_informacion_Prov("");
-                    limpiarC();
-                    Desabilitar();
+                    boolean bandera = proveedorController.update(prov);
+                    if (bandera) {
+                        new MetodosValidar().ok_modificar();
+                        carga_informacion_Prov("");
+                        limpiarC();
+                        Desabilitar();
+                    } else {
+                        new MetodosValidar().error_modificar();
+                    }
+
                 }
             } catch (Exception e) {
 
             }
-        }*/
+        }
 
     }//GEN-LAST:event_btnmodificarActionPerformed
 
@@ -510,9 +527,9 @@ public class FProveedor extends javax.swing.JInternalFrame {
 //        MetodosValidar.soloNumeros(txttelefono, 14);
     }//GEN-LAST:event_txtemailKeyPressed
 
-    private void empresaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_empresaKeyReleased
-        empresa.setText(this.empresa.getText().toUpperCase());
-    }//GEN-LAST:event_empresaKeyReleased
+    private void txtEmpresaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpresaKeyReleased
+        txtEmpresa.setText(this.txtEmpresa.getText().toUpperCase());
+    }//GEN-LAST:event_txtEmpresaKeyReleased
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
         carga_informacion_Prov(txtbuscar.getText());
@@ -528,15 +545,15 @@ public class FProveedor extends javax.swing.JInternalFrame {
             btnnuevo.setEnabled(false);
             btnaceptar.setEnabled(false);
             txtcodigo.setText(tbcontenido.getValueAt(filaS, 0).toString());
-            empresa.setText(tbcontenido.getValueAt(filaS, 1).toString());
-            txttelefono.setText(tbcontenido.getValueAt(filaS, 2).toString());
-            txtemail.setText(tbcontenido.getValueAt(filaS, 3).toString());
+            txtEmpresa.setText(tbcontenido.getValueAt(filaS, 1).toString());
+            txttelefono.setText(tbcontenido.getValueAt(filaS, 3).toString());
+            txtemail.setText(tbcontenido.getValueAt(filaS, 2).toString());
 
         }
     }//GEN-LAST:event_tbcontenidoMouseClicked
 
     private void txtcodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyReleased
-       //MetodosValidar.soloNumeros(txtcodigo, 6);
+        //MetodosValidar.soloNumeros(txtcodigo, 6);
     }//GEN-LAST:event_txtcodigoKeyReleased
 
     private void txtemailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyTyped
@@ -551,9 +568,8 @@ public class FProveedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtemailKeyReleased
 
     private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
-         
-    }//GEN-LAST:event_txttelefonoKeyTyped
 
+    }//GEN-LAST:event_txttelefonoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -563,7 +579,6 @@ public class FProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnmodificar;
     private javax.swing.JButton btnnuevo;
     private javax.swing.JButton btnsalir;
-    private javax.swing.JTextField empresa;
     private javax.swing.JLabel j1;
     private javax.swing.JLabel j2;
     private javax.swing.JLabel j4;
@@ -574,6 +589,7 @@ public class FProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlDatos;
     private javax.swing.JPanel pnlLista;
     private javax.swing.JTable tbcontenido;
+    private javax.swing.JTextField txtEmpresa;
     private javax.swing.JTextField txtbuscar;
     private javax.swing.JTextField txtcodigo;
     private javax.swing.JTextField txtemail;

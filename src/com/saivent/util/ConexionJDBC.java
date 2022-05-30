@@ -17,8 +17,8 @@ public class ConexionJDBC {
      Connection connection = null;
      public Connection connectDatabase() {
         String url = "";
-        String host="localhost";
-        String database = "sivent";
+        String host="192.168.99.201";
+        String database = "mitras31oct21_wilmer";
         try {
             // We register the PostgreSQL driver
             // Registramos el driver de PostgresSQL
@@ -32,7 +32,7 @@ public class ConexionJDBC {
             // Conectamos con la base de datos
             connection = DriverManager.getConnection(
                     url,
-                    "postgres","root");           
+                    "saicoop","slufpana?");           
             boolean valid = connection.isValid(50000);
             System.out.println(valid ? "TEST OK" : "TEST FAIL");
         } catch (java.sql.SQLException sqle) { 

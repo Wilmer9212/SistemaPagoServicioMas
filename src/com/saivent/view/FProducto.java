@@ -5,6 +5,7 @@
  */
 package com.saivent.view;
 
+import com.saivent.util.MetodosValidar;
 import com.sistema.controller.CategoriaController;
 import com.sistema.controller.ProductoController;
 import com.sistema.controller.ProveedorController;
@@ -28,6 +29,7 @@ import javax.swing.JSpinner;
  * @author Sistemas
  */
 public class FProducto extends javax.swing.JInternalFrame {
+
     DefaultComboBoxModel dfmu = new DefaultComboBoxModel();
     DefaultComboBoxModel dfmp = new DefaultComboBoxModel();
     DefaultTableModel dtm = new DefaultTableModel();//Cree instancia de una tabla
@@ -41,12 +43,19 @@ public class FProducto extends javax.swing.JInternalFrame {
 
     public FProducto() {
         initComponents();
-        llenarTbProductos();//ListarProductos("");
+        llenarTbProductos("");
         desabPanCon();
         this.btnnuevo.requestFocusInWindow();
         this.btnmodificar.setEnabled(false);
         this.btneliminar.setEnabled(false);
         padquisicion.setVisible(false);
+        llenarCategoria();
+        llenarProveedores();
+        llenarUnidades();
+        diseñoVentana();
+    }
+
+    public void diseñoVentana() {
         Dimension DimensionBarra = null;
         JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
         Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
@@ -54,18 +63,15 @@ public class FProducto extends javax.swing.JInternalFrame {
         Barra.setSize(0, 0);
         Barra.setPreferredSize(new Dimension(0, 0));
         repaint();
-        llenarCategoria();
-        llenarProveedores();
-        llenarUnidades();
-
     }
 
     public void llenarUnidades() {
         UnidadesMedidaController unidad = new UnidadesMedidaController();
-        for (int i = 0; i < unidad.unidadesAll().size(); i++) {
-            cbunidad.addItem(unidad.unidadesAll().get(i).getDescripcion());
+        for (int i = 0; i < unidad.unidadesAll("").size(); i++) {
+            cbunidad.addItem(unidad.unidadesAll("").get(i).getDescripcion());
         }
     }
+
     public void llenarProveedores() {
         ProveedorController controllerProv = new ProveedorController();
         for (int i = 0; i < controllerProv.proveedoresAll("").size(); i++) {
@@ -75,8 +81,8 @@ public class FProducto extends javax.swing.JInternalFrame {
 
     public void llenarCategoria() {
         CategoriaController controllerCat = new CategoriaController();
-        for (int i = 0; i < controllerCat.categoriasAll().size(); i++) {
-            cbcategoria.addItem(controllerCat.categoriasAll().get(i).getDescripcion());
+        for (int i = 0; i < controllerCat.categoriasAll("").size(); i++) {
+            cbcategoria.addItem(controllerCat.categoriasAll("").get(i).getDescripcion());
         }
     }
 
@@ -99,6 +105,7 @@ public class FProducto extends javax.swing.JInternalFrame {
         btncancelar.setEnabled(false);
         cbcategoria.setEnabled(false);
         jLabelCat.setEnabled(false);
+        btnnuevo.setEnabled(true);
     }
 
     public void habPanCon() {
@@ -208,8 +215,8 @@ public class FProducto extends javax.swing.JInternalFrame {
             spppublico.setValue(Double.parseDouble(tbproductos.getValueAt(fseleccionada, 2).toString()));
             spcantidad.setValue(Integer.parseInt(tbproductos.getValueAt(fseleccionada, 4).toString()));
             cbproveedor.setSelectedItem(tbproductos.getValueAt(fseleccionada, 8).toString());
-            cbcategoria.setSelectedItem(tbproductos.getValueAt(fseleccionada,7).toString());
-           // padquisicion.setText(tbproductos.getValueAt(fseleccionada, 7).toString());
+            cbcategoria.setSelectedItem(tbproductos.getValueAt(fseleccionada, 7).toString());
+            // padquisicion.setText(tbproductos.getValueAt(fseleccionada, 7).toString());
             btnaceptar.setEnabled(false);
             btnnuevo.setEnabled(false);
         }
@@ -255,6 +262,7 @@ public class FProducto extends javax.swing.JInternalFrame {
         pnlDatos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         btnaceptar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/aceptar.png"))); // NOI18N
         btnaceptar.setText("Aceptar");
         btnaceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,6 +271,7 @@ public class FProducto extends javax.swing.JInternalFrame {
         });
 
         btncancelar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancelar.png"))); // NOI18N
         btncancelar.setText("Cancelar");
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -373,14 +382,14 @@ public class FProducto extends javax.swing.JInternalFrame {
                             .addComponent(jLabelCat, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(30, 30, 30)
                 .addGroup(pcontenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbproveedor, 0, 519, Short.MAX_VALUE)
+                    .addComponent(cbproveedor, 0, 483, Short.MAX_VALUE)
                     .addComponent(spcantidad)
                     .addComponent(spppublico)
                     .addComponent(sppcliente)
                     .addComponent(cbunidad, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtnombre)
                     .addComponent(txtcod)
-                    .addComponent(cbcategoria, 0, 519, Short.MAX_VALUE))
+                    .addComponent(cbcategoria, 0, 483, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
         pcontenidoLayout.setVerticalGroup(
@@ -477,6 +486,11 @@ public class FProducto extends javax.swing.JInternalFrame {
         btneliminar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         btneliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eliminar.png"))); // NOI18N
         btneliminar.setText("ELIMINAR");
+        btneliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btneliminarMouseClicked(evt);
+            }
+        });
         btneliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btneliminarActionPerformed(evt);
@@ -484,7 +498,8 @@ public class FProducto extends javax.swing.JInternalFrame {
         });
 
         btnsalir.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        btnsalir.setText("Salir");
+        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir ventana.png"))); // NOI18N
+        btnsalir.setText("CERRAR");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -539,7 +554,7 @@ public class FProducto extends javax.swing.JInternalFrame {
                         .addComponent(btneliminar)
                         .addGap(31, 31, 31)
                         .addComponent(padquisicion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
                         .addComponent(btnsalir)))
                 .addContainerGap())
         );
@@ -614,13 +629,14 @@ public class FProducto extends javax.swing.JInternalFrame {
                     pr.setIdunidadm(uni.getIdunidadm());
                     boolean bandera = productosController.save(pr);
                     if (bandera) {
-                        JOptionPane.showMessageDialog(null, "¡¡¡::EXITO::!!!", "", JOptionPane.INFORMATION_MESSAGE, icono);
+                        new MetodosValidar().ok();
+                        limpiarC();
+                        llenarTbProductos("");
+                        desabPanCon();
                     } else {
-                        JOptionPane.showMessageDialog(null, "ERRO AL GUARDAR PRODUCTO", "", JOptionPane.ERROR_MESSAGE);
+                        new MetodosValidar().error();
                     }
                 }
-                limpiarC();
-                llenarTbProductos();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO AL GUARDAR PRODUCTO:" + e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
@@ -639,20 +655,79 @@ public class FProducto extends javax.swing.JInternalFrame {
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         habPanCon();
-        txtcod.setText(String.valueOf(leerCodigoProductos()));       
+        txtcod.setText(String.valueOf(leerCodigoProductos()));
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
-        // ListarProductos(txtBuscar.getText());
+        llenarTbProductos(txtBuscar.getText());
         txtBuscar.setText(this.txtBuscar.getText().toUpperCase());
 
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
+        try {
+            ProductoDTO pr = new ProductoDTO();
+            double pad = 0;
+            if (valEntradas() == true) {
+                int confirmar2 = JOptionPane.showConfirmDialog(null, "¿INGRESAR PRECIO DE AQUISICION?", "", JOptionPane.YES_NO_OPTION);
+                if (confirmar2 == JOptionPane.YES_OPTION) {
+                    pad = Double.parseDouble(JOptionPane.showInputDialog("PRECIO AQUIRIDO"));
+                }
+                int confirmar = JOptionPane.showConfirmDialog(null, "¿MDIFICAR?", "", JOptionPane.YES_NO_OPTION);
+                if (confirmar == JOptionPane.YES_OPTION) {
+                    pr.setIdproducto(Integer.parseInt(txtcod.getText()));
+                    pr.setNombre(txtnombre.getText());
+                    pr.setPrecio(Double.parseDouble(spppublico.getValue().toString()));
+                    if (Double.parseDouble(sppcliente.getValue().toString()) == 0.0) {
+                        pr.setPreciocliente(0.0);
+                        pr.setActivarpreciocliente(false);
+                    } else {
+                        pr.setPreciocliente(Double.parseDouble(sppcliente.getValue().toString()));
+                        pr.setActivarpreciocliente(true);
+                    }
+                    pr.setStock(Integer.parseInt(spcantidad.getValue().toString()));
+                    pr.setPreciodeproveedor(pad);
 
+                    CategoriaDTO cat = categoriaController.categoriaByNombre(cbcategoria.getSelectedItem().toString());
+                    pr.setIdcategoria(cat.getIdcategoria());
+                    ProveedorDTO prove = proveedoresController.proveedorByNombre(cbproveedor.getSelectedItem().toString());
+                    pr.setIdproveedor(prove.getIdproveedor());
+                    UnidadesMedidaDTO uni = unidadController.unidadByNombre(cbunidad.getSelectedItem().toString());
+                    pr.setIdunidadm(uni.getIdunidadm());
+                    boolean bandera = productosController.update(pr);
+                    if (bandera) {
+                        new MetodosValidar().ok_modificar();
+                        limpiarC();
+                        llenarTbProductos("");
+                        desabPanCon();
+                    } else {
+                        new MetodosValidar().error_modificar();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO AL GUARDAR PRODUCTO:" + e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
+        try {
+            boolean ba = productosController.detelete(Integer.parseInt(txtcod.getText()));
+            int conf = JOptionPane.showConfirmDialog(null, "¿ELIMINAR REGISTROS?", "", JOptionPane.YES_NO_OPTION);
+            if (conf == JOptionPane.YES_OPTION) {
+                if (ba) {
+                    new MetodosValidar().ok_eliminar();
+                    desabPanCon();
+                    limpiarC();
+                    llenarTbProductos("");
+                } else {
+                    new MetodosValidar().error_eliminar();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al eliminar productos:" + e.getMessage());
+        }
+
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
@@ -669,14 +744,18 @@ public class FProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbproductosMouseClicked
 
     private void cbunidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbunidadActionPerformed
-      
+
     }//GEN-LAST:event_cbunidadActionPerformed
 
     private void txtcodKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodKeyReleased
 
     }//GEN-LAST:event_txtcodKeyReleased
 
-    public void llenarTbProductos() {
+    private void btneliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneliminarMouseClicked
+
+    }//GEN-LAST:event_btneliminarMouseClicked
+
+    public void llenarTbProductos(String valor) {
         try {
             dtm = new DefaultTableModel();
             dtm.addColumn("CODIGO");
@@ -690,7 +769,7 @@ public class FProducto extends javax.swing.JInternalFrame {
             dtm.addColumn("PROVEEDOR");
             dtm.addColumn("U.MEDIDA");
             tbproductos.setModel(dtm);
-            List<ProductoDTO> listaProductos = productosController.productosAll("");
+            List<ProductoDTO> listaProductos = productosController.productosAll(valor);
             for (int i = 0; i < listaProductos.size(); i++) {
                 ProductoDTO producto = listaProductos.get(i);
                 Object[] fila = new Object[11];
@@ -716,14 +795,12 @@ public class FProducto extends javax.swing.JInternalFrame {
             }
             tbproductos.setModel(dtm);
         } catch (Exception ex) {
-            System.out.println("Error al llenar la tabla de productos:"+ex.getMessage());     
+            System.out.println("Error al llenar la tabla de productos:" + ex.getMessage());
         }
     }
 
     public int leerCodigoProductos() {
-        ProductoController prodReciente = new ProductoController();
-        System.out.println("" + prodReciente.productoReciente().getIdproducto());
-        return prodReciente.productoReciente().getIdproducto() + 1;
+        return productosController.generarSecuenciaId();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

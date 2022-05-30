@@ -5,7 +5,7 @@
  */
 package com.saivent.view;
 
-
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,14 +22,24 @@ import javax.swing.table.DefaultTableModel;
  * @author Elliot
  */
 public class FMunicipios extends javax.swing.JInternalFrame {
- 
-   
+
     public FMunicipios() {
         initComponents();
-         Generarnumeracion();
+        Generarnumeracion();
         desabilitar();
         llenartb("");
         llenarCB();
+        diseñoVentana();
+    }
+
+    public void diseñoVentana() {
+        Dimension DimensionBarra = null;
+        JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        DimensionBarra = Barra.getPreferredSize();
+        Barra.setSize(0, 0);
+        Barra.setPreferredSize(new Dimension(0, 0));
+        repaint();
     }
 
     /**
@@ -136,7 +147,7 @@ public class FMunicipios extends javax.swing.JInternalFrame {
         });
 
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir ventana.png"))); // NOI18N
-        btnsalir.setText("SALIR");
+        btnsalir.setText("CERRAR");
         btnsalir.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         btnsalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnsalir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -284,7 +295,7 @@ public class FMunicipios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtdescripcionKeyReleased
 
     private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
-      /*  Municipio um =new Municipio();
+        /*  Municipio um =new Municipio();
         um.setIdmunicipio(Integer.parseInt(ttcodigo.getText()));
         um.setNombrem(txtdescripcion.getText());
         for(int i=0;i<listV.size();i++){
@@ -323,7 +334,7 @@ public class FMunicipios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
-      /*  Municipio um=new Municipio();
+        /*  Municipio um=new Municipio();
         List<Estado>lm=control2.findEstadoEntities();
         int ide = 0;
         if(valEntradas()==true){
@@ -352,7 +363,7 @@ public class FMunicipios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-       /* int preg=JOptionPane.showConfirmDialog(null,"¿ELIMINAR?","",JOptionPane.YES_NO_OPTION);
+        /* int preg=JOptionPane.showConfirmDialog(null,"¿ELIMINAR?","",JOptionPane.YES_NO_OPTION);
         if(preg==JOptionPane.YES_OPTION){
             try {
                 control1.destroy(Integer.parseInt(ttcodigo.getText()));
@@ -369,11 +380,11 @@ public class FMunicipios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
-       this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void tbmunicipioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbmunicipioMouseClicked
-       /* MouseE();
+        /* MouseE();
         int fis=tbmunicipio.getSelectedRow();
         List<Municipio>lm=control1.findMunicipioEntities();
         if(fis>=0){
@@ -385,8 +396,8 @@ public class FMunicipios extends javax.swing.JInternalFrame {
 
         }*/
     }//GEN-LAST:event_tbmunicipioMouseClicked
-   public void llenartb(String descripcion){
-     /* String[] titulos = {"CODIGO","MUNICIPIO","ESTADO"};
+    public void llenartb(String descripcion) {
+        /* String[] titulos = {"CODIGO","MUNICIPIO","ESTADO"};
       DefaultTableModel dtm = new DefaultTableModel(null, titulos);
       int idm=0;String nombre="";
      try{
@@ -410,22 +421,23 @@ public class FMunicipios extends javax.swing.JInternalFrame {
        
      }catch(Exception ex){
          JOptionPane.showMessageDialog(null,"NO SE RECONOCE LA TABLA MUNICIPIOS","",JOptionPane.ERROR_MESSAGE);
-     } */                
-  }
-   /* private List<Municipio> buscarU(String nombrem) {
+     } */
+    }
+
+    /* private List<Municipio> buscarU(String nombrem) {
         EntityManager em = control1.getEntityManager();
         Query query = em.createQuery("SELECT u FROM Municipio u WHERE u.nombrem LIKE :nombrem");
         query.setParameter("nombrem","%"+nombrem+"%");
         List<Municipio> lista = query.getResultList();
         return lista;
     }*/
- 
+
     public void Generarnumeracion() {
         String SQL = "select max(idmunicipio) from municipio";
 
         int c = 0;
         int b = 0;
-      /*  try {
+        /*  try {
         //    Statement st = (Statement) connect.createStatement();
             ResultSet rs = null;//st.executeQuery(SQL);
             while (rs.next()) {
@@ -440,7 +452,7 @@ public class FMunicipios extends javax.swing.JInternalFrame {
             Logger.getLogger(FProducto.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }//MetodoGenerarNumEnId*/ 
-    
+
     public boolean valEntradas() {
         String mensaje = "";
         boolean estado = true;
@@ -452,17 +464,18 @@ public class FMunicipios extends javax.swing.JInternalFrame {
             mensaje += "NO SE INSERTO UNA DESCRIPCION \n";
             estado = false;
         }
-        if (cbestado.getSelectedIndex()==0) {
+        if (cbestado.getSelectedIndex() == 0) {
             mensaje += "ESTADO NO VALIDO \n";
             estado = false;
-        }     
-          if (mensaje.length() >= 6) {
+        }
+        if (mensaje.length() >= 6) {
             JOptionPane.showMessageDialog(null, mensaje, "", JOptionPane.WARNING_MESSAGE);
 
         }
         return estado;
     }
-      public void desabilitar(){
+
+    public void desabilitar() {
         ttcodigo.setEnabled(false);
         txtdescripcion.setEnabled(false);
         btnaceptar.setEnabled(false);
@@ -474,35 +487,38 @@ public class FMunicipios extends javax.swing.JInternalFrame {
         btnnuevo.setEnabled(true);
         btncancelar.setEnabled(false);
     }
-    public void habilitar(){
+
+    public void habilitar() {
         ttcodigo.setEnabled(true);
         ttcodigo.setEditable(false);
         txtdescripcion.setEnabled(true);
-        btnaceptar.setEnabled(true);        
+        btnaceptar.setEnabled(true);
         btnnuevo.setEnabled(false);
         cbestado.setEnabled(true);
         btneliminar.setEnabled(false);
         btnmodificar.setEnabled(false);
         btncancelar.setEnabled(true);
     }
-    public void MouseE(){
-     btnnuevo.setEnabled(false);
-     btneliminar.setEnabled(true);
-     btnmodificar.setEnabled(true);
-     btnaceptar.setEnabled(false);
-     ttcodigo.setEnabled(true);
-     ttcodigo.setEditable(false);
-     txtdescripcion.setEnabled(true);
-     cbestado.setEnabled(true);
-     btncancelar.setEnabled(true);
-     
+
+    public void MouseE() {
+        btnnuevo.setEnabled(false);
+        btneliminar.setEnabled(true);
+        btnmodificar.setEnabled(true);
+        btnaceptar.setEnabled(false);
+        ttcodigo.setEnabled(true);
+        ttcodigo.setEditable(false);
+        txtdescripcion.setEnabled(true);
+        cbestado.setEnabled(true);
+        btncancelar.setEnabled(true);
+
     }
-    public void limipiar(){
+
+    public void limipiar() {
         Generarnumeracion();
         txtdescripcion.setText("");
         cbestado.setSelectedIndex(0);
     }
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnaceptar;

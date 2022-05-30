@@ -20,6 +20,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -84,7 +85,7 @@ public class MetodosValidar {
     
   
    
-    public static void soloNumeros(JTextField txt, int numeroCaracteres) {
+    public void soloNumeros(JTextField txt, int numeroCaracteres) {
         txt.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent evt) {
@@ -329,6 +330,37 @@ public class MetodosValidar {
         String nroAutoCompletar = formato + txtObjeto.getText();
         nroAutoCompletar = nroAutoCompletar.substring(nroAutoCompletar.length() - longitud);
         txtObjeto.setText(nroAutoCompletar);
+    }
+    
+    public void ok(){
+         Icon icono = new ImageIcon(getClass().getResource("/Imagenes/oki.png"));
+         JOptionPane.showMessageDialog(null,"¡¡¡GUARDADO CON EXITO!!!","",JOptionPane.OK_OPTION,icono);
+    }
+    
+    public void error(){         
+         JOptionPane.showMessageDialog(null,"¡¡¡ERROR AL GUARDAR DATOS!!!","",JOptionPane.ERROR_MESSAGE);
+    }
+    
+     public void ok_modificar(){
+         Icon icono = new ImageIcon(getClass().getResource("/Imagenes/oki.png"));
+         JOptionPane.showMessageDialog(null,"¡¡¡MOFICADO CON EXITO!!!","",JOptionPane.OK_OPTION,icono);
+    }
+    
+    public void error_modificar(){         
+         JOptionPane.showMessageDialog(null,"¡¡¡ERROR AL MODIFICAR DATOS!!!","",JOptionPane.ERROR_MESSAGE);
+    }
+    
+     public void ok_eliminar(){
+         Icon icono = new ImageIcon(getClass().getResource("/Imagenes/oki.png"));
+         JOptionPane.showMessageDialog(null,"¡¡¡ELIMINADO CON EXITO!!!","",JOptionPane.OK_OPTION,icono);
+    }
+    
+    public void error_eliminar(){         
+         JOptionPane.showMessageDialog(null,"¡¡¡ERROR AL ELIMINAR DATOS!!!","",JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void advertencia(String men){
+        JOptionPane.showMessageDialog(null,"¡¡¡"+men+"!!!","",JOptionPane.WARNING_MESSAGE);
     }
 
 

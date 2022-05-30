@@ -1,5 +1,6 @@
 package com.saivent.principal;
 
+import com.saivent.view.FCategorias;
 import com.saivent.view.FClientes;
 import com.saivent.view.FEstados;
 import com.saivent.view.FLocalidades;
@@ -261,6 +262,11 @@ public class Run extends javax.swing.JFrame {
 
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/How-to.png"))); // NOI18N
         jMenuItem8.setText("Pago de servicios");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem8);
 
         jMenu2.add(jMenu5);
@@ -336,6 +342,7 @@ public class Run extends javax.swing.JFrame {
         jMenu7.setText("Catalogos");
         jMenu7.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
 
+        jMenuItem9.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jMenuItem9.setText("Unidades");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -344,6 +351,7 @@ public class Run extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem9);
 
+        jMenuItem10.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jMenuItem10.setText("Categorias");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -352,6 +360,7 @@ public class Run extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem10);
 
+        jMenuItem11.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jMenuItem11.setText("Estados");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -360,6 +369,7 @@ public class Run extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem11);
 
+        jMenuItem12.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jMenuItem12.setText("Municipios");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,6 +378,7 @@ public class Run extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem12);
 
+        jMenuItem14.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jMenuItem14.setText("Localidades");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -397,6 +408,7 @@ public class Run extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+       limpiarJDesktopFrame();
         ventas();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
@@ -436,14 +448,17 @@ public class Run extends javax.swing.JFrame {
     }//GEN-LAST:event_formComponentResized
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        limpiarJDesktopFrame();
         recargas();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        limpiarJDesktopFrame();
         productos();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        limpiarJDesktopFrame();
         clientes();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
@@ -456,11 +471,11 @@ public class Run extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        // TODO add your handling code here:
+        categorias();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-       estados();
+        estados();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
@@ -468,8 +483,13 @@ public class Run extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-     proveedores();
+        limpiarJDesktopFrame();
+        proveedores();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        limpiarJDesktopFrame();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     public void controllerInicio() {
 
@@ -522,6 +542,14 @@ public class Run extends javax.swing.JFrame {
         jMenuBar1.setVisible(true);
     }
 
+    private void categorias() {
+        FCategorias fv = new FCategorias();
+        fv.setSize(jDesktopPane1.getWidth(), jDesktopPane1.getHeight());
+        fv.setVisible(true);
+        jDesktopPane1.add(fv);
+        jMenuBar1.setVisible(true);
+    }
+
     private void proveedores() {
         FProveedor fv = new FProveedor();
         fv.setSize(jDesktopPane1.getWidth(), jDesktopPane1.getHeight());
@@ -545,9 +573,9 @@ public class Run extends javax.swing.JFrame {
         jDesktopPane1.add(fv);
         jMenuBar1.setVisible(true);
     }
-    
-     private void localidades() {
-         FLocalidades fv = new FLocalidades();
+
+    private void localidades() {
+        FLocalidades fv = new FLocalidades();
         fv.setSize(jDesktopPane1.getWidth(), jDesktopPane1.getHeight());
         fv.setVisible(true);
         jDesktopPane1.add(fv);

@@ -49,9 +49,6 @@ primary key(idestado)
 
 
 
-
-DROP TABLE IF EXISTS productos;
-
 DROP TABLE IF EXISTS productos;
 CREATE TABLE productos(
 	idproducto integer not null,
@@ -65,18 +62,14 @@ CREATE TABLE productos(
 	idproveedor integer not null,
 	idunidadm integer not null,
 
-	primary key(idproducto),
-	foreign key(idproveedor) references proveedores(idproveedor),
-	foreign key(idunidadm) references unidadesm(idunidadm),
-	foreign key(idcategoria)references categorias(idcategoria)
+	primary key(idproducto)
 
 );
 
 
-INSERT INTO productos VALUES(1,'Coca-cola',15.80,15.80,200,false,13.60,1,1,1);
 
-DROP TABLE IF EXISTS unidadm;
-CREATE TABLE unidadm(
+DROP TABLE IF EXISTS unidadesm;
+CREATE TABLE unidadesm(
       idunidadm integer,
       descripcion varchar(45),
 
@@ -84,7 +77,6 @@ CREATE TABLE unidadm(
        
 );
 
-INSERT INTO unidadm VALUES(1,'600 ML');
 
 DROP TABLE IF EXISTS proveedores;
 CREATE TABLE proveedores(
@@ -97,20 +89,15 @@ CREATE TABLE proveedores(
        
 );
 
-INSERT INTO proveedores values(1,'COCA-COLA S.A De C.V','8134760912','cocacola0045@cocacola.com');
 
-
-DROP TABLE IF EXISTS categoria;
-CREATE TABLE categoria(
+DROP TABLE IF EXISTS categorias;
+CREATE TABLE categorias(
       idcategoria integer,
       descripcion varchar(45),
 
       primary key(idcategoria)
        
 );
-
-INSERT INTO categoria VALUES(1,'Bebidas');
-
 DROP TABLE IF EXISTS ventas_realizadas;
 CREATE TABLE ventas_realizadas(
    idticket integer,
@@ -127,9 +114,34 @@ DROP TABLE IF EXISTS detalles_venta;
 CREATE TABLE detalles_venta(
 idticket integer,
 producto varchar(45),
-totalproducto integer,
-fecha timestamp,
+totalproductos integer,
 total numeric,
-iva numeric,
 cliente text default 'xxxxxxxxxxxx'
 );
+
+
+
+DROP TABLE IF EXISTS usuarios;
+CREATE TABLE usuarios(
+id integer,
+nombre varchar(45),
+pass text,
+
+primary key(nombre)
+);
+
+insert into usuarios values(1,'root','63a9f0ea7bb98050796b649e85481845');
+
+
+
+DROP TABLE IF EXISTS tiposventa();
+CREATE TABLE tiposventa(
+idtipo integer,
+descriṕcion varchar(45),
+primary key(idtipo)
+
+);
+
+
+INSERT INTO tiposventa VALUES(1,'CLIENTE');
+INSERT INTO tiposventa VALUES(2,'PUBLICO');

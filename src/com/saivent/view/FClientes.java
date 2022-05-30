@@ -5,9 +5,11 @@
  */
 package com.saivent.view;
 
+import java.awt.Dimension;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,7 +27,6 @@ public class FClientes extends javax.swing.JInternalFrame {
     DefaultTableModel dtm = new DefaultTableModel();
 
     //Colonia colonias = new Colonia();
-
     public FClientes() {
         initComponents();
         ListarClientes("");
@@ -34,6 +35,17 @@ public class FClientes extends javax.swing.JInternalFrame {
         llenarM();
         llenarE();
         llenarG();
+        diseñoVentana();
+    }
+
+    public void diseñoVentana() {
+        Dimension DimensionBarra = null;
+        JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        DimensionBarra = Barra.getPreferredSize();
+        Barra.setSize(0, 0);
+        Barra.setPreferredSize(new Dimension(0, 0));
+        repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -145,7 +157,7 @@ public class FClientes extends javax.swing.JInternalFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnaceptar)
                 .addGap(41, 41, 41)
                 .addComponent(btncancelar)
@@ -285,7 +297,7 @@ public class FClientes extends javax.swing.JInternalFrame {
 
         btnsalir.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir ventana.png"))); // NOI18N
-        btnsalir.setText("SALIR");
+        btnsalir.setText("CERRAR");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -411,13 +423,13 @@ public class FClientes extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-     private void ListarClientes( String  nombre ) {
+     private void ListarClientes(String nombre) {
         String[] titulos = {"CV.CLIENTE", "NMOBRE", "EDAD", "DIRECCION", "TELEFONO", "GENERO", "E-MAIL"};
         dtm = new DefaultTableModel(null, titulos);
         try {
             Object o[] = null;
 //            List<Cliente> listC = buscarClie(nombre);
-          /* for (int i = 0; i < listC.size(); i++) {
+            /* for (int i = 0; i < listC.size(); i++) {
                 dtm.addRow(o);
                 dtm.setValueAt(listC.get(i).getIdcliente(), i, 0);
                 dtm.setValueAt(listC.get(i).getNombre(),    i, 1);
@@ -432,6 +444,7 @@ public class FClientes extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+
     public void llenarC() {
         /*List<Colonia> listCo = PColonia.findColoniaEntities();
         for (int i = 0; i < listCo.size(); i++) {
@@ -439,25 +452,29 @@ public class FClientes extends javax.swing.JInternalFrame {
         }*/
     }
     public int rgm;
-    public void llenarM(){
+
+    public void llenarM() {
         /*List<Municipio> listM = PMunicipio.findMunicipioEntities();
         for (int i = 0; i < listM.size(); i++) {
             cbmuni.addItem(listM.get(i).getNombrem());
             rgm = listM.get(i).getIdmunicipio();
         }*/
     }
+
     public void llenarE() {
         /*List<Estado> listE = PEstado.findEstadoEntities();
         for (int i = 0; i < listE.size(); i++) {
             cbestado.addItem(listE.get(i).getNombree());
         }*/
     }
-     public void llenarG() {
+
+    public void llenarG() {
         /*List<Genero> listG = PGenero.findGeneroEntities();
         for (int i = 0; i < listG.size(); i++) {
             cbgenero.addItem(listG.get(i).getDescripcion());
         }*/
     }
+
     /*private List<Cliente> buscarClie(String nombre) {
         EntityManager em = PClientes.getEntityManager();
         Query query = em.createQuery("SELECT c FROM Cliente c WHERE c.nombre LIKE :nombre");
@@ -467,7 +484,7 @@ public class FClientes extends javax.swing.JInternalFrame {
     }*/
 
     public void llenarDir() {
-      /*  List<Colonia> ListC = PColonia.findColoniaEntities();
+        /*  List<Colonia> ListC = PColonia.findColoniaEntities();
         List<Municipio> ListM = PMunicipio.findMunicipioEntities();
         List<Estado> ListE = PEstado.findEstadoEntities();
         int idc = 0, idm = 0, ide, idmm = 0;
@@ -496,7 +513,7 @@ public class FClientes extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
       
-*/
+         */
     }
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
@@ -512,7 +529,7 @@ public class FClientes extends javax.swing.JInternalFrame {
 
     private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
         if (valEntradas() == true) {
-        /*    Cliente cl = new Cliente();
+            /*    Cliente cl = new Cliente();
             try {  
                
                 int confirmar = JOptionPane.showConfirmDialog(null, "¿Datos correctos?", "", JOptionPane.YES_NO_OPTION);
@@ -548,7 +565,7 @@ public class FClientes extends javax.swing.JInternalFrame {
         }*/
         }
 
-        
+
     }//GEN-LAST:event_btnaceptarActionPerformed
 
     private void txtnombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyReleased
@@ -569,7 +586,7 @@ public class FClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbclientesMouseClicked
 
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
-  /*       if (this.valEntradas() == true) {
+        /*       if (this.valEntradas() == true) {
               try {
                 List<Colonia>listc=PColonia.findColoniaEntities();
                 
@@ -604,11 +621,11 @@ public class FClientes extends javax.swing.JInternalFrame {
 
         }
         }
-*/
+         */
     }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-   int fila =tbclientes.getSelectedRow();
+        int fila = tbclientes.getSelectedRow();
         /*try {
             int confirmar = JOptionPane.showConfirmDialog(null, "¿ELIMINAR?", "", JOptionPane.YES_NO_OPTION);
             if (confirmar == JOptionPane.YES_NO_OPTION) {
@@ -625,7 +642,7 @@ public class FClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
-       // MetodosValidar.soloLetrasNumeros(txtnombre, 100);
+        // MetodosValidar.soloLetrasNumeros(txtnombre, 100);
     }//GEN-LAST:event_txtnombreKeyTyped
 
     private void cbcolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbcolMouseClicked
@@ -637,17 +654,18 @@ public class FClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbcolActionPerformed
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
-       txtbuscar.setText(txtbuscar.getText().toUpperCase());
+        txtbuscar.setText(txtbuscar.getText().toUpperCase());
         ListarClientes(txtbuscar.getText());
 
     }//GEN-LAST:event_txtbuscarKeyReleased
 
     private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
-  char car= evt.getKeyChar();
-    if((car <'0' || car > '9')){
-    if(txttelefono.getText().length()<10){
-       evt.consume();  
-    }}       // TODO add your handling code here:
+        char car = evt.getKeyChar();
+        if ((car < '0' || car > '9')) {
+            if (txttelefono.getText().length() < 10) {
+                evt.consume();
+            }
+        }       // TODO add your handling code here:
     }//GEN-LAST:event_txttelefonoKeyTyped
 
     private void txtcodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyReleased
@@ -655,10 +673,10 @@ public class FClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtcodigoKeyReleased
 
     private void txtemailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyTyped
-    char car= evt.getKeyChar();
-    if((car <'0' || car > '9') && (car < 'A' || car> 'Z') && (car < 'a' || car> 'z') && (car < '@'|| car> '@') && (car < '_'  || car > '_') && (car < '.' || car > '.')){        
-    evt.consume();
-    }       // TODO add your handling code here:
+        char car = evt.getKeyChar();
+        if ((car < '0' || car > '9') && (car < 'A' || car > 'Z') && (car < 'a' || car > 'z') && (car < '@' || car > '@') && (car < '_' || car > '_') && (car < '.' || car > '.')) {
+            evt.consume();
+        }       // TODO add your handling code here:
     }//GEN-LAST:event_txtemailKeyTyped
 
     private void txtAppaternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAppaternoKeyReleased
@@ -676,25 +694,26 @@ public class FClientes extends javax.swing.JInternalFrame {
     private void txtApmaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApmaternoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApmaternoKeyTyped
-    public void particionarDom(){
-        String c,m,e;
-        int filaS=tbclientes.getSelectedRow();
-        String cadena =tbclientes.getValueAt(filaS,3).toString() ;   
-        String[] Part = cadena.split(",");   
-        for (int i = 0; i< Part.length; i++)    {     
-            c=Part[0];
-            m=Part[1];
-            e=Part[2];
+    public void particionarDom() {
+        String c, m, e;
+        int filaS = tbclientes.getSelectedRow();
+        String cadena = tbclientes.getValueAt(filaS, 3).toString();
+        String[] Part = cadena.split(",");
+        for (int i = 0; i < Part.length; i++) {
+            c = Part[0];
+            m = Part[1];
+            e = Part[2];
             cbcol.setSelectedItem(c);
             cbmuni.setSelectedItem(m);
             cbestado.setSelectedItem(e);
-        } 
-    
-}
+        }
+
+    }
+
     public void EventMouseClick() {
         int filas = tbclientes.getSelectedRow();
         if (filas >= 0) {
-           
+
             this.habilitarC();
             this.btnaceptar.setEnabled(false);
             this.btnmodificar.setEnabled(true);
@@ -702,24 +721,23 @@ public class FClientes extends javax.swing.JInternalFrame {
             this.btnnuevo.setEnabled(false);
             this.txtcodigo.setText(tbclientes.getValueAt(filas, 0).toString());
             this.txtnombre.setText(tbclientes.getValueAt(filas, 1).toString());
-            if(tbclientes.getValueAt(filas,3).toString().equals("")){
-                
-            }else{
-             llenarDir();   
-            }            
-            if(tbclientes.getValueAt(filas, 4).toString().equals("")){
-                this.txttelefono.setText("ddd");
-               
-            }else{
-               this.txttelefono.setText(tbclientes.getValueAt(filas, 4).toString());    
+            if (tbclientes.getValueAt(filas, 3).toString().equals("")) {
+
+            } else {
+                llenarDir();
             }
-            cbgenero.setSelectedItem(tbclientes.getValueAt(filas,5).toString());
-            txtemail.setText(tbclientes.getValueAt(filas,6).toString());
+            if (tbclientes.getValueAt(filas, 4).toString().equals("")) {
+                this.txttelefono.setText("ddd");
+
+            } else {
+                this.txttelefono.setText(tbclientes.getValueAt(filas, 4).toString());
+            }
+            cbgenero.setSelectedItem(tbclientes.getValueAt(filas, 5).toString());
+            txtemail.setText(tbclientes.getValueAt(filas, 6).toString());
 
         }
     }//EventoDeMouseClicked
 
-   
     public void desabilitarC() {
         this.lblcodigo.setEnabled(false);
         this.lblnombre.setEnabled(false);
@@ -787,43 +805,44 @@ public class FClientes extends javax.swing.JInternalFrame {
             mensaje += "NO SE INSERTO UN NOMBRE VALIDO \n";
             estado = false;
         }
-         
-         if (cbgenero.getSelectedIndex()==0) {
+
+        if (cbgenero.getSelectedIndex() == 0) {
             mensaje += "NO SE SELECCIONO GENERO \n";
             estado = false;
         }
-        if(txtemail.getText().isEmpty()==false && valcorreo()==false){
-               mensaje+="VERIFICA DIRECCION DE CORREO @";
+        if (txtemail.getText().isEmpty() == false && valcorreo() == false) {
+            mensaje += "VERIFICA DIRECCION DE CORREO @";
             estado = false;
         }
         if (mensaje.length() >= 6) {
-             JOptionPane.showMessageDialog(null, mensaje, "", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, mensaje, "", JOptionPane.WARNING_MESSAGE);
 
         }
-       
+
         return estado;
     }
-     public boolean valcorreo(){
-          boolean correo=false;
-          for(int i=0;i<txtemail.getText().length();i++){
-               if(txtemail.getText().charAt(i)=='@'){
-                  correo=true;
-               } 
-         }
-         return correo;
-     }
-    //public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-   
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-     /*   java.awt.EventQueue.invokeLater(new Runnable() {
+    public boolean valcorreo() {
+        boolean correo = false;
+        for (int i = 0; i < txtemail.getText().length(); i++) {
+            if (txtemail.getText().charAt(i) == '@') {
+                correo = true;
+            }
+        }
+        return correo;
+    }
+    //public static void main(String args[]) {
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+     */
+
+    //</editor-fold>
+    //</editor-fold>
+
+    /* Create and display the form */
+ /*   java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FClientes().setVisible(true);
             }

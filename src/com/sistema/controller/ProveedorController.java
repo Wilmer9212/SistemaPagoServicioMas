@@ -33,11 +33,12 @@ public class ProveedorController {
         connect = con.connectDatabase();
         try {
             if (!valor.equals("")) {
-                sql = "SELECT * FROM proveedores WHERE nombre LIKE '%" + valor + "%'";
+                System.out.println("entro aqui");
+                sql = "SELECT * FROM proveedores WHERE UPPER(nombre) LIKE '%" + valor.toUpperCase() + "%'";
+                System.out.println(""+sql);
             } else {
                 sql = "SELECT * FROM proveedores";
             }
-            sql = "SELECT * FROM proveedores";
             stmt = connect.createStatement();
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -46,13 +47,13 @@ public class ProveedorController {
                 proveedor.setNombre(rs.getString(2));
                 proveedor.setTelefono(rs.getString(3));
                 proveedor.setMail(rs.getString(4));
-
                 lista.add(proveedor);
             }
             connect.close();
         } catch (Exception ex) {
             System.out.println("Error al obtener lista de proveedores:" + ex.getMessage());
         }
+        System.out.println("lista:"+lista.get(0).getNombre());
         return lista;
     }
 
@@ -100,7 +101,7 @@ public class ProveedorController {
         boolean bandera = false;
         connect = con.connectDatabase();
         try {
-            sql = "INSERT INTO productos VALUES(?,?,?,?)";
+            sql = "INSERT INTO proveedores VALUES(?,?,?,?)";
             ps = connect.prepareStatement(sql);
             ps.setInt(1, proveedor.getIdproveedor());
             ps.setString(2, proveedor.getNombre());
@@ -111,6 +112,42 @@ public class ProveedorController {
             bandera = true;
         } catch (Exception e) {
             System.out.println("Error al  al insertar proveedor:" + e.getMessage());
+        }
+        return bandera;
+    }
+
+    public boolean update(ProveedorDTO proveedor) {
+        boolean bandera = false;
+        connect = con.connectDatabase();
+        try {
+            sql = "UPDATE proveedores set nombre =?,mail=?,telefono=? WHERE idproveedor =?";
+            ps = connect.prepareStatement(sql);
+            ps.setString(1,proveedor.getNombre());
+            ps.setString(2, proveedor.getMail());
+            ps.setString(3, proveedor.getTelefono());
+            ps.setInt(4, proveedor.getIdproveedor());
+            ps.executeUpdate();
+            connect.close();
+            bandera = true;
+        } catch (Exception e) {
+            System.out.println("Error al  al modificar proveedor:" + e.getMessage());
+        }
+        return bandera;
+    }
+    
+    
+    public boolean delete(int id) {
+        boolean bandera = false;
+        connect = con.connectDatabase();
+        try {
+            sql = "DELETE FROM proveedores WHERE idproveedor =?";
+            ps = connect.prepareStatement(sql);
+            ps.setInt(1,id);
+            ps.executeUpdate();
+            connect.close();
+            bandera = true;
+        } catch (Exception e) {
+            System.out.println("Error al  al eliminar proveedor:" + e.getMessage());
         }
         return bandera;
     }

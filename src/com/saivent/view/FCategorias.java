@@ -5,14 +5,11 @@
  */
 package com.saivent.view;
 
+import com.saivent.util.MetodosValidar;
+import com.sistema.controller.CategoriaController;
+import com.sistema.modelo.CategoriaDTO;
 import java.awt.Dimension;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,23 +18,21 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Elliot
  */
-public class FEstados extends javax.swing.JInternalFrame {
-    //EstadoJpaController control1=new EstadoJpaController();
-    //ConnectionDB conexion=new ConnectionDB();
-    //Connection connect=conexion.ConnectionDB();
+public class FCategorias extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form FEstados
+     * Creates new form FUnidadesM
      */
-    public FEstados() {
+    CategoriaController controller = new CategoriaController();
+
+    public FCategorias() {
         initComponents();
-        Generarnumeracion();
+        llenarCategorias("");
         desabilitar();
-        llenartb("");
         diseñoVentana();
     }
-
-    public void diseñoVentana() {
+    
+    public void diseñoVentana(){
         Dimension DimensionBarra = null;
         JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
         Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
@@ -56,9 +51,11 @@ public class FEstados extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        ttcodigo = new javax.swing.JTextField();
+        txtcodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtdescripcion = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -71,7 +68,20 @@ public class FEstados extends javax.swing.JInternalFrame {
         btneliminar = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbestado = new javax.swing.JTable();
+        tbunidades = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,7 +89,7 @@ public class FEstados extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ESTADOS");
+        jLabel1.setText("CATEGORIAS");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("CODIGO");
@@ -91,8 +101,9 @@ public class FEstados extends javax.swing.JInternalFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("NOMBRE");
+        jLabel3.setText("DESCRIPCION");
 
+        btnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/aceptar.png"))); // NOI18N
         btnaceptar.setText("ACEPTAR");
         btnaceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +111,7 @@ public class FEstados extends javax.swing.JInternalFrame {
             }
         });
 
+        btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancelar.png"))); // NOI18N
         btncancelar.setText("CANCELAR");
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +125,7 @@ public class FEstados extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setText("NOMBRE");
+        jLabel4.setText("DESCRIPCION");
 
         btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/nuevo.png"))); // NOI18N
         btnnuevo.setText("NUEVO");
@@ -161,13 +173,20 @@ public class FEstados extends javax.swing.JInternalFrame {
             }
         });
 
-        tbestado = new javax.swing.JTable(){
+        tbunidades = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        tbestado.setModel(new javax.swing.table.DefaultTableModel(
+        tbunidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -177,12 +196,12 @@ public class FEstados extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbestado.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbunidades.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbestadoMouseClicked(evt);
+                tbunidadesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbestado);
+        jScrollPane1.setViewportView(tbunidades);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -191,15 +210,11 @@ public class FEstados extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnnuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnmodificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btneliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnsalir))
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtbuscar))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -207,18 +222,22 @@ public class FEstados extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ttcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnaceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 37, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btncancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnaceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(btnnuevo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbuscar)))
-                .addGap(4, 4, 4))
+                        .addComponent(btnmodificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btneliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnsalir)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,27 +246,27 @@ public class FEstados extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ttcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(btnaceptar))
+                    .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnaceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(btncancelar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3))
+                    .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnsalir, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btneliminar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnnuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnmodificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnnuevo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnsalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnmodificar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btneliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -255,167 +274,143 @@ public class FEstados extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tbunidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbunidadesMouseClicked
+        MouseE();
+        int fis = tbunidades.getSelectedRow();
+        if (fis >= 0) {
+            txtcodigo.setText(tbunidades.getValueAt(fis, 0).toString());
+            txtdescripcion.setText(tbunidades.getValueAt(fis, 1).toString());
+        }
+    }//GEN-LAST:event_tbunidadesMouseClicked
+
+    private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
+        CategoriaDTO categoria = new CategoriaDTO();
+        categoria.setIdcategoria(Integer.parseInt(txtcodigo.getText()));
+        categoria.setDescripcion(txtdescripcion.getText());
+        int preg = JOptionPane.showConfirmDialog(null, "¿MODIFICAR DATOS?","",JOptionPane.YES_NO_OPTION);
+        if (preg == JOptionPane.YES_OPTION) {
+            try {
+                boolean modi = controller.update(categoria);
+                if (modi) {
+                    llenarCategorias("");
+                    limpiar();
+                    desabilitar();
+                    new MetodosValidar().ok_modificar();
+                } else {
+                    new MetodosValidar().error_modificar();
+                }
+
+            } catch (Exception ex) {
+                System.out.println("Error al modificar datos:" + ex.getMessage());
+
+            }
+        }
+
+    }//GEN-LAST:event_btnmodificarActionPerformed
+
+    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
+        
+        int preg = JOptionPane.showConfirmDialog(null, "¿ELIMINAR DATOS?","",JOptionPane.YES_NO_OPTION);
+        if (preg == JOptionPane.YES_OPTION) {
+            try {
+                boolean eli = controller.delete(Integer.parseInt(txtcodigo.getText()));
+                if (eli) {
+                    llenarCategorias("");
+                    limpiar();
+                    desabilitar();
+                    new MetodosValidar().ok_eliminar();
+                } else {
+                    new MetodosValidar().error_eliminar();
+                }
+
+            } catch (Exception ex) {
+                System.out.println("Error al eliminar datos:" + ex.getMessage());
+
+            }
+        }
+
+    }//GEN-LAST:event_btneliminarActionPerformed
+
+    private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
+        CategoriaDTO categoria = new CategoriaDTO();
+        if (valEntradas() == true) {
+            int preg = JOptionPane.showConfirmDialog(null, "¿DATOS CORRECTOS?", "", JOptionPane.YES_NO_OPTION);
+            categoria.setIdcategoria(Integer.parseInt(txtcodigo.getText()));
+            categoria.setDescripcion(txtdescripcion.getText());
+            if (preg == JOptionPane.YES_OPTION) {
+                try {
+                    boolean in = controller.save(categoria);
+                    if (in) {
+                        llenarCategorias("");
+                        limpiar();
+                        desabilitar();
+                        new MetodosValidar().ok();
+                    } else {
+                        new MetodosValidar().error();
+                    }
+
+                } catch (Exception ex) {
+                    System.out.println("Error al insertar unidades:" + ex.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_btnaceptarActionPerformed
+
+    private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
+        txtbuscar.setText(txtbuscar.getText().toUpperCase());
+        llenarCategorias(txtbuscar.getText());
+    }//GEN-LAST:event_txtbuscarKeyReleased
 
     private void txtdescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyReleased
         txtdescripcion.setText(txtdescripcion.getText().toUpperCase());
         // TODO add your handling code here:
     }//GEN-LAST:event_txtdescripcionKeyReleased
 
-    private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
-        /*        Estado um =new Estado();
-        um.setIdestado(Integer.parseInt(ttcodigo.getText()));
-        um.setNombree(txtdescripcion.getText());
-        if(valEntradas()==true){
-            int preg=JOptionPane.showConfirmDialog(null,"¿DATOS CORRECTOS?","",JOptionPane.YES_NO_OPTION);
-            if(preg==JOptionPane.YES_OPTION){
-                try {
-                    control1.create(um);
-                    llenartb("");
-                    limipiar();
-                    desabilitar();
-
-                } catch (Exception ex) {
-                    Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }*/
-    }//GEN-LAST:event_btnaceptarActionPerformed
-
-    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-        btnnuevo.setEnabled(true);
-        desabilitar();
-    }//GEN-LAST:event_btncancelarActionPerformed
-
-    private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
-        txtbuscar.setText(txtbuscar.getText().toUpperCase());
-        llenartb(txtbuscar.getText());
-    }//GEN-LAST:event_txtbuscarKeyReleased
-
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
+        txtcodigo.setText(String.valueOf(controller.generarSecuenciaId()));
         habilitar();
     }//GEN-LAST:event_btnnuevoActionPerformed
-
-    private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
-        /* Estado um=new Estado();
-        List<Estado>lm=control1.findEstadoEntities();
-        int ide = 0;
-        if(valEntradas()==true){
-            int preg=JOptionPane.showConfirmDialog(null,"¿MODIFICAR?","",JOptionPane.YES_NO_OPTION);
-            if(preg==JOptionPane.YES_OPTION){
-                try {
-                    um.setIdestado(Integer.parseInt(ttcodigo.getText()));
-                    um.setNombree(txtdescripcion.getText());
-                    control1.edit(um);
-                    Generarnumeracion();
-                    desabilitar();
-                    llenartb("");
-                    limipiar();
-                } catch (Exception ex) {
-                    Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }*/
-    }//GEN-LAST:event_btnmodificarActionPerformed
-
-    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        /*int preg=JOptionPane.showConfirmDialog(null,"¿ELIMINAR?","",JOptionPane.YES_NO_OPTION);
-        if(preg==JOptionPane.YES_OPTION){
-            try {
-                control1.destroy(Integer.parseInt(ttcodigo.getText()));
-                llenartb("");
-                Generarnumeracion();
-                desabilitar();
-                limipiar();
-
-            } catch (NonexistentEntityException ex) {
-                Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-
-            }
-        }*/
-    }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnsalirActionPerformed
 
-    private void tbestadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbestadoMouseClicked
-        MouseE();
-        /*   int fis=tbestado.getSelectedRow();
-        List<Estado>lm=control1.findEstadoEntities();
-        if(fis>=0){
-            for(int i=0;i<lm.size();i++){
-                ttcodigo.setText(tbestado.getValueAt(fis, 0).toString());
-                txtdescripcion.setText(tbestado.getValueAt(fis,1).toString());
-            }
-
-        }*/
-    }//GEN-LAST:event_tbestadoMouseClicked
-    public void llenartb(String descripcion) {
-        /* String[] titulos = {"CODIGO","DESCRIPCION"};
-      DefaultTableModel dtm = new DefaultTableModel(null, titulos);
-      int ide=0;
-     try{
-        Object o[] = null;
-         List<Estado>lista = buscarU(descripcion);
-         for (int i = 0; i < lista.size(); i++) {  
-                dtm.addRow(o);
-                dtm.setValueAt(lista.get(i).getIdestado().toString(),i, 0); 
-                dtm.setValueAt(lista.get(i).getNombree(),i, 1);
-          }
-         tbestado.setModel(dtm);
-       
-     }catch(Exception ex){
-         JOptionPane.showMessageDialog(null,"NO SE RECONOCE LA TABLA ESTADOS","",JOptionPane.ERROR_MESSAGE);
-     } */
-    }
-
-    /*private List<Estado> buscarU(String nombree) {
-        EntityManager em = control1.getEntityManager();
-        Query query = em.createQuery("SELECT u FROM Estado u WHERE u.nombree LIKE :nombree");
-        query.setParameter("nombree","%"+nombree+"%");
-        List<Estado> lista = query.getResultList();
-        return lista;
-    }*/
-
-    public void Generarnumeracion() {
-        String SQL = "select max(idestado) from estado";
-        /*
-        int c = 0;
-        int b = 0;
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+        btnnuevo.setEnabled(true);
+        desabilitar();
+    }//GEN-LAST:event_btncancelarActionPerformed
+    public void llenarCategorias(String descripcion) {
+        String[] titulos = {"CODIGO", "DESCRIPCION"};
+        DefaultTableModel dtm = new DefaultTableModel(null, titulos);
         try {
-            Statement st =  null;//(Statement) connect.createStatement();
-            ResultSet rs = st.executeQuery(SQL);
-            while (rs.next()) {
-                c = rs.getInt(1);
+            Object o[] = null;
+            List<CategoriaDTO> lista = controller.categoriasAll(descripcion);
+            for (int i = 0; i < lista.size(); i++) {
+                dtm.addRow(o);
+                dtm.setValueAt(lista.get(i).getIdcategoria().toString(), i, 0);
+                dtm.setValueAt(lista.get(i).getDescripcion(), i, 1);
             }
-            if (c == 0) {
-                ttcodigo.setText("1");
-            } else {
-                ttcodigo.setText("" + (+c + 1));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }//MetodoGenerarNumEnId*/ 
+            tbunidades.setModel(dtm);
+
+        } catch (Exception ex) {
+            System.out.println("ERROR AL CARGAR CATEGORIAS:"+ex.getMessage());
+        }
+    }
 
     public boolean valEntradas() {
         String mensaje = "";
         boolean estado = true;
-        if (ttcodigo.getText().isEmpty()) {
+        if (txtcodigo.getText().isEmpty()) {
             mensaje += "CODIGO NO DEBE ESTAR VACIO \n";
             estado = false;
         }
@@ -424,7 +419,7 @@ public class FEstados extends javax.swing.JInternalFrame {
             estado = false;
         }
 
-        if (mensaje.length() >= 6) {
+        if (mensaje.length() >= 4) {
             JOptionPane.showMessageDialog(null, mensaje, "", JOptionPane.WARNING_MESSAGE);
 
         }
@@ -432,26 +427,24 @@ public class FEstados extends javax.swing.JInternalFrame {
     }
 
     public void desabilitar() {
-        ttcodigo.setEnabled(false);
+        txtcodigo.setEnabled(false);
         txtdescripcion.setEnabled(false);
         btnaceptar.setEnabled(false);
         btnmodificar.setEnabled(false);
         btneliminar.setEnabled(false);
         txtdescripcion.setText("");
-        Generarnumeracion();
         btnnuevo.setEnabled(true);
         btncancelar.setEnabled(false);
+
     }
 
     public void habilitar() {
-        ttcodigo.setEnabled(true);
-        ttcodigo.setEditable(false);
+        txtcodigo.setEnabled(true);
+        txtcodigo.setEditable(false);
         txtdescripcion.setEnabled(true);
         btnaceptar.setEnabled(true);
-        btnnuevo.setEnabled(false);
-        btneliminar.setEnabled(false);
-        btnmodificar.setEnabled(false);
         btncancelar.setEnabled(true);
+        btnnuevo.setEnabled(false);
     }
 
     public void MouseE() {
@@ -459,18 +452,15 @@ public class FEstados extends javax.swing.JInternalFrame {
         btneliminar.setEnabled(true);
         btnmodificar.setEnabled(true);
         btnaceptar.setEnabled(false);
-        ttcodigo.setEnabled(true);
-        ttcodigo.setEditable(false);
+        txtcodigo.setEnabled(true);
+        txtcodigo.setEditable(false);
         txtdescripcion.setEnabled(true);
         btncancelar.setEnabled(true);
-
     }
 
-    public void limipiar() {
-        Generarnumeracion();
+    public void limpiar() {
         txtdescripcion.setText("");
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnaceptar;
@@ -485,9 +475,11 @@ public class FEstados extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbestado;
-    private javax.swing.JTextField ttcodigo;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbunidades;
     private javax.swing.JTextField txtbuscar;
+    private javax.swing.JTextField txtcodigo;
     private javax.swing.JTextField txtdescripcion;
     // End of variables declaration//GEN-END:variables
 }

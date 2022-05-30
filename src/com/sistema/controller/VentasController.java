@@ -27,7 +27,7 @@ public class VentasController {
     PreparedStatement ps;
     String sql = "";
     public List<TiposVentaDTO> tiposVenta(){        
-        sql = "SELECT * FROM tiposventa";        
+        sql = "SELECT * FROM tiposventa ORDER BY idtipo DESC";        
         List<TiposVentaDTO>listaTiposVenta = new ArrayList<>();
         try {
             connect = con.connectDatabase();    

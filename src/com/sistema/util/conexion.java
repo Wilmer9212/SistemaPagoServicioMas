@@ -7,6 +7,7 @@ package com.sistema.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,12 +26,13 @@ public class conexion {
             // Database connect
             // Conectamos con la base de datos
             con = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/sivent",
-                    "postgres", "root");
+                    "jdbc:postgresql://localhost:5432/test",
+                    "postgres", "red1");
             
            if(con != null){
-               System.out.println("Connection Exitosa....");
+              // System.out.println("Connection Exitosa....");
            }else{
+               JOptionPane.showMessageDialog(null,"ERROR AL CONECTAR A BASE DE DATOS","",JOptionPane.ERROR_MESSAGE);
                System.out.println("Error en conexion\n Saliendo del sistema...");
                try {
                     Thread.sleep(3000);

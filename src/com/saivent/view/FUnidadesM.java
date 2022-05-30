@@ -5,18 +5,15 @@
  */
 package com.saivent.view;
 
+import com.saivent.util.MetodosValidar;
+import com.saivent.util.Validaciones;
 import com.sistema.controller.UnidadesMedidaController;
 import com.sistema.modelo.UnidadesMedidaDTO;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.Dimension;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-
 import javax.swing.table.DefaultTableModel;
-
 
 /**
  *
@@ -27,14 +24,24 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
     /**
      * Creates new form FUnidadesM
      */
-     
     UnidadesMedidaController Controller = new UnidadesMedidaController();
+
     public FUnidadesM() {
         initComponents();
-        llenartb("");
+        llenarUnidades("");
         desabilitar();
+        diseñoVentana();
     }
-    
+
+    public void diseñoVentana() {
+        Dimension DimensionBarra = null;
+        JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        DimensionBarra = Barra.getPreferredSize();
+        Barra.setSize(0, 0);
+        Barra.setPreferredSize(new Dimension(0, 0));
+        repaint();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,7 +56,7 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        ttcodigo = new javax.swing.JTextField();
+        txtcodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtdescripcion = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -154,7 +161,7 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
         });
 
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir ventana.png"))); // NOI18N
-        btnsalir.setText("SALIR");
+        btnsalir.setText("CERRAR");
         btnsalir.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         btnsalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnsalir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -214,7 +221,7 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ttcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -231,7 +238,7 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ttcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnaceptar)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,146 +281,132 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbunidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbunidadesMouseClicked
-     MouseE();
-     int fis=tbunidades.getSelectedRow();
-     if(fis>=0){
-         ttcodigo.setText(tbunidades.getValueAt(fis, 0).toString());
-         txtdescripcion.setText(tbunidades.getValueAt(fis,1).toString());
-     }
+        MouseE();
+        int fis = tbunidades.getSelectedRow();
+        if (fis >= 0) {
+            txtcodigo.setText(tbunidades.getValueAt(fis, 0).toString());
+            txtdescripcion.setText(tbunidades.getValueAt(fis, 1).toString());
+        }
     }//GEN-LAST:event_tbunidadesMouseClicked
 
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
-     /*UnidadesMedidaDTO umedida = new UnidadesMedidaDTO();
-     um.setIdunidad(Integer.parseInt(ttcodigo.getText()));
-     um.setDescripcion(txtdescripcion.getText());
-    if(valEntradas()==true){
-        int preg=JOptionPane.showConfirmDialog(null,"¿MODIFICAR?","",JOptionPane.YES_NO_OPTION);
-        if(preg==JOptionPane.YES_OPTION){
+        UnidadesMedidaDTO unidad = new UnidadesMedidaDTO();
+        unidad.setIdunidadm(Integer.parseInt(txtcodigo.getText()));
+        unidad.setDescripcion(txtdescripcion.getText());
+        int preg = JOptionPane.showConfirmDialog(null, "¿MODIFICAR DATOS?", "", JOptionPane.YES_NO_OPTION);
+        if (preg == JOptionPane.YES_OPTION) {
             try {
-            Controller.edit(um);
-            Generarnumeracion();
-            txtdescripcion.setText("");
-            llenartb("");
-            limpiar();
-            desabilitar();
-        } catch (Exception ex) {
-            Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-      } 
-    }*/
-    
+                boolean modi = Controller.update(unidad);
+                if (modi) {
+                    llenarUnidades("");
+                    limpiar();
+                    desabilitar();
+                    new MetodosValidar().ok_modificar();
+                } else {
+                    new MetodosValidar().error_modificar();
+                }
+
+            } catch (Exception ex) {
+                System.out.println("Error al modificar datos:" + ex.getMessage());
+
+            }
+        }
+
     }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-         /*int preg=JOptionPane.showConfirmDialog(null,"¿ELIMINAR?","",JOptionPane.YES_NO_OPTION);
-         if(preg==JOptionPane.YES_OPTION){
-           try {
-          Controller.destroy(Integer.parseInt(ttcodigo.getText()));
-          llenartb("");
-          limpiar();
-          desabilitar();
-         
-        } catch (NonexistentEntityException ex) {
-            Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-          
-       } 
-     }
-          */
-       
+
+        int preg = JOptionPane.showConfirmDialog(null, "¿ELIMINAR DATOS?", "", JOptionPane.YES_NO_OPTION);
+        if (preg == JOptionPane.YES_OPTION) {
+            try {
+                boolean eli = Controller.delete(Integer.parseInt(txtcodigo.getText()));
+                if (eli) {
+                    llenarUnidades("");
+                    limpiar();
+                    desabilitar();
+                    new MetodosValidar().ok_eliminar();
+                } else {
+                    new MetodosValidar().error_eliminar();
+                }
+
+            } catch (Exception ex) {
+                System.out.println("Error al eliminar datos:" + ex.getMessage());
+
+            }
+        }
+
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
-      /*Unidadesm um =new Unidadesm();
-      um.setIdunidad(Integer.parseInt(ttcodigo.getText()));
-      um.setDescripcion(txtdescripcion.getText());
-      if(valEntradas()==true){
-      int preg=JOptionPane.showConfirmDialog(null,"¿DATOS CORRECTOS?","",JOptionPane.YES_NO_OPTION);
-         if(preg==JOptionPane.YES_OPTION){
-           try {
-          Controller.create(um);
-          llenartb("");
-          limpiar();
-         } catch (Exception ex) {
-            Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-          }    
+        UnidadesMedidaDTO unidad = new UnidadesMedidaDTO();
+        if (valEntradas() == true) {
+            int preg = JOptionPane.showConfirmDialog(null, "¿DATOS CORRECTOS?", "", JOptionPane.YES_NO_OPTION);
+            unidad.setIdunidadm(Integer.parseInt(txtcodigo.getText()));
+            unidad.setDescripcion(txtdescripcion.getText());
+            if (preg == JOptionPane.YES_OPTION) {
+                try {
+                    boolean in = Controller.save(unidad);
+                    if (in) {
+                        llenarUnidades("");
+                        limpiar();
+                        desabilitar();
+                        new MetodosValidar().ok();
+                    } else {
+                        new MetodosValidar().error();
+                    }
+
+                } catch (Exception ex) {
+                    System.out.println("Error al insertar unidades:" + ex.getMessage());
+                }
+            }
         }
-      }*/
     }//GEN-LAST:event_btnaceptarActionPerformed
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
-      txtbuscar.setText(txtbuscar.getText().toUpperCase());
-      llenartb(txtbuscar.getText());
+        txtbuscar.setText(txtbuscar.getText().toUpperCase());
+        llenarUnidades(txtbuscar.getText());
     }//GEN-LAST:event_txtbuscarKeyReleased
 
     private void txtdescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyReleased
-      txtdescripcion.setText(txtdescripcion.getText().toUpperCase());
+        txtdescripcion.setText(txtdescripcion.getText().toUpperCase());
         // TODO add your handling code here:
     }//GEN-LAST:event_txtdescripcionKeyReleased
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
-     habilitar();
+        txtcodigo.setText(String.valueOf(Controller.generarSecuenciaId()));
+        habilitar();
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
-     this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         btnnuevo.setEnabled(true);
         desabilitar();
     }//GEN-LAST:event_btncancelarActionPerformed
-  public void llenartb(String descripcion){
-      /*String[] titulos = {"CODIGO","DESCRIPCION"};
-      DefaultTableModel dtm = new DefaultTableModel(null, titulos);
-      
-     try{
-        Object o[] = null;
-        List<Unidadesm>lista = buscarU(descripcion); 
+    public void llenarUnidades(String descripcion) {
+        String[] titulos = {"CODIGO", "DESCRIPCION"};
+        DefaultTableModel dtm = new DefaultTableModel(null, titulos);
+        try {
+            Object o[] = null;
+            List<UnidadesMedidaDTO> lista = Controller.unidadesAll(descripcion);
             for (int i = 0; i < lista.size(); i++) {
                 dtm.addRow(o);
-                dtm.setValueAt(lista.get(i).getIdunidad().toString(),i, 0);
-                dtm.setValueAt(lista.get(i).getDescripcion().toString(),i, 1);
-             }
+                dtm.setValueAt(lista.get(i).getIdunidadm().toString(), i, 0);
+                dtm.setValueAt(lista.get(i).getDescripcion(), i, 1);
+            }
             tbunidades.setModel(dtm);
-       
-     }catch(Exception ex){
-         JOptionPane.showMessageDialog(null,"NO SE RECONOCE LA TABLA UNIDADES","",JOptionPane.ERROR_MESSAGE);
-     }  */               
-  }
 
-    private List<UnidadesMedidaDTO> buscarU(String descripcion) {
-        /*EntityManager em = Controller.getEntityManager();
-        Query query = em.createQuery("SELECT u FROM Unidadesm u WHERE u.descripcion LIKE :descripcion");
-        query.setParameter("descripcion","%"+descripcion+"%");
-        List<Unidadesm> lista = query.getResultList();
-        */
-        return null;
+        } catch (Exception ex) {
+            System.out.println("ERROR AL CARGAR UNIDADES");
+        }
     }
- 
-    public void Generarnumeracion() {
-        String SQL = "select max(idunidad) from unidadesm";
 
-        int c = 0;
-        int b = 0;
-        /*try {
-            Statement st = (Statement) connect.createStatement();
-            ResultSet rs = st.executeQuery(SQL);
-            while (rs.next()) {
-                c = rs.getInt(1);
-            }
-            if (c == 0) {
-                ttcodigo.setText("1");
-            } else {
-                ttcodigo.setText("" + (+c + 1));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }//MetodoGenerarNumEnId*/ 
-     public boolean valEntradas() {
+    public boolean valEntradas() {
         String mensaje = "";
         boolean estado = true;
-        if (ttcodigo.getText().isEmpty()) {
+        if (txtcodigo.getText().isEmpty()) {
             mensaje += "CODIGO NO DEBE ESTAR VACIO \n";
             estado = false;
         }
@@ -421,16 +414,16 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
             mensaje += "NO SE INSERTO UNA DESCRIPCION \n";
             estado = false;
         }
-       
-              if (mensaje.length() >= 4) {
+
+        if (mensaje.length() >= 4) {
             JOptionPane.showMessageDialog(null, mensaje, "", JOptionPane.WARNING_MESSAGE);
 
         }
         return estado;
     }
-     
-    public void desabilitar(){
-        ttcodigo.setEnabled(false);
+
+    public void desabilitar() {
+        txtcodigo.setEnabled(false);
         txtdescripcion.setEnabled(false);
         btnaceptar.setEnabled(false);
         btnmodificar.setEnabled(false);
@@ -438,29 +431,30 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
         txtdescripcion.setText("");
         btnnuevo.setEnabled(true);
         btncancelar.setEnabled(false);
-        Generarnumeracion();
-        
+
     }
-    public void habilitar(){
-        ttcodigo.setEnabled(true);
-        ttcodigo.setEditable(false);
+
+    public void habilitar() {
+        txtcodigo.setEnabled(true);
+        txtcodigo.setEditable(false);
         txtdescripcion.setEnabled(true);
-        btnaceptar.setEnabled(true); 
+        btnaceptar.setEnabled(true);
         btncancelar.setEnabled(true);
         btnnuevo.setEnabled(false);
     }
-    public void MouseE(){
-     btnnuevo.setEnabled(false);
-     btneliminar.setEnabled(true);
-     btnmodificar.setEnabled(true);
-     btnaceptar.setEnabled(false);
-     ttcodigo.setEnabled(true);
-     ttcodigo.setEditable(false);
-     txtdescripcion.setEnabled(true);
-     btncancelar.setEnabled(true);
-     }
-    public void limpiar(){
-        Generarnumeracion();
+
+    public void MouseE() {
+        btnnuevo.setEnabled(false);
+        btneliminar.setEnabled(true);
+        btnmodificar.setEnabled(true);
+        btnaceptar.setEnabled(false);
+        txtcodigo.setEnabled(true);
+        txtcodigo.setEditable(false);
+        txtdescripcion.setEnabled(true);
+        btncancelar.setEnabled(true);
+    }
+
+    public void limpiar() {
         txtdescripcion.setText("");
     }
 
@@ -480,8 +474,8 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable tbunidades;
-    private javax.swing.JTextField ttcodigo;
     private javax.swing.JTextField txtbuscar;
+    private javax.swing.JTextField txtcodigo;
     private javax.swing.JTextField txtdescripcion;
     // End of variables declaration//GEN-END:variables
 }
