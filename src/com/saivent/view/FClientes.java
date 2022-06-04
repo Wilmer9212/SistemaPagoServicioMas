@@ -23,9 +23,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Sistemas
  */
 public class FClientes extends javax.swing.JInternalFrame {
-
+    
     ClientesController controllerClientes = new ClientesController();
-
+    
     public FClientes() {
         initComponents();
         ListarClientes("");
@@ -33,7 +33,7 @@ public class FClientes extends javax.swing.JInternalFrame {
         llenarCombos();
         diseñoVentana();
     }
-
+    
     public void diseñoVentana() {
         Dimension DimensionBarra = null;
         JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
@@ -43,7 +43,7 @@ public class FClientes extends javax.swing.JInternalFrame {
         Barra.setPreferredSize(new Dimension(0, 0));
         repaint();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -183,7 +183,7 @@ public class FClientes extends javax.swing.JInternalFrame {
 
         cbestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
 
-        cbgenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONA..." }));
+        cbgenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONA", "HOMBRE", "MUJER" }));
 
         txtAppaterno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -243,7 +243,7 @@ public class FClientes extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txtnombre)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtAppaterno, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                                        .addComponent(txtAppaterno, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtApmaterno))
                                     .addComponent(txtcodigo))))
@@ -259,9 +259,8 @@ public class FClientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblcodigo)
@@ -279,8 +278,9 @@ public class FClientes extends javax.swing.JInternalFrame {
                                 .addComponent(cbestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(cbcol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbldireccion)))))
-                .addGap(8, 8, 8)
+                                .addComponent(lbldireccion))))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbltelefono))
@@ -393,7 +393,7 @@ public class FClientes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8)
                     .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsalir)
@@ -431,6 +431,7 @@ public class FClientes extends javax.swing.JInternalFrame {
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         this.btnnuevo.setEnabled(false);
         habilitarC();
+        generarId();
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
@@ -441,42 +442,9 @@ public class FClientes extends javax.swing.JInternalFrame {
 
     private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
         if (valEntradas() == true) {
-            /*    Cliente cl = new Cliente();
-            try {  
-               
-                int confirmar = JOptionPane.showConfirmDialog(null, "¿Datos correctos?", "", JOptionPane.YES_NO_OPTION);
-                if (confirmar == JOptionPane.YES_OPTION) {
-                
-                cl.setIdcliente(Integer.parseInt(txtcodigo.getText()));
-                cl.setNombre(txtnombre.getText());
-                cl.setEdad(Integer.parseInt(txtedad.getText()));                 
-                cl.setDireccion(cbcol.getSelectedItem()+","+cbmuni.getSelectedItem()+","+cbestado.getSelectedItem());
-                if(!txttelefono.getText().equals("")){
-                 cl.setTelefono(Integer.parseInt(txttelefono.getText())); 
-                }
-                cl.setGenero(cbgenero.getSelectedItem().toString());
-                cl.setMail(txtemail.getText());
-                List<Colonia>listc=PColonia.findColoniaEntities();
-                int idcc=0;
-                for(int i=0;i<listc.size();i++){
-                    if(cbcol.getSelectedItem().equals(listc.get(i).getNombre())){
-                      idcc=listc.get(i).getIdcolonia();
-                       }
-                 }
-                cl.setIdcolonia(idcc);   
-                PClientes.create(cl);
-                ListarClientes("");
-                limpiarC();
-                desabilitarC(); 
-                btnnuevo.setEnabled(true);
-                
-            }
-               
-        } catch (Exception e) {
-
-        }*/
+            guardar();
         }
-
+        
 
     }//GEN-LAST:event_btnaceptarActionPerformed
 
@@ -494,63 +462,17 @@ public class FClientes extends javax.swing.JInternalFrame {
 
     private void tbclientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbclientesMouseClicked
         EventMouseClick();
-        particionarDom();
+        
     }//GEN-LAST:event_tbclientesMouseClicked
 
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
-        /*       if (this.valEntradas() == true) {
-              try {
-                List<Colonia>listc=PColonia.findColoniaEntities();
-                
-                int idc=0,idcc=0;
-                for(int i=0;i<listc.size();i++){
-                    idc=listc.get(i).getIdcolonia();
-                    if(cbcol.getSelectedItem().equals(listc.get(i).getNombre())){
-                      idcc=listc.get(i).getIdcolonia();
-                       }
-                   
-                }
-               int confirmar=JOptionPane.showConfirmDialog(null,"¿MODIFICAR?","",JOptionPane.YES_NO_OPTION);
-               if (confirmar == JOptionPane.YES_NO_OPTION) {
-                Cliente cl = new Cliente();
-                cl.setIdcliente(Integer.parseInt(txtcodigo.getText()));
-                cl.setNombre(txtnombre.getText());
-                cl.setEdad(Integer.parseInt(txtedad.getText()));
-                cl.setDireccion(cbcol.getSelectedItem()+","+cbmuni.getSelectedItem()+","+cbestado.getSelectedItem());
-                if(!txttelefono.getText().equals("")){
-                cl.setTelefono(Integer.parseInt(txttelefono.getText()));    
-                }                
-                cl.setGenero(cbgenero.getSelectedItem().toString());
-                cl.setMail(txtemail.getText());
-                cl.setIdcolonia(idc);                 
-                PClientes.edit(cl);
-                ListarClientes("");
-                limpiarC();
-                desabilitarC();
-                btnnuevo.setEnabled(true);
-            }           
-        } catch (Exception e) {
-
+        if(valEntradas()){
+            modificar();
         }
-        }
-         */
     }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        int fila = tbclientes.getSelectedRow();
-        /*try {
-            int confirmar = JOptionPane.showConfirmDialog(null, "¿ELIMINAR?", "", JOptionPane.YES_NO_OPTION);
-            if (confirmar == JOptionPane.YES_NO_OPTION) {
-                PClientes.destroy(Integer.parseInt(txtcodigo.getText()));
-                ListarClientes("");
-                this.limpiarC();
-                desabilitarC();    
-                btnnuevo.setEnabled(true);
-          }
-        } catch (NonexistentEntityException ex) {
-            Logger.getLogger(FProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-
+       eliminar();
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
@@ -562,13 +484,12 @@ public class FClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbcolMouseClicked
 
     private void cbcolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbcolActionPerformed
-        llenarDir();
+     
     }//GEN-LAST:event_cbcolActionPerformed
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
         txtbuscar.setText(txtbuscar.getText().toUpperCase());
         ListarClientes(txtbuscar.getText());
-
     }//GEN-LAST:event_txtbuscarKeyReleased
 
     private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
@@ -592,7 +513,7 @@ public class FClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtemailKeyTyped
 
     private void txtAppaternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAppaternoKeyReleased
-        // TODO add your handling code here:
+        txtAppaterno.setText(txtAppaterno.getText().toUpperCase());
     }//GEN-LAST:event_txtAppaternoKeyReleased
 
     private void txtAppaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAppaternoKeyTyped
@@ -600,17 +521,17 @@ public class FClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtAppaternoKeyTyped
 
     private void txtApmaternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApmaternoKeyReleased
-        // TODO add your handling code here:
+        txtApmaterno.setText(txtApmaterno.getText().toUpperCase());
     }//GEN-LAST:event_txtApmaternoKeyReleased
 
     private void txtApmaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApmaternoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApmaternoKeyTyped
-
+    
     public void generarId() {
         txtcodigo.setText(String.valueOf(controllerClientes.generarSecuenciaId()));
     }
-
+    
     private void ListarClientes(String nombre) {
         String[] titulos = {"CODIGO", "NOMBRE COMPLETO", "DIRECCION", "CORREO", "TELEFONO", "GENERO"};
         DefaultTableModel dtm = new DefaultTableModel(null, titulos);
@@ -625,14 +546,14 @@ public class FClientes extends javax.swing.JInternalFrame {
                 dtm.setValueAt(listC.get(i).getMail(), i, 3);
                 dtm.setValueAt(listC.get(i).getTelefono(), i, 4);
                 dtm.setValueAt(listC.get(i).getGenero(), i, 5);
-               
+                
             }
             tbclientes.setModel(dtm);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-
+    
     public void guardar() {
         ClienteDTO cliente = new ClienteDTO();
         try {
@@ -642,7 +563,12 @@ public class FClientes extends javax.swing.JInternalFrame {
             cliente.setApmaterno(txtApmaterno.getText());
             cliente.setDomicilio(cbcol.getSelectedItem().toString() + "," + cbmuni.getSelectedItem().toString() + "," + cbestado.getSelectedItem().toString());
             cliente.setMail(txtemail.getText());
-            cliente.setTelefono(Integer.parseInt(txttelefono.getText()));
+            if(!txttelefono.getText().equals("")){
+               cliente.setTelefono(Integer.parseInt(txttelefono.getText()));
+            } else{
+                cliente.setTelefono(0);
+            }             
+            cliente.setGenero(cbgenero.getSelectedItem().toString());
             ColoniaDTO colonia = new LocalidadesController().coloniaByNombre(cbcol.getSelectedItem().toString());
             cliente.setIdcolonia(colonia.getIdcolonia());
             int confirmar = JOptionPane.showConfirmDialog(null, "¿Guardar registros?", "", JOptionPane.YES_NO_OPTION);
@@ -660,9 +586,9 @@ public class FClientes extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println("Error al guardar estado:" + e.getMessage());
         }
-
+        
     }
-
+    
     public void modificar() {
         ClienteDTO cliente = new ClienteDTO();
         try {
@@ -672,7 +598,12 @@ public class FClientes extends javax.swing.JInternalFrame {
             cliente.setApmaterno(txtApmaterno.getText());
             cliente.setDomicilio(cbcol.getSelectedItem().toString() + "," + cbmuni.getSelectedItem().toString() + "," + cbestado.getSelectedItem().toString());
             cliente.setMail(txtemail.getText());
-            cliente.setTelefono(Integer.parseInt(txttelefono.getText()));
+            if(!txttelefono.getText().equals("")){
+               cliente.setTelefono(Integer.parseInt(txttelefono.getText()));
+            } else{
+                cliente.setTelefono(0);
+            }  
+            cliente.setGenero(cbgenero.getSelectedItem().toString());
             ColoniaDTO colonia = new LocalidadesController().coloniaByNombre(cbcol.getSelectedItem().toString());
             cliente.setIdcolonia(colonia.getIdcolonia());
             int confirmar = JOptionPane.showConfirmDialog(null, "¿Modificar registros?", "", JOptionPane.YES_NO_OPTION);
@@ -691,7 +622,7 @@ public class FClientes extends javax.swing.JInternalFrame {
             System.out.println("Error al moficar registros:" + e.getMessage());
         }
     }
-
+    
     public void eliminar() {
         try {
             int confirmar = JOptionPane.showConfirmDialog(null, "¿Eliminar registros?", "", JOptionPane.YES_NO_OPTION);
@@ -710,60 +641,27 @@ public class FClientes extends javax.swing.JInternalFrame {
             System.out.println("Error al eliminar registros");
         }
     }
-
+    
     public void llenarCombos() {
-
+        
         for (int i = 0; i < new LocalidadesController().coloniasAll("").size(); i++) {
             cbcol.addItem(new LocalidadesController().coloniasAll("").get(i).getNombre());
         }
-
+        
         for (int i = 0; i < new MunicipiosController().municipiosAll("").size(); i++) {
             cbmuni.addItem(new MunicipiosController().municipiosAll("").get(i).getNombre());
         }
-
+        
         for (int i = 0; i < new EstadosController().estadosAll("").size(); i++) {
             cbestado.addItem(new EstadosController().estadosAll("").get(i).getNombre());
         }
-
+        
     }
-
-    public void llenarDir() {
-        /*  List<Colonia> ListC = PColonia.findColoniaEntities();
-        List<Municipio> ListM = PMunicipio.findMunicipioEntities();
-        List<Estado> ListE = PEstado.findEstadoEntities();
-        int idc = 0, idm = 0, ide, idmm = 0;
-        try {
-            for (int i = 0; i < ListC.size(); i++) {
-                 if(ListC.get(i).getNombre().equalsIgnoreCase(String.valueOf(cbcol.getSelectedItem()))){
-                 idm=ListC.get(i).getIdmunicipio(); 
-                 if(idm==0){
-                  
-                  cbestado.addItem("---");
-                  
-                 }
-                     for (Municipio ListM1 : ListM) {
-                         if(ListM1.getIdmunicipio().equals(idm)){
-                             cbmuni.setSelectedItem(ListM1.getNombrem());
-                             ide=ListM1.getIdestado();
-                               for (Estado ListE1 : ListE) {
-                                   if(ListE1.getIdestado().equals(ide)){
-                                       cbestado.setSelectedItem(ListE1.getNombree());
-                                   }
-                               }
-                         }
-                     }         
-                 }
-            }
-        } catch (Exception e) {
-        }
-      
-         */
-    }
-
-    public void particionarDom() {
+    
+    
+    public void particionarDom(String cadena) {
         String c, m, e;
-        int filaS = tbclientes.getSelectedRow();
-        String cadena = tbclientes.getValueAt(filaS, 3).toString();
+        System.out.println("cadenaaaaaaaaaaaa:" + cadena);
         String[] Part = cadena.split(",");
         for (int i = 0; i < Part.length; i++) {
             c = Part[0];
@@ -773,34 +671,47 @@ public class FClientes extends javax.swing.JInternalFrame {
             cbmuni.setSelectedItem(m);
             cbestado.setSelectedItem(e);
         }
-
     }
-
+    
+    public void particionarNombre(String cadena) {
+        String n, ap, am;
+        int filaS = tbclientes.getSelectedRow();
+        String[] Part = cadena.trim().split(" ");
+        for (int i = 0; i < Part.length; i++) {
+            System.out.println("entroooooooooooooooooooooooooooo");
+            n = Part[0];
+            ap = Part[1];
+            am = Part[2];
+            txtnombre.setText(n);
+            txtAppaterno.setText(ap);
+            txtApmaterno.setText(am);
+        }
+    }
+    
     public void EventMouseClick() {
         int filas = tbclientes.getSelectedRow();
         if (filas >= 0) {
-
+            
             this.habilitarC();
             this.btnaceptar.setEnabled(false);
             this.btnmodificar.setEnabled(true);
             this.btneliminar.setEnabled(true);
             this.btnnuevo.setEnabled(false);
             this.txtcodigo.setText(tbclientes.getValueAt(filas, 0).toString());
-            this.txtnombre.setText(tbclientes.getValueAt(filas, 1).toString());
-            if (tbclientes.getValueAt(filas, 3).toString().equals("")) {
-
+            particionarNombre(tbclientes.getValueAt(filas, 1).toString());            
+            particionarDom(tbclientes.getValueAt(filas, 2).toString());
+            txttelefono.setText(tbclientes.getValueAt(filas, 4).toString()); 
+            if(tbclientes.getValueAt(filas, 5) != null){
+                cbgenero.setSelectedItem(tbclientes.getValueAt(filas, 5).toString());
+            }else{
+                cbgenero.setSelectedIndex(0);
+            }            
+            if (!tbclientes.getValueAt(filas, 3).toString().equals("")) {                
+                txtemail.setText(tbclientes.getValueAt(filas, 3).toString());
             } else {
-                llenarDir();
+                txtemail.setText("");
             }
-            if (tbclientes.getValueAt(filas, 4).toString().equals("")) {
-                this.txttelefono.setText("ddd");
-
-            } else {
-                this.txttelefono.setText(tbclientes.getValueAt(filas, 4).toString());
-            }
-            cbgenero.setSelectedItem(tbclientes.getValueAt(filas, 5).toString());
-            txtemail.setText(tbclientes.getValueAt(filas, 6).toString());
-
+            
         }
     }//EventoDeMouseClicked
 
@@ -823,9 +734,11 @@ public class FClientes extends javax.swing.JInternalFrame {
         cbcol.setEnabled(false);
         cbmuni.setEnabled(false);
         cbestado.setEnabled(false);
-
+        txtApmaterno.setEnabled(false);
+        txtAppaterno.setEnabled(false);
+        
     }
-
+    
     public void habilitarC() {
         this.lblcodigo.setEnabled(true);
         this.lblnombre.setEnabled(true);
@@ -845,9 +758,12 @@ public class FClientes extends javax.swing.JInternalFrame {
         cbcol.setEnabled(true);
         cbmuni.setEnabled(true);
         cbestado.setEnabled(true);
-
+        txtAppaterno.setEnabled(true);
+        txtApmaterno.setEnabled(true);
+        txttelefono.setText("0");
+        
     }
-
+    
     public void limpiarC() {
 //        this.Generarnumeracion();
         this.txtnombre.setText("");
@@ -858,8 +774,10 @@ public class FClientes extends javax.swing.JInternalFrame {
         cbcol.setSelectedIndex(0);
         cbmuni.setSelectedIndex(0);
         cbestado.setSelectedIndex(0);
+        txtAppaterno.setText("");
+        txtApmaterno.setText("");
     }
-
+    
     public boolean valEntradas() {
         String mensaje = "";
         boolean estado = true;
@@ -871,7 +789,7 @@ public class FClientes extends javax.swing.JInternalFrame {
             mensaje += "NO SE INSERTO UN NOMBRE VALIDO \n";
             estado = false;
         }
-
+        
         if (cbgenero.getSelectedIndex() == 0) {
             mensaje += "NO SE SELECCIONO GENERO \n";
             estado = false;
@@ -882,12 +800,12 @@ public class FClientes extends javax.swing.JInternalFrame {
         }
         if (mensaje.length() >= 6) {
             JOptionPane.showMessageDialog(null, mensaje, "", JOptionPane.WARNING_MESSAGE);
-
+            
         }
-
+        
         return estado;
     }
-
+    
     public boolean valcorreo() {
         boolean correo = false;
         for (int i = 0; i < txtemail.getText().length(); i++) {

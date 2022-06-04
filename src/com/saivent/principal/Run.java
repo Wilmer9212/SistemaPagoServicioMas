@@ -149,7 +149,7 @@ public class Run extends javax.swing.JFrame {
         );
         JDBloquearLayout.setVerticalGroup(
             JDBloquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -228,6 +228,7 @@ public class Run extends javax.swing.JFrame {
             }
         });
 
+        btnSalir.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salida.png"))); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -472,14 +473,11 @@ public class Run extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        desbloquear();
+        System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void bntBloquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBloquearActionPerformed
-        //b();
         bloquear();
-
-
     }//GEN-LAST:event_bntBloquearActionPerformed
 
     
@@ -525,22 +523,27 @@ public class Run extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+       limpiarJDesktopFrame();
         municipios();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        limpiarJDesktopFrame();
         unidadesm();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+       limpiarJDesktopFrame();
         categorias();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+       limpiarJDesktopFrame();
         estados();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        limpiarJDesktopFrame();
         localidades();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 

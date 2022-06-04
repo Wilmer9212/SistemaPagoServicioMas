@@ -5,6 +5,7 @@
  */
 package com.sistema.controller;
 
+import com.sistema.modelo.DetalleVentaDTO;
 import com.sistema.modelo.TiposVentaDTO;
 import com.sistema.modelo.VentaRealizadaDTO;
 import com.sistema.util.conexion;
@@ -66,9 +67,23 @@ public class VentasController {
         return registros;
     }
     
-    public int insertarDetalleVenta(){
-       
-        return 0;
+    public int insertarDetalleVenta(DetalleVentaDTO detalle){
+        sql = "INSERT INTO detalles_venta VALUES(?,?,?,?,?)";
+         int registros = 0;
+         try {
+             connect = con.connectDatabase();    
+             ps = connect.prepareStatement(sql);
+             ps.setInt(1,detalle.getTicket());
+             ps.setString(2, detalle.getProducto());
+             ps.setInt(3, detalle.getTotalProducto());
+             ps.setDouble(4, detalle.getTotal());
+             ps.setString(5, detalle.getCliente());
+            registros = ps.executeUpdate();
+             connect.close();
+         } catch (Exception e) {
+             System.out.println("Error al insertar detalle_ventas:"+e.getMessage());
+         }
+         return registros;
     }
     
     

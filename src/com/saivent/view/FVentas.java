@@ -8,11 +8,14 @@ package com.saivent.view;
 import com.saivent.principal.Run;
 import com.saivent.util.MetodosValidar;
 import com.sistema.controller.CategoriaController;
+import com.sistema.controller.ClientesController;
 import com.sistema.controller.ProductoController;
 import com.sistema.controller.ProveedorController;
 import com.sistema.controller.UnidadesMedidaController;
 import com.sistema.controller.VentasController;
 import com.sistema.modelo.CategoriaDTO;
+import com.sistema.modelo.ClienteDTO;
+import com.sistema.modelo.DetalleVentaDTO;
 import com.sistema.modelo.ProductoDTO;
 import com.sistema.modelo.ProveedorDTO;
 import com.sistema.modelo.TiposVentaDTO;
@@ -20,7 +23,6 @@ import com.sistema.modelo.UnidadesMedidaDTO;
 import com.sistema.modelo.VentaRealizadaDTO;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -57,6 +59,7 @@ public class FVentas extends javax.swing.JInternalFrame {
     UnidadesMedidaController unidadesController = new UnidadesMedidaController();
     ProveedorController proveedoresController = new ProveedorController();
     CategoriaController categoriaController = new CategoriaController();
+    ClientesController clientesController = new ClientesController();
 
     public FVentas() {
         initComponents();
@@ -145,7 +148,6 @@ public class FVentas extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbClientes1 = new javax.swing.JTable();
-        btnclientes = new javax.swing.JButton();
         jDialogProducto = new javax.swing.JDialog();
         jPanel5 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -161,8 +163,6 @@ public class FVentas extends javax.swing.JInternalFrame {
         plista = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        btnmodificar = new javax.swing.JButton();
-        btnsalir1 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tbproductos = new javax.swing.JTable();
         pnlDatos1 = new javax.swing.JPanel();
@@ -296,14 +296,6 @@ public class FVentas extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        btnclientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/gestiones-menu.png"))); // NOI18N
-        btnclientes.setText("CLIENTES");
-        btnclientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnclientesActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -316,9 +308,7 @@ public class FVentas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtclientesb, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnclientes)))
+                        .addComponent(txtclientesb, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,8 +321,7 @@ public class FVentas extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtclientesb, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnclientes, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -501,22 +490,6 @@ public class FVentas extends javax.swing.JInternalFrame {
             }
         });
 
-        btnmodificar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        btnmodificar.setText("MODIFICAR");
-        btnmodificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmodificarActionPerformed(evt);
-            }
-        });
-
-        btnsalir1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        btnsalir1.setText("Salir");
-        btnsalir1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsalir1ActionPerformed(evt);
-            }
-        });
-
         tbproductos.setBackground(new java.awt.Color(204, 204, 255));
         tbproductos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbproductos.setModel(new javax.swing.table.DefaultTableModel(
@@ -548,11 +521,7 @@ public class FVentas extends javax.swing.JInternalFrame {
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(txtBuscar))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
-                    .addGroup(plistaLayout.createSequentialGroup()
-                        .addComponent(btnmodificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnsalir1)))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE))
                 .addContainerGap())
         );
         plistaLayout.setVerticalGroup(
@@ -564,17 +533,13 @@ public class FVentas extends javax.swing.JInternalFrame {
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(plistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnsalir1)
-                    .addComponent(btnmodificar))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlDatos1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         btnaceptar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        btnaceptar.setText("Aceptar");
+        btnaceptar.setText("Modificar");
         btnaceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnaceptarActionPerformed(evt);
@@ -760,11 +725,11 @@ public class FVentas extends javax.swing.JInternalFrame {
         jDialogProductosAdminLayout.setVerticalGroup(
             jDialogProductosAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogProductosAdminLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlDatos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(plista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(plista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13))
         );
 
         setForeground(new java.awt.Color(51, 0, 51));
@@ -1090,28 +1055,18 @@ public class FVentas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public boolean activador = false;
-    private void btnclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclientesActionPerformed
-        try {
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR AL CONECTAR A LA BASE DE DATOS", "", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnclientesActionPerformed
-
     private void tbClientes1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClientes1MouseClicked
         int fs = tbClientes1.getSelectedRow();
         if (fs >= 0) {
             txtCliente.setText(tbClientes1.getValueAt(fs, 1).toString());
             codCliente = tbClientes1.getValueAt(fs, 0).toString();
-            cbTipoVenta.setEnabled(false);
-            this.setEnabled(true);
+            cbTipoVenta.setEnabled(false);           
             jDialogClientes.setVisible(false);
         }
     }//GEN-LAST:event_tbClientes1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        this.jDialogClientes.setVisible(false);
+       jDialogClientes.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtclientesbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtclientesbKeyReleased
@@ -1144,7 +1099,9 @@ public class FVentas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbProductosMouseClicked
 
     private void btnaddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddProdActionPerformed
+        desabComponentesInit();
         productosView();
+       
     }//GEN-LAST:event_btnaddProdActionPerformed
 
     private void txtClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyReleased
@@ -1152,7 +1109,6 @@ public class FVentas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtClienteKeyReleased
 
     private void cbTipoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoVentaActionPerformed
-
         if (cbTipoVenta.getSelectedItem().toString().toUpperCase().contains("CLIENTE")) {
             cargarTBC("");
             try {
@@ -1216,7 +1172,7 @@ public class FVentas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCodKeyTyped
 
     private void cbTipoVentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoVentaMousePressed
-
+         
 
     }//GEN-LAST:event_cbTipoVentaMousePressed
 
@@ -1224,10 +1180,6 @@ public class FVentas extends javax.swing.JInternalFrame {
         llenarTbProductos(txtBuscar.getText());
         txtBuscar.setText(this.txtBuscar.getText().toUpperCase());
     }//GEN-LAST:event_txtBuscarKeyReleased
-
-    private void btnsalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalir1ActionPerformed
-        jDialogProductosAdmin.dispose();
-    }//GEN-LAST:event_btnsalir1ActionPerformed
 
     private void tbproductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbproductosMouseClicked
         EventoTbProductoMouseClicked();
@@ -1271,10 +1223,6 @@ public class FVentas extends javax.swing.JInternalFrame {
     private void txtcodKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodKeyReleased
 
     }//GEN-LAST:event_txtcodKeyReleased
-
-    private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
-
-    }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btnVaciarTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarTicketActionPerformed
         int fila = tbTicket.getSelectedRow();
@@ -1331,7 +1279,6 @@ public class FVentas extends javax.swing.JInternalFrame {
         txtSubTotal.setText("0.0");
         txtTotalIva.setText("0.0");
         txtTotalVenta.setEditable(false);
-        btnCancelar.setEnabled(false);
         btnVender.setEnabled(false);
 
     }
@@ -1376,7 +1323,6 @@ public class FVentas extends javax.swing.JInternalFrame {
         llenarProveedores();
         int fseleccionada = tbproductos.getSelectedRow();
         if (fseleccionada >= 0) {
-            this.btnmodificar.setEnabled(true);
             txtcod.setText(tbproductos.getValueAt(fseleccionada, 0).toString());
             txtnombre.setText(tbproductos.getValueAt(fseleccionada, 1).toString());
             cbunidad.setSelectedItem(tbproductos.getValueAt(fseleccionada, 9));
@@ -1465,6 +1411,18 @@ public class FVentas extends javax.swing.JInternalFrame {
         spppublico.setEnabled(false);
         sppcliente.setEnabled(false);
         cbproveedor.setEnabled(false);
+        spcantidad.setEnabled(true);
+
+    }
+    
+     public void desabComponentesInit() {
+        txtcod.setEnabled(false);
+        txtnombre.setEnabled(false);
+        cbunidad.setEnabled(false);
+        spppublico.setEnabled(false);
+        sppcliente.setEnabled(false);
+        cbproveedor.setEnabled(false);
+        spcantidad.setEnabled(false);        
 
     }
 
@@ -1554,19 +1512,18 @@ public class FVentas extends javax.swing.JInternalFrame {
         modelo.addColumn("NOMBRES");
         modelo.addColumn("DIRECCION");
         modelo.addColumn("TELEFONO");
-
         this.tbClientes1.setModel(modelo);
-        String sql = "";
-        if (valorB.equals("")) {
-            sql = "SELECT idcliente,nombre,direccion,telefono FROM cliente";
-        } else {
-            sql = "SELECT idcliente,nombre,direccion,telefono FROM cliente WHERE nombre LIKE'%" + valorB + "%'";
-        }
-        String datos[] = new String[5];
-        Statement st;
         try {
-
-            this.tbClientes1.setModel(modelo);
+            List<ClienteDTO> clientes = clientesController.findAll(valorB);
+            for (int i = 0; i < clientes.size(); i++) {
+                Object[] obj = new Object[4];
+                obj[0] = clientes.get(i).getIdcliente();
+                obj[1] = clientes.get(i).getNombre() + " " + clientes.get(i).getAppaterno() + " " + clientes.get(i).getApmaterno();
+                obj[2] = clientes.get(i).getDomicilio();
+                obj[3] = clientes.get(i).getTelefono();
+                modelo.addRow(obj);
+            }
+            tbClientes1.setModel(modelo);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DATOS CLIENTES", "", JOptionPane.ERROR_MESSAGE);
 
@@ -1623,12 +1580,10 @@ public class FVentas extends javax.swing.JInternalFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         String jd = sdf.format(jDateChooser1.getDate());
         String hoy = sdf.format(new Date());
+         int insertaDetalles = 0;
         if (opcion == JOptionPane.YES_OPTION) {
             //primero descontamos de la base de datos el total de productos
-            for (int y = 0; y < tbTicket.getRowCount(); y++) {
-                ProductoDTO producto = productoController.productoById(Integer.parseInt(tbTicket.getValueAt(y, 0).toString()));
-                int eliminarProductos = productoController.modificarProductoStock(Integer.parseInt(tbTicket.getValueAt(y, 0).toString()), producto.getStock() - Integer.parseInt(tbTicket.getValueAt(y, 3).toString()));
-                //Insertamos la venta
+             //Insertamos la venta
                 VentaRealizadaDTO venta = new VentaRealizadaDTO();
                 venta.setIdticket(random);
                 Timestamp timestamp = null;
@@ -1642,13 +1597,44 @@ public class FVentas extends javax.swing.JInternalFrame {
                 venta.setTipoventa(cbTipoVenta.getSelectedItem().toString());
                 venta.setTotalventa(Double.parseDouble(txtTotalVenta.getText()));
                 venta.setUsuario(1);
+                
                 int insertaRegistro = venController.insertarVentaRealizada(venta);
-                if (insertaRegistro > 0) {
-                    Icon icono = new ImageIcon(getClass().getResource("/Imagenes/applicated.gif"));
-                    JOptionPane.showMessageDialog(null, "VENTA EXITOSA", "", JOptionPane.PLAIN_MESSAGE, icono);
-                }
+            for (int y = 0; y < tbTicket.getRowCount(); y++) {
+                ProductoDTO producto = productoController.productoById(Integer.parseInt(tbTicket.getValueAt(y, 0).toString()));
+                int eliminarProductos = productoController.modificarProductoStock(Integer.parseInt(tbTicket.getValueAt(y, 0).toString()), producto.getStock() - Integer.parseInt(tbTicket.getValueAt(y, 3).toString()));
+               
+                
+                DetalleVentaDTO detalle_venta = new DetalleVentaDTO();
+                detalle_venta.setTicket(venta.getIdticket());
+                detalle_venta.setProducto(producto.getNombre());
+                detalle_venta.setTotalProducto(Integer.parseInt(tbTicket.getValueAt(y,3).toString()));
+                detalle_venta.setTotal(Double.parseDouble(tbTicket.getValueAt(y,4).toString()));
+                detalle_venta.setCliente(txtCliente.getText());
+                
+                insertaDetalles = venController.insertarDetalleVenta(detalle_venta);
+                
+               
             }
+             if (insertaRegistro > 0 && insertaDetalles>0) {
+                    Icon icono = new ImageIcon(getClass().getResource("/Imagenes/applicated.gif"));
+                    JOptionPane.showMessageDialog(null, "VENTA EXITOSA"+"\n"+
+                                                        "TIKCET:"+venta.getIdticket()+"\n"+
+                                                        "TOTAL:"+txtTotalVenta.getText()+"\n"+
+                                                        "FECHA:"+fecha(), "", JOptionPane.PLAIN_MESSAGE, icono);
+                }
+            vaciarTicketMethod();
         }
+    }
+    
+    public String fecha(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
+        String fecha = "";
+        try {
+            fecha = sdf.format(jDateChooser1.getDate());
+        } catch (Exception e) {
+            System.out.println("Error al parsear fecha:"+e.getMessage());
+        }
+        return fecha;
     }
 
     public void diseñarJDateChooser() {
@@ -1657,8 +1643,14 @@ public class FVentas extends javax.swing.JInternalFrame {
 
     }
 
+    public void vaciarTicketMethod(){
+        for(int i=0;i<tbTicket.getRowCount();i++){
+            dtmTicket.removeRow(i);
+        }
+    }
     public void btnCancelar() {
         cbTipoVenta.setSelectedIndex(0);
+        cbTipoVenta.setEnabled(true);
         txtCantidad.setText("");
         txtCod.setText("");
         txtCliente.setText("XXXXXXXXXXXXXXXXXXXX");
@@ -1668,7 +1660,6 @@ public class FVentas extends javax.swing.JInternalFrame {
         for (int i = 0; i < dtmTicket.getRowCount(); i++) {
             dtmTicket.removeRow(i);
         }
-        btnCancelar.setEnabled(false);
         txtSubTotal.setText("0.0");
         txtTotalIva.setText("0.0");
         txtTotalVenta.setText("0.0");
@@ -1683,10 +1674,7 @@ public class FVentas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnaddProd;
     private javax.swing.JButton btnbprod;
     private javax.swing.JButton btncancelar;
-    private javax.swing.JButton btnclientes;
-    private javax.swing.JButton btnmodificar;
     private javax.swing.JButton btnsalir;
-    private javax.swing.JButton btnsalir1;
     private javax.swing.JComboBox cbTipoVenta;
     private javax.swing.JComboBox<String> cbproveedor;
     private javax.swing.JComboBox<String> cbunidad;
