@@ -17,6 +17,24 @@ foreign key(idcolonia) references colonias(idcolonia)
 
 
 
+DROP TABLE IF EXISTS municipios;
+CREATE TABLE municipios(
+idmunicipio integer not null,
+nombre text not null,
+idestado integer not null,
+
+primary key(idmunicipio),
+foreign key(idestado)references estados(idestado)
+);
+
+
+DROP TABLE IF EXISTS estados;
+CREATE TABLE estados(
+idestado integer not null,
+nombre text not null,
+primary key(idestado)
+);
+
 
 DROP TABLE IF EXISTS colonias;
 CREATE TABLE colonias(
@@ -39,13 +57,6 @@ primary key(idmunicipio),
 foreign key(idestado)references estados(idestado)
 );
 
-
-DROP TABLE IF EXISTS estados;
-CREATE TABLE estados(
-idestado integer not null,
-nombre text not null,
-primary key(idestado)
-);
 
 
 
