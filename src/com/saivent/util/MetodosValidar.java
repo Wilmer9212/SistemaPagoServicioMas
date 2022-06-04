@@ -5,18 +5,11 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.AWTKeyStroke;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Desktop;
-import java.awt.Image;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DateFormat.Field;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,10 +20,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -362,7 +352,10 @@ public class MetodosValidar {
     public void advertencia(String men){
         JOptionPane.showMessageDialog(null,"¡¡¡"+men+"!!!","",JOptionPane.WARNING_MESSAGE);
     }
-
+    
+    public ImageIcon getIconOk(){
+        return new ImageIcon("/Imagenes/oki.png");
+    }
 
 }
 

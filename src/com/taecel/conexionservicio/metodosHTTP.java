@@ -59,8 +59,8 @@ public class metodosHTTP {
         TransaccionDTO transaccionResponse = null;
         try {
             JSONObject json = conect.urlConnect("POST", "https://taecel.com/app/api/RequestTXN", "&producto=" + producto + "&referencia=" + referencia + "&monto=" + monto);
-            transaccionResponse = gson.fromJson(json.toString(), TransaccionDTO.class);
-
+            System.out.println("Json:"+json);
+            transaccionResponse = gson.fromJson(json.toString(), TransaccionDTO.class);           
         } catch (Exception e) {
             System.out.println("Error al realizar el consumo de productos:" + e.getMessage());
         }

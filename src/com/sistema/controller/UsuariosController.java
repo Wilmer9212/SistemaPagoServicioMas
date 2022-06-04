@@ -41,7 +41,7 @@ public class UsuariosController {
             }
             connect.close();
         } catch (Exception e) {
-            System.out.println("Error al obtener undidad de medida por id:" + e.getMessage());
+            System.out.println("Error al obtener usuario por nombre:" + e.getMessage());
         }
         return user;
     }

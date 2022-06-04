@@ -134,10 +134,10 @@ insert into usuarios values(1,'root','63a9f0ea7bb98050796b649e85481845');
 
 
 
-DROP TABLE IF EXISTS tiposventa();
+DROP TABLE IF EXISTS tiposventa;
 CREATE TABLE tiposventa(
 idtipo integer,
-descriṕcion varchar(45),
+descripcion varchar(45),
 primary key(idtipo)
 
 );

@@ -7,9 +7,12 @@ package com.saivent.view;
 
 import com.google.gson.Gson;
 import com.saivent.util.ImageTable;
+import com.saivent.util.MetodosValidar;
 import com.sistema.util.Hilo;
 import com.taecel.conexionservicio.metodosHTTP;
 import com.taecel.modelo.ProductsDTO;
+import com.taecel.modelo.StatusDTO;
+import com.taecel.modelo.TransaccionDTO;
 import com.taecel.modelo.carriersModelo;
 import com.taecel.modelo.productoModel;
 import java.awt.BorderLayout;
@@ -32,11 +35,7 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
 import javax.swing.Timer;
-import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -92,6 +91,8 @@ public class FRecargas extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        lblVigencia1 = new javax.swing.JLabel();
+        jLabelCodProducto = new javax.swing.JLabel();
         loading = new javax.swing.JDialog();
         jProgressBar1 = new javax.swing.JProgressBar();
         porcentaje = new javax.swing.JLabel();
@@ -110,6 +111,8 @@ public class FRecargas extends javax.swing.JInternalFrame {
         jLabel3.setText("Monto ->");
 
         cbMontoCompa.setFont(new java.awt.Font("Noto Sans", 3, 12)); // NOI18N
+        cbMontoCompa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE" }));
+        cbMontoCompa.setToolTipText("");
         cbMontoCompa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbMontoCompaActionPerformed(evt);
@@ -126,6 +129,11 @@ public class FRecargas extends javax.swing.JInternalFrame {
         pnlVentas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 30));
 
         txtNumero.setToolTipText("ingresa tu numero\n");
+        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNumeroKeyReleased(evt);
+            }
+        });
         pnlVentas.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 193, -1));
 
         jLabel5.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
@@ -134,6 +142,11 @@ public class FRecargas extends javax.swing.JInternalFrame {
         pnlVentas.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         txtConfirmarNumero.setToolTipText("confirmar tu numero\n");
+        txtConfirmarNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtConfirmarNumeroKeyReleased(evt);
+            }
+        });
         pnlVentas.add(txtConfirmarNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 63, 193, -1));
 
         lblCostoProducto.setFont(new java.awt.Font("Noto Sans", 3, 12)); // NOI18N
@@ -154,7 +167,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
         lblNota.setFont(new java.awt.Font("Noto Sans", 3, 12)); // NOI18N
         lblNota.setForeground(new java.awt.Color(1, 1, 1));
         lblNota.setText("Nota :");
-        pnlVentas.add(lblNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 40, -1));
+        pnlVentas.add(lblNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 40, -1));
 
         jlabelCostoProducto.setForeground(new java.awt.Color(1, 1, 1));
         jlabelCostoProducto.setText("jLabel6");
@@ -172,10 +185,24 @@ public class FRecargas extends javax.swing.JInternalFrame {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        pnlVentas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, 50));
+        pnlVentas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, 50));
 
-        jButton1.setText("Vender");
-        pnlVentas.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/OK.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        pnlVentas.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, -1, -1));
+
+        lblVigencia1.setFont(new java.awt.Font("Noto Sans", 3, 12)); // NOI18N
+        lblVigencia1.setForeground(new java.awt.Color(1, 1, 1));
+        lblVigencia1.setText("Nombre producto :");
+        pnlVentas.add(lblVigencia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 110, -1));
+
+        jLabelCodProducto.setForeground(new java.awt.Color(1, 1, 1));
+        jLabelCodProducto.setText("jLabel6");
+        pnlVentas.add(jLabelCodProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 100, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -189,7 +216,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbMontoCompa, 0, 211, Short.MAX_VALUE)
+                        .addComponent(cbMontoCompa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
@@ -337,7 +364,6 @@ public class FRecargas extends javax.swing.JInternalFrame {
     private void cbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProductosActionPerformed
         jTable1.removeAll();
         if (cbProductos.getSelectedIndex() == 0) {
-
             loading.setSize(430, 90);
             loading.setLocationRelativeTo(null);
             loading.setVisible(true);
@@ -481,6 +507,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
             //pnlVentas.setBorder(bordejpanel);
             jlVenta.setText(cbProductos.getSelectedItem() + "," + jTable1.getValueAt(fila, 0).toString());
             dialogov.setVisible(true);
+            jLabelCodProducto.setText(cbMontoCompa.getSelectedItem().toString());
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR AL CONECTAR A LA BASE DE DATOS", "", JOptionPane.ERROR_MESSAGE);
@@ -503,9 +530,57 @@ public class FRecargas extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btnsalirActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Icon icono = new ImageIcon(getClass().getResource("/Imagenes/oki.png"));
+        try {
+            if (!txtNumero.getText().equals("") && !txtConfirmarNumero.equals("") && !jLabelCodProducto.getText().equals("")) {
+                if (txtNumero.getText().length() >= 10 || txtConfirmarNumero.getText().length() >= 10) {
+                    if (!txtConfirmarNumero.getText().equals(txtNumero.getText())) {
+                        JOptionPane.showMessageDialog(null, "LOS NUMEROS NO COINCIDEN", "", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        System.out.println("" + jLabelCodProducto.getText() + "," + txtConfirmarNumero.getText() + "," + cbMontoCompa.getSelectedItem().toString());
+                        TransaccionDTO transaction = metodos.getTransaccion(jLabelCodProducto.getText(), txtConfirmarNumero.getText(), cbMontoCompa.getSelectedItem().toString());
+                        System.out.println("Transaction:" + transaction);
+                        StatusDTO estatus = metodos.getStatus(transaction.getData().getTransID());
+                        if (!estatus.isSuccess()) {
+                             
+                            /*if (transaction.getError() > 0) {
+                                System.out.println("Entro aqui");
+                                JOptionPane.showMessageDialog(null, "Codigo de error:" + transaction.getError() + "\n"
+                                        + "Descripcion:" + transaction.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "¡¡¡" + transaction.getMessage() + "!!! \n"
+                                        + transaction.getData().getTransID(), "", JOptionPane.OK_OPTION, icono);
+                            }*/
+                        }else{
+                            
+                        }
+
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "LOS NUMEROS DEBEN SER 10 DIGITOS", "", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "INGRESE DATOS VALIDOS", "", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al enviar recarga:" + e.getMessage());
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtConfirmarNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmarNumeroKeyReleased
+        new MetodosValidar().soloNumeros(txtConfirmarNumero, 10);
+    }//GEN-LAST:event_txtConfirmarNumeroKeyReleased
+
+    private void txtNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyReleased
+        new MetodosValidar().soloNumeros(txtNumero, 10);
+    }//GEN-LAST:event_txtNumeroKeyReleased
+
     public void llenarComboProductos(String compa, String serv) {
         cbMontoCompa.removeAllItems();
         limpiarControlesRecargar();
+        cbMontoCompa.addItem("SELECCIONE");
         try {
             ProductsDTO prod = productos;// metodos.getProducts();
             ArrayList<productoModel> modelosProducto = prod.getData().getProductos();
@@ -533,6 +608,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
                     jlabelVigencia.setText(producto.getVigencia());
                     jlabelComisionServicio.setText("$0.00 pesos.");
                     jTextArea1.setText(producto.getDescripcion());
+                    jLabelCodProducto.setText(producto.getCodigo());
                 }
             }
 
@@ -563,6 +639,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
         jlabelComisionServicio.setText("");
         jlabelVigencia.setText("");
         jTextArea1.setText("");
+        jLabelCodProducto.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -574,6 +651,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelCodProducto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
@@ -590,6 +668,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblCostoProducto;
     private javax.swing.JLabel lblNota;
     private javax.swing.JLabel lblVigencia;
+    private javax.swing.JLabel lblVigencia1;
     private javax.swing.JDialog loading;
     private javax.swing.JPanel pnlVentas;
     private javax.swing.JLabel porcentaje;

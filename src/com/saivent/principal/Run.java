@@ -1,5 +1,6 @@
 package com.saivent.principal;
 
+import com.saivent.util.bloquear;
 import com.saivent.view.FCategorias;
 import com.saivent.view.FClientes;
 import com.saivent.view.FEstados;
@@ -10,20 +11,27 @@ import com.saivent.view.FProveedor;
 import com.saivent.view.FRecargas;
 import com.saivent.view.FUnidadesM;
 import com.saivent.view.FVentas;
+import com.sistema.controller.UsuariosController;
+import com.sistema.modelo.UsuarioDTO;
 import java.awt.GridBagConstraints;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 public class Run extends javax.swing.JFrame {
 
     boolean banderaProcesos = false;
-
+    JDialog jd = new JDialog();
     public Run() {
         initComponents();
         this.setLocationRelativeTo(null);
         DecorarBTN();
         setMenuBar();
-        controllerInicio();
     }
 
     int contBtn1 = 0;
@@ -66,6 +74,10 @@ public class Run extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JDBloquear = new javax.swing.JDialog();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         txtmsj = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -74,18 +86,19 @@ public class Run extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         bntBloquear = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        lblUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        jmenuOperaciones = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jmenuReporte = new javax.swing.JMenu();
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        jmenuMantenimiento = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -97,6 +110,47 @@ public class Run extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Key.png"))); // NOI18N
+
+        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout JDBloquearLayout = new javax.swing.GroupLayout(JDBloquear.getContentPane());
+        JDBloquear.getContentPane().setLayout(JDBloquearLayout);
+        JDBloquearLayout.setHorizontalGroup(
+            JDBloquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        JDBloquearLayout.setVerticalGroup(
+            JDBloquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -113,8 +167,9 @@ public class Run extends javax.swing.JFrame {
             }
         });
 
+        txtmsj.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         txtmsj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtmsj.setText("jLabel1");
+        txtmsj.setText("Usuario:");
 
         jPanel2.setBackground(new java.awt.Color(52, 130, 148));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -142,7 +197,7 @@ public class Run extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 13, Short.MAX_VALUE)
+            .addGap(0, 25, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -159,7 +214,7 @@ public class Run extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE))
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE))
         );
 
         bntBloquear.setFont(new java.awt.Font("Noto Sans", 1, 10)); // NOI18N
@@ -214,12 +269,14 @@ public class Run extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtmsj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtmsj, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,15 +284,17 @@ public class Run extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtmsj)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtmsj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jMenu2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jMenu2.setText("Operaciones");
-        jMenu2.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jmenuOperaciones.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jmenuOperaciones.setText("Operaciones");
+        jmenuOperaciones.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
 
         jMenuItem13.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-comportamiento-de-las-ventas-30.png"))); // NOI18N
@@ -245,7 +304,7 @@ public class Run extends javax.swing.JFrame {
                 jMenuItem13ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem13);
+        jmenuOperaciones.add(jMenuItem13);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-pago-de-recarga-30.png"))); // NOI18N
         jMenu5.setText("Servicios");
@@ -269,17 +328,17 @@ public class Run extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem8);
 
-        jMenu2.add(jMenu5);
+        jmenuOperaciones.add(jMenu5);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jmenuOperaciones);
 
-        jMenu3.setText("Reportes");
-        jMenu3.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jmenuReporte.setText("Reportes");
+        jmenuReporte.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
 
         jMenuItem21.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/VENTASS (1).png"))); // NOI18N
         jMenuItem21.setText("Ventas");
-        jMenu3.add(jMenuItem21);
+        jmenuReporte.add(jMenuItem21);
 
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-factura-30.png"))); // NOI18N
         jMenu6.setText("Servicios");
@@ -293,12 +352,12 @@ public class Run extends javax.swing.JFrame {
         jMenuItem6.setText("Pago de servicios");
         jMenu6.add(jMenuItem6);
 
-        jMenu3.add(jMenu6);
+        jmenuReporte.add(jMenu6);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jmenuReporte);
 
-        jMenu4.setText("Mantenimiento");
-        jMenu4.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jmenuMantenimiento.setText("Mantenimiento");
+        jmenuMantenimiento.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
 
         jMenuItem1.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-bienes-de-consumo-de-rápido-movimiento-48.png"))); // NOI18N
@@ -308,7 +367,7 @@ public class Run extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem1);
+        jmenuMantenimiento.add(jMenuItem1);
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/User group.png"))); // NOI18N
         jMenu1.setText("Personas");
@@ -336,7 +395,7 @@ public class Run extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenu4.add(jMenu1);
+        jmenuMantenimiento.add(jMenu1);
 
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/TableCat.png"))); // NOI18N
         jMenu7.setText("Catalogos");
@@ -387,9 +446,9 @@ public class Run extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem14);
 
-        jMenu4.add(jMenu7);
+        jmenuMantenimiento.add(jMenu7);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jmenuMantenimiento);
 
         setJMenuBar(jMenuBar1);
 
@@ -408,19 +467,22 @@ public class Run extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-       limpiarJDesktopFrame();
+        limpiarJDesktopFrame();
         ventas();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-
+        desbloquear();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void bntBloquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBloquearActionPerformed
+        //b();
+        bloquear();
+
 
     }//GEN-LAST:event_bntBloquearActionPerformed
 
-
+    
     private void jPanel3ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel3ComponentResized
 
     }//GEN-LAST:event_jPanel3ComponentResized
@@ -491,9 +553,19 @@ public class Run extends javax.swing.JFrame {
         limpiarJDesktopFrame();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    public void controllerInicio() {
-
-    }
+    private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
+        char c = evt.getKeyChar();
+        if (c == KeyEvent.VK_ENTER) {   
+             if(validarDesbloquear()){
+                desbloquear();
+                jd.setVisible(false); 
+                jPasswordField1.setText("");
+            }else{
+                JOptionPane.showMessageDialog(null,"ERROR AL VERIFICAR SU CONTRASEÑA","",JOptionPane.ERROR_MESSAGE);
+            }
+            
+        }
+    }//GEN-LAST:event_jPasswordField1KeyTyped
 
     public void controllerProcesos() {
         banderaProcesos = true;
@@ -501,9 +573,9 @@ public class Run extends javax.swing.JFrame {
 
     public void controllerMantenimiento() {
         btnSalir.setVisible(false);
-        jMenu2.setVisible(false);
-        jMenu3.setText("DEPURACIONES");
-        jMenu4.setVisible(false);
+        jmenuOperaciones.setVisible(false);
+        jmenuReporte.setText("DEPURACIONES");
+        jmenuMantenimiento.setVisible(false);
         jMenuBar1.setVisible(false);
         jMenuItem13.setText("Ejecucion de querys");
         jMenuItem21.setText("Depuracion de municipios");
@@ -524,6 +596,66 @@ public class Run extends javax.swing.JFrame {
         fv.setVisible(true);
         jDesktopPane1.add(fv);
         jMenuBar1.setVisible(true);
+    }
+
+    public boolean validarDesbloquear() {
+        boolean bandera = false;
+        try {
+            UsuarioDTO user = new UsuariosController().usuarioByNombre(lblUsuario.getText().trim());
+            if (user != null) {
+                if (user.getPassword().equals(getMD5(jPasswordField1.getText().trim()))) {
+                    bandera = true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al buscar el usuario:" + e.getMessage());
+        }
+        return bandera;
+    }
+
+    public static String getMD5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String hashtext = number.toString(16);
+
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void bloquear() {
+        jd = new JDialog(this,"DESBLOQUEAR",false);
+        jd.add(JDBloquear.getContentPane());
+        jd.setVisible(true);
+        JDBloquear.setTitle("INGRESA CONTRASEÑA");
+        jd.setSize(360,60);
+        jd.setLocationRelativeTo(null);
+        jd.setDefaultCloseOperation(0);      
+    
+        jMenuBar1.setEnabled(false);
+        jmenuOperaciones.setEnabled(false);
+        jmenuMantenimiento.setEnabled(false);
+        jmenuReporte.setEnabled(false);
+        btnSalir.setEnabled(false);
+        bntBloquear.setEnabled(false);
+        
+        this.setEnabled(false);
+    }
+
+    public void desbloquear() {
+        jMenuBar1.setEnabled(true);
+        jmenuOperaciones.setEnabled(true);
+        jmenuMantenimiento.setEnabled(true);
+        jmenuReporte.setEnabled(true);
+        btnSalir.setEnabled(true);
+        bntBloquear.setEnabled(true);
+        this.setEnabled(true);
     }
 
     private void clientes() {
@@ -646,17 +778,16 @@ public class Run extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog JDBloquear;
     private javax.swing.JButton bntBloquear;
     private javax.swing.JButton btnSalir;
     public javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenuBar jMenuBar1;
+    public javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
@@ -676,6 +807,12 @@ public class Run extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     public javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JMenu jmenuMantenimiento;
+    private javax.swing.JMenu jmenuOperaciones;
+    private javax.swing.JMenu jmenuReporte;
+    public javax.swing.JLabel lblUsuario;
     public javax.swing.JLabel txtmsj;
     // End of variables declaration//GEN-END:variables
 }

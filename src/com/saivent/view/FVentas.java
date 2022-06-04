@@ -1207,6 +1207,8 @@ public class FVentas extends javax.swing.JInternalFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         this.insertarDatosTicket();
+        btnVender.setEnabled(true);
+        btnCancelar.setEnabled(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtCodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodKeyTyped
@@ -1319,10 +1321,10 @@ public class FVentas extends javax.swing.JInternalFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         btnCancelar();
-        
+
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    public void inicioFrame(){
+    public void inicioFrame() {
         txtSubTotal.setEditable(false);
         txtTotalIva.setEditable(false);
         txtTotalVenta.setEditable(false);
@@ -1331,8 +1333,9 @@ public class FVentas extends javax.swing.JInternalFrame {
         txtTotalVenta.setEditable(false);
         btnCancelar.setEnabled(false);
         btnVender.setEnabled(false);
-        
+
     }
+
     public void calcTot() {
         double total = 0;
         double IVA = 0;
@@ -1640,9 +1643,9 @@ public class FVentas extends javax.swing.JInternalFrame {
                 venta.setTotalventa(Double.parseDouble(txtTotalVenta.getText()));
                 venta.setUsuario(1);
                 int insertaRegistro = venController.insertarVentaRealizada(venta);
-                if(insertaRegistro>0){
-                     Icon icono = new ImageIcon(getClass().getResource("/Imagenes/applicated.gif"));
-                     JOptionPane.showMessageDialog(null,"VENTA EXITOSA","",JOptionPane.PLAIN_MESSAGE,icono);
+                if (insertaRegistro > 0) {
+                    Icon icono = new ImageIcon(getClass().getResource("/Imagenes/applicated.gif"));
+                    JOptionPane.showMessageDialog(null, "VENTA EXITOSA", "", JOptionPane.PLAIN_MESSAGE, icono);
                 }
             }
         }

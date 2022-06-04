@@ -53,7 +53,6 @@ public class ProveedorController {
         } catch (Exception ex) {
             System.out.println("Error al obtener lista de proveedores:" + ex.getMessage());
         }
-        System.out.println("lista:"+lista.get(0).getNombre());
         return lista;
     }
 
