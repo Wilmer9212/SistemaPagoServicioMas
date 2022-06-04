@@ -5,10 +5,11 @@ idcliente integer not null,
 nombre text not null,
 appaterno text not null,
 apmaterno text,
+domicilio text,
 email text,
 telefono integer,
 activo boolean,
-sexo   varchar(45)
+sexo   varchar(45),
 idcolonia integer not null,
 
 primary key(idcliente),

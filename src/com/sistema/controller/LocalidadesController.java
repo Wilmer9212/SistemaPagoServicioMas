@@ -6,7 +6,6 @@
 package com.sistema.controller;
 
 import com.sistema.modelo.ColoniaDTO;
-import com.sistema.modelo.UnidadesMedidaDTO;
 import com.sistema.util.conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,79 +46,83 @@ public class LocalidadesController {
         return colonia;
     }
 
-    public List<UnidadesMedidaDTO> unidadesAll(String valor) {
-        List<UnidadesMedidaDTO> ListaUnidad = new ArrayList<>();
+    public List<ColoniaDTO> coloniasAll(String valor) {
+        List<ColoniaDTO> ListaColonias = new ArrayList<>();
         try {
             connect = con.connectDatabase();
             if(!valor.equals("")){
-                sql = "SELECT * FROM unidadesm WHERE descripcion LIKE '%"+valor+"%'";
+                sql = "SELECT * FROM colonias WHERE nombre LIKE '%"+valor+"%'";
             }else{
-                sql = "SELECT * FROM unidadesm";
+                sql = "SELECT * FROM colonias";
             }
             
             stmt = connect.createStatement();
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                UnidadesMedidaDTO unidad = new UnidadesMedidaDTO();
-                unidad.setIdunidadm(rs.getInt(1));
-                unidad.setDescripcion(rs.getString(2));
-                ListaUnidad.add(unidad);
+                ColoniaDTO colonia = new ColoniaDTO();
+                colonia.setIdcolonia(rs.getInt(1));
+                colonia.setNombre(rs.getString(2));
+                colonia.setIdmunicipio(rs.getInt(3));
+                ListaColonias.add(colonia);
             }
             connect.close();
         } catch (Exception e) {
-            System.out.println("Error al obtener lista de unidades de medida:" + e.getMessage());
+            System.out.println("Error al obtener lista de colonias de medida:" + e.getMessage());
         }
-        return ListaUnidad;
+        return ListaColonias;
     }
 
-    public UnidadesMedidaDTO unidadByNombre(String nombre) {
-        UnidadesMedidaDTO unidad = new UnidadesMedidaDTO();
+    public ColoniaDTO coloniaByNombre(String nombre) {
+        ColoniaDTO colonia = new ColoniaDTO();
         try {
             connect = con.connectDatabase();
-            sql = "SELECT * FROM unidadesm WHERE descripcion='" + nombre + "'";
+            sql = "SELECT * FROM colonias WHERE nombre='" + nombre + "'";
             stmt = connect.createStatement();
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                unidad.setIdunidadm(rs.getInt(1));
-                unidad.setDescripcion(rs.getString(2));
+                colonia.setIdcolonia(rs.getInt(1));
+                colonia.setNombre(rs.getString(2));
+                colonia.setIdmunicipio(rs.getInt(3));
             }
             connect.close();
         } catch (Exception e) {
-            System.out.println("Error al obtener undidad de medida por descripcion:" + e.getMessage());
+            System.out.println("Error al obtener colonia por nombre:" + e.getMessage());
         }
-        return unidad;
+        return colonia;
     }
 
-    public boolean save(UnidadesMedidaDTO unidad) {
+    public boolean save(ColoniaDTO colonia) {
         boolean bandera = false;
         connect = con.connectDatabase();
         try {
-            sql = "INSERT INTO unidadesm VALUES(?,?)";
+            sql = "INSERT INTO colonias VALUES(?,?,?)";
             ps = connect.prepareStatement(sql);
-            ps.setInt(1, unidad.getIdunidadm());
-            ps.setString(2, unidad.getDescripcion());
+            ps.setInt(1, colonia.getIdcolonia());
+            ps.setString(2, colonia.getNombre());
+            ps.setInt(3, colonia.getIdmunicipio());
             ps.executeUpdate();
             connect.close();
             bandera = true;
         } catch (Exception e) {
-            System.out.println("Error al  al insertar unidad:" + e.getMessage());
+            System.out.println("Error al insertar colonia:" + e.getMessage());
         }
         return bandera;
     }
 
-    public boolean update(UnidadesMedidaDTO unidad) {
+    public boolean update(ColoniaDTO colonia) {
         boolean bandera = false;
         connect = con.connectDatabase();
         try {
-            sql = "UPDATE unidadesm set descripcion =? WHERE idunidadm =?";
+            sql = "UPDATE colonias set nombre=?,idmunicipio=? WHERE idcolonia =?";
             ps = connect.prepareStatement(sql);
-            ps.setString(1, unidad.getDescripcion());
-            ps.setInt(2, unidad.getIdunidadm());
+            ps.setString(1, colonia.getNombre());
+            ps.setInt(2, colonia.getIdmunicipio());
+            ps.setInt(3,colonia.getIdcolonia());
             ps.executeUpdate();
             connect.close();
             bandera = true;
         } catch (Exception e) {
-            System.out.println("Error al  al modificar unidad:" + e.getMessage());
+            System.out.println("Error al modificar colonia:" + e.getMessage());
         }
         return bandera;
     }
@@ -128,14 +131,14 @@ public class LocalidadesController {
         boolean bandera = false;
         connect = con.connectDatabase();
         try {
-            sql = "DELETE FROM unidadesm WHERE idunidadm =?";
+            sql = "DELETE FROM colonias WHERE idcolonia =?";
             ps = connect.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
             connect.close();
             bandera = true;
         } catch (Exception e) {
-            System.out.println("Error al  al eliminar unidad:" + e.getMessage());
+            System.out.println("Error al eliminar colonia:" + e.getMessage());
         }
         return bandera;
     }
@@ -145,7 +148,7 @@ public class LocalidadesController {
         connect = con.connectDatabase();
 
         try {
-            sql = "SELECT * FROM unidadesm ORDER BY idunidadm DESC LIMIT 1";
+            sql = "SELECT * FROM colonias ORDER BY idcolonia DESC LIMIT 1";
             stmt = connect.createStatement();
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -157,7 +160,7 @@ public class LocalidadesController {
                 c = c + 1;
             }
         } catch (Exception ex) {
-            System.out.println("Error al generar numeracion unidadesm:" + ex.getMessage());
+            System.out.println("Error al generar numeracion colonias:" + ex.getMessage());
         }
         return c;
     }

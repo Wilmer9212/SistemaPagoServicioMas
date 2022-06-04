@@ -15,12 +15,11 @@ public class ClienteDTO {
     private String nombre;
     private String appaterno;
     private String apmaterno;
-    private Integer edad;
-    private String direccion;
+    private String domicilio;
     private Integer telefono;
-    
-    private String genero;
     private String mail;
+    private boolean activo;
+    private String genero;    
     private Integer idcolonia;
 
     public ClienteDTO() {
@@ -58,20 +57,12 @@ public class ClienteDTO {
         this.apmaterno = apmaterno;
     }
 
-    public Integer getEdad() {
-        return edad;
+    public String getDomicilio() {
+        return domicilio;
     }
 
-    public void setEdad(Integer edad) {
-        this.edad = edad;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
     }
 
     public Integer getTelefono() {
@@ -82,20 +73,28 @@ public class ClienteDTO {
         this.telefono = telefono;
     }
 
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
     public String getMail() {
         return mail;
     }
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public Integer getIdcolonia() {
@@ -108,7 +107,8 @@ public class ClienteDTO {
 
     @Override
     public String toString() {
-        return "ClienteDTO{" + "idcliente=" + idcliente + ", nombre=" + nombre + ", appaterno=" + appaterno + ", apmaterno=" + apmaterno + ", edad=" + edad + ", direccion=" + direccion + ", telefono=" + telefono + ", genero=" + genero + ", mail=" + mail + ", idcolonia=" + idcolonia + '}';
+        return "ClienteDTO{" + "idcliente=" + idcliente + ", nombre=" + nombre + ", appaterno=" + appaterno + ", apmaterno=" + apmaterno + ", domicilio=" + domicilio + ", telefono=" + telefono + ", mail=" + mail + ", activo=" + activo + ", genero=" + genero + ", idcolonia=" + idcolonia + '}';
     }
-
+     
+    
 }

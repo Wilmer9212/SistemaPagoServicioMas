@@ -5,40 +5,36 @@
  */
 package com.saivent.view;
 
+import com.saivent.util.MetodosValidar;
+import com.sistema.controller.LocalidadesController;
+import com.sistema.controller.MunicipiosController;
+import com.sistema.modelo.ColoniaDTO;
+import com.sistema.modelo.MunicipioDTO;
 import java.awt.Dimension;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static javax.management.remote.JMXConnectorFactory.connect;
 import javax.swing.JComponent;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author Elliot
  */
-
 public class FLocalidades extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FLocalidades
-     */
+    MunicipiosController controllerMunicipios = new MunicipiosController();
+    LocalidadesController controllerColonias = new LocalidadesController();
+
     public FLocalidades() {
         initComponents();
-        Generarnumeracion();
         desabilitar();
         llenartb("");
-        llenarCB();diseñoVentana();
+        llenarCB();
+        diseñoVentana();
     }
-    
-    public void diseñoVentana(){
+
+    public void diseñoVentana() {
         Dimension DimensionBarra = null;
         JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
         Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
@@ -47,6 +43,7 @@ public class FLocalidades extends javax.swing.JInternalFrame {
         Barra.setPreferredSize(new Dimension(0, 0));
         repaint();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -288,10 +285,9 @@ public class FLocalidades extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
      public void llenarCB() {
-        /*listV = control1.findMunicipioEntities();
-        for (int i = 0; i < listV.size(); i++) {
-           cbmun.addItem(listV.get(i).getNombrem());
-        }*/
+        for (int i = 0; i < controllerMunicipios.municipiosAll("").size(); i++) {
+            cbmun.addItem(controllerMunicipios.municipiosAll("").get(i).getNombre());
+        }
     }
     private void txtdescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyReleased
         txtdescripcion.setText(txtdescripcion.getText().toUpperCase());
@@ -299,28 +295,10 @@ public class FLocalidades extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtdescripcionKeyReleased
 
     private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
-        /*Colonia um =new Colonia();
-        um.setIdcolonia(Integer.parseInt(ttcodigo.getText()));
-        um.setNombre(txtdescripcion.getText());
-        for(int i=0;i<listV.size();i++){
-            if(listV.get(i).getNombrem().equals(cbmun.getSelectedItem())){
-                um.setIdmunicipio(listV.get(i).getIdmunicipio());
-            }
+
+        if (valEntradas() == true) {
+            guardar();
         }
-        if(valEntradas()==true){
-            int preg=JOptionPane.showConfirmDialog(null,"¿DATOS CORRECTOS?","",JOptionPane.YES_NO_OPTION);
-            if(preg==JOptionPane.YES_OPTION){
-                try {
-                    control.create(um);
-                    llenartb("");
-                    limipiar();
-                    desabilitar();
-                    
-                } catch (Exception ex) {
-                    Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }*/
     }//GEN-LAST:event_btnaceptarActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
@@ -335,53 +313,19 @@ public class FLocalidades extends javax.swing.JInternalFrame {
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         habilitar();
+        generarSecuencia();
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
-        /*Colonia um=new Colonia();
-        List<Municipio>lm=control1.findMunicipioEntities();
         int idm = 0;
-        if(valEntradas()==true){
-            int preg=JOptionPane.showConfirmDialog(null,"¿MODIFICAR?","",JOptionPane.YES_NO_OPTION);
-            if(preg==JOptionPane.YES_OPTION){
-                try {
-                     um.setIdcolonia(Integer.parseInt(ttcodigo.getText()));
-                     um.setNombre(txtdescripcion.getText()); 
-                    for(int i=0;i<lm.size();i++){
-                    if(lm.get(i).getNombrem().equals(cbmun.getSelectedItem())){
-                        idm=Integer.parseInt(lm.get(i).getIdmunicipio().toString()); 
-                    }
-                    }                 
-                    um.setIdmunicipio(idm);
-                    control.edit(um); 
-                    
-                    Generarnumeracion();
-                    desabilitar();
-                    llenartb("");
-                    limipiar();
-                } catch (Exception ex) {
-                    Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }*/
+        if (valEntradas() == true) {
+            modificar();
+        }
 
     }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        int preg=JOptionPane.showConfirmDialog(null,"¿ELIMINAR?","",JOptionPane.YES_NO_OPTION);
-        if(preg==JOptionPane.YES_OPTION){
-            try {
-           //     control.destroy(Integer.parseInt(ttcodigo.getText()));
-                llenartb("");
-                Generarnumeracion();
-                desabilitar();
-                limipiar();
-                
-            } catch (Exception ex) {
-                Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-
-            }
-        }
+        eliminar();
 
     }//GEN-LAST:event_btneliminarActionPerformed
 
@@ -390,75 +334,117 @@ public class FLocalidades extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void tbcoloniasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbcoloniasMouseClicked
-        MouseE();        
-       /* int fis=tbcolonias.getSelectedRow();
-        List<Municipio>lm=control1.findMunicipioEntities();
-        if(fis>=0){
-             ttcodigo.setText(tbcolonias.getValueAt(fis, 0).toString());
-             txtdescripcion.setText(tbcolonias.getValueAt(fis,1).toString());
-            for(int i=0;i<lm.size();i++){
-            cbmun.setSelectedItem(tbcolonias.getValueAt(fis,2).toString());
-            }
-            
-        }*/
+        MouseE();
+        int fila = tbcolonias.getSelectedRow();
+        ttcodigo.setText(tbcolonias.getValueAt(fila, 0).toString());
+        txtdescripcion.setText(tbcolonias.getValueAt(fila, 1).toString());
+        cbmun.setSelectedItem(tbcolonias.getValueAt(fila,2).toString());
+
+
     }//GEN-LAST:event_tbcoloniasMouseClicked
- public void llenartb(String descripcion){
-      String[] titulos = {"CODIGO","COLONIA","MUNICIPIO"};
-      DefaultTableModel dtm = new DefaultTableModel(null, titulos);
-      String nombre="";
-    /* try{
-        Object o[] = null;
-        List<Colonia>lista = buscarU(descripcion);
-         List<Municipio>lista2 = control1.findMunicipioEntities();
-         String idmm="";         
-          for (int i = 0; i < lista.size(); i++) {  
-                dtm.addRow(o);
-                dtm.setValueAt(lista.get(i).getIdcolonia().toString(),i, 0);
-                dtm.setValueAt(lista.get(i).getNombre().toString(),i, 1);  
-              for(int x=0;x < lista2.size(); x++){
-              idmm=String.valueOf(lista2.get(x).getIdmunicipio());
-              if(idmm.equals(String.valueOf(lista.get(i).getIdmunicipio()))){
-                nombre=lista2.get(x).getNombrem();
-                }
-              }
-              dtm.setValueAt(nombre, i, 2);
-            }
-          tbcolonias.setModel(dtm);
-       
-     }catch(Exception ex){
-         JOptionPane.showMessageDialog(null,"NO SE RECONOCE LA TABLA LOCALIDADES","",JOptionPane.ERROR_MESSAGE);
-     }*/                 
-  }
 
-  /*  private List<Colonia> buscarU(String nombre) {
-        EntityManager em = control.getEntityManager();
-        Query query = em.createQuery("SELECT u FROM Colonia u WHERE u.nombre LIKE :nombre");
-        query.setParameter("nombre","%"+nombre+"%");
-        List<Colonia> lista = query.getResultList();
-        return lista;
-    }*/
- 
-    public void Generarnumeracion() {
-      /*  String SQL = "select max(idcolonia) from colonia";
+    public void generarSecuencia() {
+        ttcodigo.setText(String.valueOf(controllerColonias.generarSecuenciaId()));
+    }
 
-        int c = 0;
-        int b = 0;
+    public void guardar() {
+        ColoniaDTO colonia = new ColoniaDTO();
         try {
-            Statement st = null;// (Statement) connect.createStatement();
-            ResultSet rs = st.executeQuery(SQL);
-            while (rs.next()) {
-                c = rs.getInt(1);
+            colonia.setIdcolonia(Integer.parseInt(ttcodigo.getText()));
+            colonia.setNombre(txtdescripcion.getText());
+            MunicipioDTO municipio = controllerMunicipios.municipioByNombre(cbmun.getSelectedItem().toString());
+            colonia.setIdmunicipio(municipio.getIdmunicipio());
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Guardar Registros?", "", JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_OPTION) {
+                boolean bandera = controllerColonias.save(colonia);
+                if (bandera) {
+                    new MetodosValidar().ok();
+                    limipiar();
+                    desabilitar();
+                    llenartb("");
+                } else {
+                    new MetodosValidar().error();
+                }
             }
-            if (c == 0) {
-                ttcodigo.setText("1");
-            } else {
-                ttcodigo.setText("" + (+c + 1));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al guardar rgistros:" + e.getMessage());
+        }
+
+    }
+
+    public void modificar() {
+        ColoniaDTO colonia = new ColoniaDTO();
+        try {
+            colonia.setIdcolonia(Integer.parseInt(ttcodigo.getText()));
+            colonia.setNombre(txtdescripcion.getText());
+            MunicipioDTO municipio = controllerMunicipios.municipioByNombre(cbmun.getSelectedItem().toString());
+            colonia.setIdmunicipio(municipio.getIdmunicipio());
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Modificar Registros?", "", JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_OPTION) {
+                boolean bandera = controllerColonias.update(colonia);
+                if (bandera) {
+                    new MetodosValidar().ok_modificar();
+                    limipiar();
+                    desabilitar();
+                    llenartb("");
+                } else {
+                    new MetodosValidar().error_modificar();
+                }
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(FProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }//MetodoGenerarNumEnId*/ 
-    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al modificar rgistros:" + e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    public void eliminar() {
+        int id = Integer.parseInt(ttcodigo.getText());
+        try {
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Eliminar Registros?", "", JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_NO_OPTION) {
+                boolean eliminarVar = controllerColonias.delete(id);
+                if (eliminarVar) {
+                    new MetodosValidar().ok_eliminar();
+                    limipiar();
+                    desabilitar();
+                    llenartb("");
+                } else {
+                    new MetodosValidar().error_eliminar();
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al eliminar rgistros:" + e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void llenartb(String descripcion) {
+        String[] titulos = {"CODIGO", "COLONIA", "MUNICIPIO"};
+        DefaultTableModel dtm = new DefaultTableModel(null, titulos);
+        String nombre = "";
+        try {
+            Object o[] = null;
+            List<ColoniaDTO> listaC = controllerColonias.coloniasAll(descripcion);
+            List<MunicipioDTO> listaM = controllerMunicipios.municipiosAll("");
+            String idmm = "";
+            for (int i = 0; i < listaC.size(); i++) {
+                dtm.addRow(o);
+                dtm.setValueAt(listaC.get(i).getIdcolonia().toString(), i, 0);
+                dtm.setValueAt(listaC.get(i).getNombre().toString(), i, 1);
+                for (int x = 0; x < listaM.size(); x++) {
+                    idmm = String.valueOf(listaM.get(x).getIdmunicipio());
+                    if (idmm.equals(String.valueOf(listaM.get(i).getIdmunicipio()))) {
+                        nombre = listaM.get(x).getNombre();
+                    }
+                }
+                dtm.setValueAt(nombre, i, 2);
+            }
+            tbcolonias.setModel(dtm);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "NO SE RECONOCE LA TABLA COLONIAS", "", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public boolean valEntradas() {
         String mensaje = "";
         boolean estado = true;
@@ -470,17 +456,18 @@ public class FLocalidades extends javax.swing.JInternalFrame {
             mensaje += "NO SE INSERTO UNA DESCRIPCION \n";
             estado = false;
         }
-        if (cbmun.getSelectedIndex()==0) {
+        if (cbmun.getSelectedIndex() == 0) {
             mensaje += "MUNUCIPIO NO VALIDO \n";
             estado = false;
-        }     
-          if (mensaje.length() >= 6) {
+        }
+        if (mensaje.length() >= 6) {
             JOptionPane.showMessageDialog(null, mensaje, "", JOptionPane.WARNING_MESSAGE);
 
         }
         return estado;
     }
-      public void desabilitar(){
+
+    public void desabilitar() {
         ttcodigo.setEnabled(false);
         txtdescripcion.setEnabled(false);
         btnaceptar.setEnabled(false);
@@ -488,39 +475,40 @@ public class FLocalidades extends javax.swing.JInternalFrame {
         btneliminar.setEnabled(false);
         txtdescripcion.setText("");
         cbmun.setEnabled(false);
-        Generarnumeracion();
         btnnuevo.setEnabled(true);
         btncancelar.setEnabled(false);
     }
-    public void habilitar(){
+
+    public void habilitar() {
         ttcodigo.setEnabled(true);
         ttcodigo.setEditable(false);
         txtdescripcion.setEnabled(true);
-        btnaceptar.setEnabled(true);        
+        btnaceptar.setEnabled(true);
         btnnuevo.setEnabled(false);
         cbmun.setEnabled(true);
         btneliminar.setEnabled(false);
         btnmodificar.setEnabled(false);
         btncancelar.setEnabled(true);
     }
-    public void MouseE(){
-     btnnuevo.setEnabled(false);
-     btneliminar.setEnabled(true);
-     btnmodificar.setEnabled(true);
-     btnaceptar.setEnabled(false);
-     ttcodigo.setEnabled(true);
-     ttcodigo.setEditable(false);
-     txtdescripcion.setEnabled(true);
-     cbmun.setEnabled(true);
-     btncancelar.setEnabled(true);
-     
+
+    public void MouseE() {
+        btnnuevo.setEnabled(false);
+        btneliminar.setEnabled(true);
+        btnmodificar.setEnabled(true);
+        btnaceptar.setEnabled(false);
+        ttcodigo.setEnabled(true);
+        ttcodigo.setEditable(false);
+        txtdescripcion.setEnabled(true);
+        cbmun.setEnabled(true);
+        btncancelar.setEnabled(true);
+
     }
-    public void limipiar(){
-        Generarnumeracion();
+
+    public void limipiar() {
         txtdescripcion.setText("");
         cbmun.setSelectedIndex(0);
     }
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnaceptar;

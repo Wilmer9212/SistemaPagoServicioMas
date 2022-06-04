@@ -6,7 +6,6 @@
 package com.sistema.controller;
 
 import com.sistema.modelo.EstadoDTO;
-import com.sistema.modelo.UnidadesMedidaDTO;
 import com.sistema.util.conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

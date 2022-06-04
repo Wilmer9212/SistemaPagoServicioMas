@@ -5,14 +5,11 @@
  */
 package com.saivent.view;
 
+import com.saivent.util.MetodosValidar;
+import com.sistema.controller.EstadosController;
+import com.sistema.modelo.EstadoDTO;
 import java.awt.Dimension;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,16 +19,11 @@ import javax.swing.table.DefaultTableModel;
  * @author Elliot
  */
 public class FEstados extends javax.swing.JInternalFrame {
-    //EstadoJpaController control1=new EstadoJpaController();
-    //ConnectionDB conexion=new ConnectionDB();
-    //Connection connect=conexion.ConnectionDB();
 
-    /**
-     * Creates new form FEstados
-     */
+    EstadosController controller = new EstadosController();
+
     public FEstados() {
         initComponents();
-        Generarnumeracion();
         desabilitar();
         llenartb("");
         diseñoVentana();
@@ -58,13 +50,13 @@ public class FEstados extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        ttcodigo = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtdescripcion = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnaceptar = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
-        txtbuscar = new javax.swing.JTextField();
+        txtNombreBuscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btnnuevo = new javax.swing.JButton();
         btnmodificar = new javax.swing.JButton();
@@ -84,9 +76,9 @@ public class FEstados extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("CODIGO");
 
-        txtdescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtdescripcionKeyReleased(evt);
+                txtNombreKeyReleased(evt);
             }
         });
 
@@ -107,9 +99,9 @@ public class FEstados extends javax.swing.JInternalFrame {
             }
         });
 
-        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNombreBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtbuscarKeyReleased(evt);
+                txtNombreBuscarKeyReleased(evt);
             }
         });
 
@@ -207,8 +199,8 @@ public class FEstados extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ttcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnaceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,7 +209,7 @@ public class FEstados extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbuscar)))
+                        .addComponent(txtNombreBuscar)))
                 .addGap(4, 4, 4))
         );
         jPanel1Layout.setVerticalGroup(
@@ -227,17 +219,17 @@ public class FEstados extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ttcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(btnaceptar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(btncancelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
@@ -270,29 +262,15 @@ public class FEstados extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtdescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyReleased
-        txtdescripcion.setText(txtdescripcion.getText().toUpperCase());
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+        txtNombre.setText(txtNombre.getText().toUpperCase());
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtdescripcionKeyReleased
+    }//GEN-LAST:event_txtNombreKeyReleased
 
     private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
-        /*        Estado um =new Estado();
-        um.setIdestado(Integer.parseInt(ttcodigo.getText()));
-        um.setNombree(txtdescripcion.getText());
-        if(valEntradas()==true){
-            int preg=JOptionPane.showConfirmDialog(null,"¿DATOS CORRECTOS?","",JOptionPane.YES_NO_OPTION);
-            if(preg==JOptionPane.YES_OPTION){
-                try {
-                    control1.create(um);
-                    llenartb("");
-                    limipiar();
-                    desabilitar();
-
-                } catch (Exception ex) {
-                    Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }*/
+        if (valEntradas() == true) {
+            guardar();
+        }
     }//GEN-LAST:event_btnaceptarActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
@@ -300,52 +278,27 @@ public class FEstados extends javax.swing.JInternalFrame {
         desabilitar();
     }//GEN-LAST:event_btncancelarActionPerformed
 
-    private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
-        txtbuscar.setText(txtbuscar.getText().toUpperCase());
-        llenartb(txtbuscar.getText());
-    }//GEN-LAST:event_txtbuscarKeyReleased
+    private void txtNombreBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreBuscarKeyReleased
+        txtNombreBuscar.setText(txtNombreBuscar.getText().toUpperCase());
+        llenartb(txtNombreBuscar.getText());
+    }//GEN-LAST:event_txtNombreBuscarKeyReleased
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         habilitar();
+        generarNumercion();
+
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
-        /* Estado um=new Estado();
-        List<Estado>lm=control1.findEstadoEntities();
-        int ide = 0;
-        if(valEntradas()==true){
-            int preg=JOptionPane.showConfirmDialog(null,"¿MODIFICAR?","",JOptionPane.YES_NO_OPTION);
-            if(preg==JOptionPane.YES_OPTION){
-                try {
-                    um.setIdestado(Integer.parseInt(ttcodigo.getText()));
-                    um.setNombree(txtdescripcion.getText());
-                    control1.edit(um);
-                    Generarnumeracion();
-                    desabilitar();
-                    llenartb("");
-                    limipiar();
-                } catch (Exception ex) {
-                    Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }*/
+
+        if (valEntradas() == true) {
+            modificar();
+        }
     }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        /*int preg=JOptionPane.showConfirmDialog(null,"¿ELIMINAR?","",JOptionPane.YES_NO_OPTION);
-        if(preg==JOptionPane.YES_OPTION){
-            try {
-                control1.destroy(Integer.parseInt(ttcodigo.getText()));
-                llenartb("");
-                Generarnumeracion();
-                desabilitar();
-                limipiar();
 
-            } catch (NonexistentEntityException ex) {
-                Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-
-            }
-        }*/
+        eliminar();
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
@@ -354,72 +307,108 @@ public class FEstados extends javax.swing.JInternalFrame {
 
     private void tbestadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbestadoMouseClicked
         MouseE();
-        /*   int fis=tbestado.getSelectedRow();
-        List<Estado>lm=control1.findEstadoEntities();
-        if(fis>=0){
-            for(int i=0;i<lm.size();i++){
-                ttcodigo.setText(tbestado.getValueAt(fis, 0).toString());
-                txtdescripcion.setText(tbestado.getValueAt(fis,1).toString());
-            }
-
-        }*/
+        int fila = tbestado.getSelectedRow();
+        if (fila >= 0) {
+            txtCodigo.setText(tbestado.getValueAt(fila, 0).toString());
+            txtNombre.setText(tbestado.getValueAt(fila, 1).toString());
+        }
     }//GEN-LAST:event_tbestadoMouseClicked
-    public void llenartb(String descripcion) {
-        /* String[] titulos = {"CODIGO","DESCRIPCION"};
-      DefaultTableModel dtm = new DefaultTableModel(null, titulos);
-      int ide=0;
-     try{
-        Object o[] = null;
-         List<Estado>lista = buscarU(descripcion);
-         for (int i = 0; i < lista.size(); i++) {  
-                dtm.addRow(o);
-                dtm.setValueAt(lista.get(i).getIdestado().toString(),i, 0); 
-                dtm.setValueAt(lista.get(i).getNombree(),i, 1);
-          }
-         tbestado.setModel(dtm);
-       
-     }catch(Exception ex){
-         JOptionPane.showMessageDialog(null,"NO SE RECONOCE LA TABLA ESTADOS","",JOptionPane.ERROR_MESSAGE);
-     } */
+    public void generarNumercion() {
+        int cod = controller.generarSecuenciaId();
+        txtCodigo.setText(String.valueOf(cod));
     }
 
-    /*private List<Estado> buscarU(String nombree) {
-        EntityManager em = control1.getEntityManager();
-        Query query = em.createQuery("SELECT u FROM Estado u WHERE u.nombree LIKE :nombree");
-        query.setParameter("nombree","%"+nombree+"%");
-        List<Estado> lista = query.getResultList();
-        return lista;
-    }*/
-
-    public void Generarnumeracion() {
-        String SQL = "select max(idestado) from estado";
-        /*
-        int c = 0;
-        int b = 0;
+    public void guardar() {
+        EstadoDTO estado = new EstadoDTO();
         try {
-            Statement st =  null;//(Statement) connect.createStatement();
-            ResultSet rs = st.executeQuery(SQL);
-            while (rs.next()) {
-                c = rs.getInt(1);
+            estado.setId(Integer.parseInt(txtCodigo.getText()));
+            estado.setNombre(txtNombre.getText());
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Guardar registros?", "", JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_OPTION) {
+                boolean registro = controller.save(estado);
+                if (registro) {
+                    new MetodosValidar().ok();
+                    limipiar();
+                    desabilitar();
+                    llenartb("");
+                } else {
+                    new MetodosValidar().error();
+                }
             }
-            if (c == 0) {
-                ttcodigo.setText("1");
-            } else {
-                ttcodigo.setText("" + (+c + 1));
+        } catch (Exception e) {
+            System.out.println("Error al guardar estado:" + e.getMessage());
+        }
+
+    }
+
+    public void modificar() {
+        EstadoDTO estado = new EstadoDTO();
+        try {
+            estado.setId(Integer.parseInt(txtCodigo.getText()));
+            estado.setNombre(txtNombre.getText());
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Modificar registros?", "", JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_OPTION) {
+                boolean registro = controller.update(estado);
+                if (registro) {
+                    new MetodosValidar().ok_modificar();
+                    limipiar();
+                    desabilitar();
+                    llenartb("");
+                } else {
+                    new MetodosValidar().error_modificar();
+                }
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(FProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }//MetodoGenerarNumEnId*/ 
+        } catch (Exception e) {
+            System.out.println("Error al moficar registros");
+        }
+    }
+
+    public void eliminar() {
+        try {
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Eliminar registros?", "", JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_OPTION) {
+                boolean registro = controller.delete(Integer.parseInt(txtCodigo.getText()));
+                if (registro) {
+                    new MetodosValidar().ok_eliminar();
+                    limipiar();
+                    desabilitar();
+                    llenartb("");
+                } else {
+                    new MetodosValidar().error_eliminar();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al eliminar registros");
+        }
+    }
+
+    public void llenartb(String descripcion) {
+        String[] titulos = {"CODIGO", "DESCRIPCION"};
+        DefaultTableModel dtm = new DefaultTableModel(null, titulos);
+        int ide = 0;
+        try {
+            Object o[] = null;
+            List<EstadoDTO> lista = controller.estadosAll(descripcion);
+            for (int i = 0; i < lista.size(); i++) {
+                dtm.addRow(o);
+                dtm.setValueAt(lista.get(i).getId().toString(), i, 0);
+                dtm.setValueAt(lista.get(i).getNombre(), i, 1);
+            }
+            tbestado.setModel(dtm);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "NO SE RECONOCE LA TABLA ESTADOS", "", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     public boolean valEntradas() {
         String mensaje = "";
         boolean estado = true;
-        if (ttcodigo.getText().isEmpty()) {
+        if (txtCodigo.getText().isEmpty()) {
             mensaje += "CODIGO NO DEBE ESTAR VACIO \n";
             estado = false;
         }
-        if (txtdescripcion.getText().isEmpty()) {
+        if (txtNombre.getText().isEmpty()) {
             mensaje += "NO SE INSERTO UNA DESCRIPCION \n";
             estado = false;
         }
@@ -432,21 +421,20 @@ public class FEstados extends javax.swing.JInternalFrame {
     }
 
     public void desabilitar() {
-        ttcodigo.setEnabled(false);
-        txtdescripcion.setEnabled(false);
+        txtCodigo.setEnabled(false);
+        txtNombre.setEnabled(false);
         btnaceptar.setEnabled(false);
         btnmodificar.setEnabled(false);
         btneliminar.setEnabled(false);
-        txtdescripcion.setText("");
-        Generarnumeracion();
+        txtNombre.setText("");
         btnnuevo.setEnabled(true);
         btncancelar.setEnabled(false);
     }
 
     public void habilitar() {
-        ttcodigo.setEnabled(true);
-        ttcodigo.setEditable(false);
-        txtdescripcion.setEnabled(true);
+        txtCodigo.setEnabled(true);
+        txtCodigo.setEditable(false);
+        txtNombre.setEnabled(true);
         btnaceptar.setEnabled(true);
         btnnuevo.setEnabled(false);
         btneliminar.setEnabled(false);
@@ -459,16 +447,15 @@ public class FEstados extends javax.swing.JInternalFrame {
         btneliminar.setEnabled(true);
         btnmodificar.setEnabled(true);
         btnaceptar.setEnabled(false);
-        ttcodigo.setEnabled(true);
-        ttcodigo.setEditable(false);
-        txtdescripcion.setEnabled(true);
+        txtCodigo.setEnabled(true);
+        txtCodigo.setEditable(false);
+        txtNombre.setEnabled(true);
         btncancelar.setEnabled(true);
 
     }
 
     public void limipiar() {
-        Generarnumeracion();
-        txtdescripcion.setText("");
+        txtNombre.setText("");
     }
 
 
@@ -486,8 +473,8 @@ public class FEstados extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbestado;
-    private javax.swing.JTextField ttcodigo;
-    private javax.swing.JTextField txtbuscar;
-    private javax.swing.JTextField txtdescripcion;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombreBuscar;
     // End of variables declaration//GEN-END:variables
 }

@@ -52,7 +52,7 @@ public class MunicipiosController {
         try {
             connect = con.connectDatabase();
             if(!valor.equals("")){
-                sql = "SELECT * FROM muicipios WHERE nombre LIKE '%"+valor+"%'";
+                sql = "SELECT * FROM municipios WHERE nombre LIKE '%"+valor+"%'";
             }else{
                 sql = "SELECT * FROM municipios";
             }
@@ -73,22 +73,23 @@ public class MunicipiosController {
         return ListaMunicipios;
     }
 
-    public UnidadesMedidaDTO unidadByNombre(String nombre) {
-        UnidadesMedidaDTO unidad = new UnidadesMedidaDTO();
+    public MunicipioDTO municipioByNombre(String nombre) {
+       MunicipioDTO municipio = new MunicipioDTO();
         try {
             connect = con.connectDatabase();
-            sql = "SELECT * FROM unidadesm WHERE descripcion='" + nombre + "'";
+            sql = "SELECT * FROM municipios WHERE nombre='" + nombre + "'";
             stmt = connect.createStatement();
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                unidad.setIdunidadm(rs.getInt(1));
-                unidad.setDescripcion(rs.getString(2));
+                municipio.setIdmunicipio(rs.getInt(1));
+                municipio.setNombre(rs.getString(2));
+                municipio.setIdestado(rs.getInt(2));
             }
             connect.close();
         } catch (Exception e) {
-            System.out.println("Error al obtener undidad de medida por descripcion:" + e.getMessage());
+            System.out.println("Error al obtener municipio por nombre:" + e.getMessage());
         }
-        return unidad;
+        return municipio;
     }
 
     public boolean save(MunicipioDTO municipio) {

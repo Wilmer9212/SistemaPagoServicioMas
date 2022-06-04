@@ -5,14 +5,13 @@
  */
 package com.saivent.view;
 
+import com.saivent.util.MetodosValidar;
+import com.sistema.controller.EstadosController;
+import com.sistema.controller.MunicipiosController;
+import com.sistema.modelo.EstadoDTO;
+import com.sistema.modelo.MunicipioDTO;
 import java.awt.Dimension;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,9 +22,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FMunicipios extends javax.swing.JInternalFrame {
 
+    EstadosController controllerEstados = new EstadosController();
+    MunicipiosController controllerMunicipios = new MunicipiosController();
+
     public FMunicipios() {
         initComponents();
-        Generarnumeracion();
         desabilitar();
         llenartb("");
         llenarCB();
@@ -284,39 +285,19 @@ public class FMunicipios extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
       public void llenarCB() {
-        /*listV = control2.findEstadoEntities();
-        for (int i = 0; i < listV.size(); i++) {
-           cbestado.addItem(listV.get(i).getNombree());
-        }*/
+        for (int i = 0; i < controllerEstados.estadosAll("").size(); i++) {
+            cbestado.addItem(controllerEstados.estadosAll("").get(i).getNombre());
+        }
     }
     private void txtdescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyReleased
         txtdescripcion.setText(txtdescripcion.getText().toUpperCase());
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtdescripcionKeyReleased
 
     private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
-        /*  Municipio um =new Municipio();
-        um.setIdmunicipio(Integer.parseInt(ttcodigo.getText()));
-        um.setNombrem(txtdescripcion.getText());
-        for(int i=0;i<listV.size();i++){
-            if(listV.get(i).getNombree().equals(cbestado.getSelectedItem())){
-                um.setIdestado(listV.get(i).getIdestado());
-            }
-        }
-        if(valEntradas()==true){
-            int preg=JOptionPane.showConfirmDialog(null,"¿DATOS CORRECTOS?","",JOptionPane.YES_NO_OPTION);
-            if(preg==JOptionPane.YES_OPTION){
-                try {
-                    control1.create(um);
-                    llenartb("");
-                    limipiar();
-                    desabilitar();
 
-                } catch (Exception ex) {
-                    Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }*/
+        if (valEntradas() == true) {
+            guardar();
+        }
     }//GEN-LAST:event_btnaceptarActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
@@ -331,52 +312,18 @@ public class FMunicipios extends javax.swing.JInternalFrame {
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         habilitar();
+        generaNumeracion();
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
-        /*  Municipio um=new Municipio();
-        List<Estado>lm=control2.findEstadoEntities();
-        int ide = 0;
-        if(valEntradas()==true){
-            int preg=JOptionPane.showConfirmDialog(null,"¿MODIFICAR?","",JOptionPane.YES_NO_OPTION);
-            if(preg==JOptionPane.YES_OPTION){
-                try {
-                    um.setIdmunicipio(Integer.parseInt(ttcodigo.getText()));
-                    um.setNombrem(txtdescripcion.getText());
-                    for(int i=0;i<lm.size();i++){
-                        if(lm.get(i).getNombree().equals(cbestado.getSelectedItem())){
-                            ide=Integer.parseInt(lm.get(i).getIdestado().toString());
-                        }
-                    }
-                    
-                    um.setIdestado(ide);
-                    control1.edit(um);
-                    Generarnumeracion();
-                    desabilitar();
-                    llenartb("");
-                    limipiar();
-                } catch (Exception ex) {
-                    Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }*/
+
+        if (valEntradas() == true) {
+            modificar();
+        }
     }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        /* int preg=JOptionPane.showConfirmDialog(null,"¿ELIMINAR?","",JOptionPane.YES_NO_OPTION);
-        if(preg==JOptionPane.YES_OPTION){
-            try {
-                control1.destroy(Integer.parseInt(ttcodigo.getText()));
-                llenartb("");
-                Generarnumeracion();
-                desabilitar();
-                limipiar();
-
-            } catch (NonexistentEntityException ex) {
-                Logger.getLogger(FUnidadesM.class.getName()).log(Level.SEVERE, null, ex);
-
-            }
-        }*/
+         eliminar();
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
@@ -384,44 +331,119 @@ public class FMunicipios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void tbmunicipioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbmunicipioMouseClicked
-        /* MouseE();
-        int fis=tbmunicipio.getSelectedRow();
-        List<Municipio>lm=control1.findMunicipioEntities();
-        if(fis>=0){
-             ttcodigo.setText(tbmunicipio.getValueAt(fis, 0).toString());
-             txtdescripcion.setText(tbmunicipio.getValueAt(fis,1).toString());
-            for(int i=0;i<lm.size();i++){
-              cbestado.setSelectedItem(tbmunicipio.getValueAt(fis,2).toString());
-            }
+        MouseE();
+        int fis = tbmunicipio.getSelectedRow();
+        if (fis >= 0) {
+            ttcodigo.setText(tbmunicipio.getValueAt(fis, 0).toString());
+            txtdescripcion.setText(tbmunicipio.getValueAt(fis, 1).toString());
 
-        }*/
+            cbestado.setSelectedItem(tbmunicipio.getValueAt(fis, 2).toString());
+
+        }
     }//GEN-LAST:event_tbmunicipioMouseClicked
-    public void llenartb(String descripcion) {
-        /* String[] titulos = {"CODIGO","MUNICIPIO","ESTADO"};
-      DefaultTableModel dtm = new DefaultTableModel(null, titulos);
-      int idm=0;String nombre="";
-     try{
-        Object o[] = null;
-         List<Municipio>lista = buscarU(descripcion);
-         List<Estado>lista2 = control2.findEstadoEntities();
-         String idmm="";
-         for (int i = 0; i < lista.size(); i++) {  
-                dtm.addRow(o);
-                dtm.setValueAt(lista.get(i).getIdmunicipio().toString(),i, 0); 
-                dtm.setValueAt(lista.get(i).getNombrem(),i, 1);
-             for(int x=0;x < lista2.size(); x++){
-                idmm=String.valueOf(lista2.get(x).getIdestado());                
-                if(idmm.equals(String.valueOf(lista.get(i).getIdestado()))){
-                nombre=lista2.get(x).getNombree();
+
+    public void generaNumeracion() {
+        ttcodigo.setText(String.valueOf(controllerMunicipios.generarSecuenciaId()));
+    }
+
+    public void guardar() {
+        MunicipioDTO municipio = new MunicipioDTO();
+        try {
+            municipio.setIdmunicipio(Integer.parseInt(ttcodigo.getText()));
+            municipio.setNombre(txtdescripcion.getText());
+            EstadoDTO estado = controllerEstados.estadoByNombre(cbestado.getSelectedItem().toString());
+            municipio.setIdestado(estado.getId());
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Guardar Registros?", "", JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_OPTION) {
+                boolean bandera = controllerMunicipios.save(municipio);
+                if (bandera) {
+                    new MetodosValidar().ok();
+                    limipiar();
+                    desabilitar();
+                    llenartb("");
+                } else {
+                    new MetodosValidar().error();
                 }
-             }
-             dtm.setValueAt(nombre, i, 2);
-          }
-         tbmunicipio.setModel(dtm);
-       
-     }catch(Exception ex){
-         JOptionPane.showMessageDialog(null,"NO SE RECONOCE LA TABLA MUNICIPIOS","",JOptionPane.ERROR_MESSAGE);
-     } */
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un erro al guardar rgistros:" + e.getMessage());
+        }
+
+    }
+
+    public void modificar() {
+        MunicipioDTO municipio = new MunicipioDTO();
+        try {
+            municipio.setIdmunicipio(Integer.parseInt(ttcodigo.getText()));
+            municipio.setNombre(txtdescripcion.getText());
+            EstadoDTO estado = controllerEstados.estadoByNombre(cbestado.getSelectedItem().toString());
+            municipio.setIdestado(estado.getId());
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Modificar Registros?", "", JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_OPTION) {
+                boolean bandera = controllerMunicipios.update(municipio);
+                if (bandera) {
+                    new MetodosValidar().ok_modificar();
+                    limipiar();
+                    desabilitar();
+                    llenartb("");
+                } else {
+                    new MetodosValidar().error_modificar();
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al modificar rgistros:" + e.getMessage(),"",JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+    
+    
+    public void eliminar(){
+        int id = Integer.parseInt(ttcodigo.getText());
+        try {
+            int confirmar = JOptionPane.showConfirmDialog(null,"¿Eliminar Registros?","",JOptionPane.YES_NO_OPTION);
+            if(confirmar == JOptionPane.YES_NO_OPTION){
+                boolean eliminarVar = controllerMunicipios.delete(id);
+                if(eliminarVar){
+                    new MetodosValidar().ok_eliminar();
+                    limipiar();
+                    desabilitar();
+                    llenartb("");
+                }else{
+                    new MetodosValidar().error_eliminar();
+                }
+            }
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, "Se produjo un error al eliminar rgistros:" + e.getMessage(),"",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void llenartb(String descripcion) {
+        String[] titulos = {"CODIGO", "MUNICIPIO", "ESTADO"};
+        DefaultTableModel dtm = new DefaultTableModel(null, titulos);
+        int idm = 0;
+        String nombre = "";
+        try {
+            Object o[] = null;
+            List<MunicipioDTO> listaM = controllerMunicipios.municipiosAll(descripcion);
+            List<EstadoDTO> listaE = controllerEstados.estadosAll("");
+            String idmm = "";
+            for (int i = 0; i < listaM.size(); i++) {
+                dtm.addRow(o);
+                dtm.setValueAt(listaM.get(i).getIdmunicipio().toString(), i, 0);
+                dtm.setValueAt(listaM.get(i).getNombre(), i, 1);
+                for (int x = 0; x < listaE.size(); x++) {
+                    idmm = String.valueOf(listaE.get(x).getId());
+                    if (idmm.equals(String.valueOf(listaE.get(i).getId()))) {
+                        nombre = listaE.get(x).getNombre();
+                    }
+                }
+                dtm.setValueAt(nombre, i, 2);
+            }
+            tbmunicipio.setModel(dtm);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "NO SE RECONOCE LA TABLA MUNICIPIOS", "", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /* private List<Municipio> buscarU(String nombrem) {
@@ -431,28 +453,6 @@ public class FMunicipios extends javax.swing.JInternalFrame {
         List<Municipio> lista = query.getResultList();
         return lista;
     }*/
-
-    public void Generarnumeracion() {
-        String SQL = "select max(idmunicipio) from municipio";
-
-        int c = 0;
-        int b = 0;
-        /*  try {
-        //    Statement st = (Statement) connect.createStatement();
-            ResultSet rs = null;//st.executeQuery(SQL);
-            while (rs.next()) {
-                c = rs.getInt(1);
-            }
-            if (c == 0) {
-                ttcodigo.setText("1");
-            } else {
-                ttcodigo.setText("" + (+c + 1));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }//MetodoGenerarNumEnId*/ 
-
     public boolean valEntradas() {
         String mensaje = "";
         boolean estado = true;
@@ -483,7 +483,6 @@ public class FMunicipios extends javax.swing.JInternalFrame {
         btneliminar.setEnabled(false);
         txtdescripcion.setText("");
         cbestado.setEnabled(false);
-        Generarnumeracion();
         btnnuevo.setEnabled(true);
         btncancelar.setEnabled(false);
     }
@@ -514,7 +513,6 @@ public class FMunicipios extends javax.swing.JInternalFrame {
     }
 
     public void limipiar() {
-        Generarnumeracion();
         txtdescripcion.setText("");
         cbestado.setSelectedIndex(0);
     }
