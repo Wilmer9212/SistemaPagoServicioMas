@@ -634,7 +634,7 @@ public class Run extends javax.swing.JFrame {
         jd.add(JDBloquear.getContentPane());
         jd.setVisible(true);
         JDBloquear.setTitle("INGRESA CONTRASEÑA");
-        jd.setSize(380,68);
+        jd.setSize(380,75);
         jd.setLocationRelativeTo(null);
         jd.setDefaultCloseOperation(0);      
     
