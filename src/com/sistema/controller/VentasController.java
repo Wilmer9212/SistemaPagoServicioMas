@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,17 +28,18 @@ public class VentasController {
     Connection connect = null;
     PreparedStatement ps;
     String sql = "";
+    ResultSet rs;
     public List<TiposVentaDTO> tiposVenta(){        
         sql = "SELECT * FROM tiposventa ORDER BY idtipo DESC";        
         List<TiposVentaDTO>listaTiposVenta = new ArrayList<>();
         try {
             connect = con.connectDatabase();    
             stmt = connect.createStatement();
-            ResultSet result = stmt.executeQuery(sql);
-            while(result.next()){
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
                 TiposVentaDTO tipo = new TiposVentaDTO();
-                tipo.setIdtipoventa(result.getInt(1));
-                tipo.setDescripcion(result.getString(2));
+                tipo.setIdtipoventa(rs.getInt(1));
+                tipo.setDescripcion(rs.getString(2));
                 listaTiposVenta.add(tipo);
             }            
          connect.close();
@@ -86,5 +88,30 @@ public class VentasController {
          return registros;
     }
     
+    public List<DetalleVentaDTO>listaDetallesVenta(Date fechaInit,Date fechaFin){
+        List<DetalleVentaDTO>lista = new ArrayList<>();
+        connect = con.connectDatabase();
+        try {
+            if (fechaInit != null && fechaFin!=null) {
+                sql = "SELECT * FROM detalles_venta dv INNER JOIN ventas_realizadas vr USING(idticket) WHERE date(vr.fecha) BETWEEN "+fechaInit+" AND "+fechaFin+" ORDER BY idticket";
+            } else {
+                sql = "SELECT * FROM detalles_venta dv INNER JOIN ventas_realizadas vr USING(idticket) ORDER BY vr.idticket";
+            }
+            stmt = connect.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                DetalleVentaDTO detalles = new DetalleVentaDTO();
+                detalles.setTicket(rs.getInt(1));
+                detalles.setProducto(rs.getString(2));
+                detalles.setTotalProducto(rs.getInt(3));
+                detalles.setTotal(rs.getDouble(4));
+                detalles.setCliente(rs.getString(5));
+                lista.add(detalles);            }
+            connect.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener lista detalles venta:" + e.getMessage());
+        }
+        return lista;
+    }
     
 }

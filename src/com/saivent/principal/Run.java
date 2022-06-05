@@ -1,5 +1,6 @@
 package com.saivent.principal;
 
+import com.saivent.reportes.FReporteVentas;
 import com.saivent.util.bloquear;
 import com.saivent.view.FCategorias;
 import com.saivent.view.FClientes;
@@ -9,6 +10,7 @@ import com.saivent.view.FMunicipios;
 import com.saivent.view.FProducto;
 import com.saivent.view.FProveedor;
 import com.saivent.view.FRecargas;
+
 import com.saivent.view.FUnidadesM;
 import com.saivent.view.FVentas;
 import com.sistema.controller.UsuariosController;
@@ -94,7 +96,7 @@ public class Run extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jmenuReporte = new javax.swing.JMenu();
-        jMenuItem21 = new javax.swing.JMenuItem();
+        itemRPVentas = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -336,10 +338,15 @@ public class Run extends javax.swing.JFrame {
         jmenuReporte.setText("Reportes");
         jmenuReporte.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
 
-        jMenuItem21.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/VENTASS (1).png"))); // NOI18N
-        jMenuItem21.setText("Ventas");
-        jmenuReporte.add(jMenuItem21);
+        itemRPVentas.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        itemRPVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/VENTASS (1).png"))); // NOI18N
+        itemRPVentas.setText("Ventas");
+        itemRPVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRPVentasActionPerformed(evt);
+            }
+        });
+        jmenuReporte.add(itemRPVentas);
 
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-factura-30.png"))); // NOI18N
         jMenu6.setText("Servicios");
@@ -570,6 +577,11 @@ public class Run extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPasswordField1KeyTyped
 
+    private void itemRPVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRPVentasActionPerformed
+        limpiarJDesktopFrame();
+        reporteVentas();
+    }//GEN-LAST:event_itemRPVentasActionPerformed
+
     public void controllerProcesos() {
         banderaProcesos = true;
     }
@@ -581,7 +593,7 @@ public class Run extends javax.swing.JFrame {
         jmenuMantenimiento.setVisible(false);
         jMenuBar1.setVisible(false);
         jMenuItem13.setText("Ejecucion de querys");
-        jMenuItem21.setText("Depuracion de municipios");
+        itemRPVentas.setText("Depuracion de municipios");
         banderaProcesos = true;
     }
 
@@ -740,6 +752,12 @@ public class Run extends javax.swing.JFrame {
         }
     }
 
+    public void reporteVentas() {
+        FReporteVentas fv = new FReporteVentas();
+        fv.setSize(jDesktopPane1.getWidth(), jDesktopPane1.getHeight());
+        fv.setVisible(true);
+        jDesktopPane1.add(fv);
+    }
     public void limpiarJDesktopFrame() {
         jDesktopPane1.removeAll();
     }
@@ -784,6 +802,7 @@ public class Run extends javax.swing.JFrame {
     private javax.swing.JDialog JDBloquear;
     private javax.swing.JButton bntBloquear;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JMenuItem itemRPVentas;
     public javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -798,7 +817,6 @@ public class Run extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
