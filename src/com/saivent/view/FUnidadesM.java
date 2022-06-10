@@ -86,13 +86,16 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 111, 111));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("UNIDADES DE MEDIDA");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setText("CODIGO");
 
         txtdescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -101,9 +104,11 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setText("DESCRIPCION");
 
+        btnaceptar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnaceptar.setText("ACEPTAR");
         btnaceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +116,7 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
             }
         });
 
+        btncancelar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btncancelar.setText("CANCELAR");
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,8 +130,11 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setText("DESCRIPCION");
 
+        btnnuevo.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/nuevo.png"))); // NOI18N
         btnnuevo.setText("NUEVO");
         btnnuevo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -138,6 +147,7 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
             }
         });
 
+        btnmodificar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/modiicar.png"))); // NOI18N
         btnmodificar.setText("MODIFICAR");
         btnmodificar.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -149,6 +159,7 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
             }
         });
 
+        btneliminar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btneliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eliminar.png"))); // NOI18N
         btneliminar.setText("ELIMINAR");
         btneliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -160,6 +171,7 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
             }
         });
 
+        btnsalir.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir ventana.png"))); // NOI18N
         btnsalir.setText("CERRAR");
         btnsalir.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -227,7 +239,7 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btncancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
                             .addComponent(btnaceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 6, Short.MAX_VALUE))
+                        .addGap(0, 2, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -251,7 +263,7 @@ public class FUnidadesM extends javax.swing.JInternalFrame {
                     .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnsalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

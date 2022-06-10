@@ -149,14 +149,16 @@ public class FProveedor extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbcontenido = new javax.swing.JTable();
 
+        pnlDatos.setBackground(new java.awt.Color(0, 111, 111));
         pnlDatos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        j1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        j1.setText("Codigo");
+        j1.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        j1.setForeground(new java.awt.Color(254, 254, 254));
+        j1.setText("CODIGO");
 
-        btnaceptar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btnaceptar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/aceptar.png"))); // NOI18N
-        btnaceptar.setText("Aceptar");
+        btnaceptar.setText("ACEPTAR");
         btnaceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnaceptarActionPerformed(evt);
@@ -170,9 +172,9 @@ public class FProveedor extends javax.swing.JInternalFrame {
             }
         });
 
-        btncancelar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btncancelar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancelar.png"))); // NOI18N
-        btncancelar.setText("Cancelar");
+        btncancelar.setText("CANCELAR");
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncancelarActionPerformed(evt);
@@ -192,8 +194,9 @@ public class FProveedor extends javax.swing.JInternalFrame {
             }
         });
 
-        j2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        j2.setText("Empresa");
+        j2.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        j2.setForeground(new java.awt.Color(254, 254, 254));
+        j2.setText("EMPRESA");
 
         txttelefono.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -205,8 +208,9 @@ public class FProveedor extends javax.swing.JInternalFrame {
             }
         });
 
-        j4.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        j4.setText("Telefono");
+        j4.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        j4.setForeground(new java.awt.Color(254, 254, 254));
+        j4.setText("TELEFONO");
 
         txtEmpresa.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -215,10 +219,12 @@ public class FProveedor extends javax.swing.JInternalFrame {
             }
         });
 
-        j5.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        j5.setText("E-mail");
+        j5.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        j5.setForeground(new java.awt.Color(254, 254, 254));
+        j5.setText("EMAIL");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("PROVEEDORES");
 
@@ -279,36 +285,37 @@ public class FProveedor extends javax.swing.JInternalFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        pnlLista.setBackground(new java.awt.Color(0, 111, 111));
         pnlLista.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        btnnuevo.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btnnuevo.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/nuevo.png"))); // NOI18N
-        btnnuevo.setText("Nuevo");
+        btnnuevo.setText("NUEVO");
         btnnuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnnuevoActionPerformed(evt);
             }
         });
 
-        btneliminar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btneliminar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btneliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eliminar.png"))); // NOI18N
-        btneliminar.setText("Eliminar");
+        btneliminar.setText("ELIMINAR");
         btneliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btneliminarActionPerformed(evt);
             }
         });
 
-        btnmodificar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btnmodificar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/modiicar.png"))); // NOI18N
-        btnmodificar.setText("Modificar");
+        btnmodificar.setText("MODIFICAR");
         btnmodificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnmodificarActionPerformed(evt);
             }
         });
 
-        btnsalir.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btnsalir.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir ventana.png"))); // NOI18N
         btnsalir.setText("CERRAR");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -317,7 +324,8 @@ public class FProveedor extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(254, 254, 254));
         jLabel5.setText("BUSCAR");
 
         txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -364,12 +372,12 @@ public class FProveedor extends javax.swing.JInternalFrame {
                         .addComponent(btnmodificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btneliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
                         .addComponent(btnsalir))
                     .addComponent(jScrollPane1)
                     .addGroup(pnlListaLayout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtbuscar)))
                 .addContainerGap())
         );
@@ -378,22 +386,21 @@ public class FProveedor extends javax.swing.JInternalFrame {
             .addGroup(pnlListaLayout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(pnlListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                 .addGroup(pnlListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlListaLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(pnlListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnmodificar)
-                            .addComponent(btnnuevo)))
                     .addGroup(pnlListaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnsalir))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlListaLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(pnlListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btneliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnlListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnmodificar)
+                                .addComponent(btnnuevo)))))
                 .addContainerGap())
         );
 

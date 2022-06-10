@@ -58,6 +58,43 @@ public class ProductoController {
         }
         return lista;
     }
+    
+    
+      public List<ProductoDTO> productosReporte(String nombre,int opcion) {
+        List<ProductoDTO> lista = new ArrayList<>();
+        connect = con.connectDatabase();
+        try {
+            if (opcion ==1 && !nombre.trim().equals("")) {
+                sql = "SELECT * FROM productos WHERE nombre LIKE '%" + nombre.toUpperCase() + "%'";
+           }else if(opcion == 2 && !nombre.trim().equals("")){
+                sql = "SELECT * FROM productos WHERE idproveedor=" + Integer.parseInt(nombre.toUpperCase());
+           }else if(opcion==3 && !nombre.equals("")){
+            sql = "SELECT * FROM productos WHERE idunidadm=" + Integer.parseInt(nombre.toUpperCase());   
+           }else{    
+                sql = "SELECT * FROM productos WHERE nombre LIKE '%" + nombre.toUpperCase() + "%'";
+           }
+            stmt = connect.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                ProductoDTO producto = new ProductoDTO();
+                producto.setIdproducto(rs.getInt(1));
+                producto.setNombre(rs.getString(2));
+                producto.setPrecio(rs.getDouble(3));
+                producto.setPreciocliente(rs.getDouble(4));
+                producto.setStock(rs.getInt(5));
+                producto.setActivarpreciocliente(rs.getBoolean(6));
+                producto.setPreciodeproveedor(rs.getDouble(7));
+                producto.setIdcategoria(rs.getInt(8));
+                producto.setIdproveedor(rs.getInt(9));
+                producto.setIdunidadm(rs.getInt(10));
+                lista.add(producto);
+            }
+            connect.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener lista de productos:" + e.getMessage());
+        }
+        return lista;
+    }
 
     public ProductoDTO productoById(int id) {
         ProductoDTO producto = new ProductoDTO();
@@ -85,6 +122,34 @@ public class ProductoController {
         }
         return producto;
     }
+    
+      public ProductoDTO productoByNombre(String nombre) {
+        ProductoDTO producto = new ProductoDTO();
+        connect = con.connectDatabase();
+        try {
+            sql = "SELECT * FROM productos WHERE nombre='" +nombre+"'";
+            stmt = connect.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                producto = new ProductoDTO();
+                producto.setIdproducto(rs.getInt(1));
+                producto.setNombre(rs.getString(2));
+                producto.setPrecio(rs.getDouble(3));
+                producto.setPreciocliente(rs.getDouble(4));
+                producto.setStock(rs.getInt(5));
+                producto.setActivarpreciocliente(rs.getBoolean(6));
+                producto.setPreciodeproveedor(rs.getDouble(7));
+                producto.setIdcategoria(rs.getInt(8));
+                producto.setIdproveedor(rs.getInt(9));
+                producto.setIdunidadm(rs.getInt(10));
+            }
+            connect.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener producto por id:" + e.getMessage());
+        }
+        return producto;
+    }
+
 
     public int modificarProductoStock(int id, int stock) {
         sql = "UPDATE productos set stock =" + stock + " WHERE idproducto=" + id;

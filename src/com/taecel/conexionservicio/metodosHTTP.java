@@ -7,11 +7,14 @@ import com.taecel.modelo.BalanceDTO;
 import com.taecel.modelo.ProductsDTO;
 import com.taecel.modelo.StatusDTO;
 import com.taecel.modelo.TransaccionDTO;
+import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import javax.swing.JOptionPane;
+import org.json.JSONException;
 
 public class metodosHTTP {
 
@@ -34,7 +37,6 @@ public class metodosHTTP {
         BalanceDTO balanceResponse = null;
         try {
             JSONObject json = conect.urlConnect("POST", "https://taecel.com/app/api/getSales", "&fecha=" + fecha + "&bolsa=" + idBolsa);
-
             balanceResponse = gson.fromJson(json.toString().replace("\\\\", ""), BalanceDTO.class);
 
         } catch (Exception e) {
@@ -45,12 +47,21 @@ public class metodosHTTP {
 
     public ProductsDTO getProducts() {
         ProductsDTO productsResponse = null;
-       try {
+        int code = 0;
+        String mensaje = "";
+        try {
             JSONObject json = conect.urlConnect("POST", "https://taecel.com/app/api/getProducts", "");
+            code = json.getInt("error");
+            mensaje = json.getString("message");
+            System.out.println("json products:" + json);
             productsResponse = gson.fromJson(json.toString(), ProductsDTO.class);
 
         } catch (Exception e) {
             System.out.println("Error al realizar el consumo getProducts:" + e.getMessage());
+            if(code == 405){
+                JOptionPane.showMessageDialog(null,mensaje,"",JOptionPane.ERROR_MESSAGE);
+            }
+
         }
         return productsResponse;
     }
@@ -59,8 +70,12 @@ public class metodosHTTP {
         TransaccionDTO transaccionResponse = null;
         try {
             JSONObject json = conect.urlConnect("POST", "https://taecel.com/app/api/RequestTXN", "&producto=" + producto + "&referencia=" + referencia + "&monto=" + monto);
-            System.out.println("Json:"+json);
-            transaccionResponse = gson.fromJson(json.toString(), TransaccionDTO.class);           
+            //System.out.println("Json Get Transaction:" + json);
+            //{"data":{"transID":"220600386450"},"success":true,"extra":null,"error":0,"message":"Consulta Exitosa"}
+            //{"data":[],"success":false,"extra":null,"error":"3128","message":"Numero recargado en menos de 10 minutos, por favor revise su reporte de ventas o espere para intentarlo nuevamente"}
+            transaccionResponse = gson.fromJson(json.toString(), TransaccionDTO.class);
+           // transaccionResponse.setSuccess(false);
+            //transaccionResponse.setMessage("Numero recargado en menos de 10 minutos");
         } catch (Exception e) {
             System.out.println("Error al realizar el consumo de productos:" + e.getMessage());
         }
@@ -71,6 +86,9 @@ public class metodosHTTP {
         StatusDTO statusResponse = null;
         try {
             JSONObject json = conect.urlConnect("POST", "https://taecel.com/app/api/StatusTXN", "&transID=" + idtransaccion);
+            System.out.println("Json Estatus:" + json);
+            //{"data":{"Status":"Fracasada ","Cargo":"$0.00","Timeout":"0.00","Folio":"","IP":"189.158.2.224","Nota":"Saldo insuficiente","Abono":"$0.00","Via":"WS","Fecha":"2022-06-06 14:55:25","pin":"","Telefono":"9631562456","Monto":"$200.00","Saldo Final":"$68.90","Carrier":"Paquete Amigo Sin Limite","Bolsa":"Tiempo Aire","TransID":"220600386744","Región":"8","Comision":"$0.00"},"success":false,"extra":null,"error":"2130","message":"No cuenta con saldo suficiente para realizar la transacción"}
+            //{"data":{"Status":"Exitosa","Cargo":"$0.00","Timeout":"2.25","Folio":"644439","IP":"189.158.2.224","Nota":"","Abono":"$0.00","Via":"WS","Fecha":"2022-06-06 15:04:19","pin":"","Telefono":"9631562456","Monto":"$20.00","Saldo Final":"$48.90","Carrier":"Paquete Amigo Sin Limite","Bolsa":"Tiempo Aire","TransID":"220600387497","Región":"8","Comision":"$0.00"},"success":true,"extra":null,"error":0,"message":"Transacción Exitosa"}
             statusResponse = gson.fromJson(json.toString(), StatusDTO.class);
 
         } catch (Exception e) {
@@ -82,7 +100,7 @@ public class metodosHTTP {
     public String productosTaecel(String contenido) {
         String contenidoResultado = "";
         try {
-          File file = new File(System.getProperty("user.home") + System.getProperty("file.separator") + ".taecel");
+            File file = new File(System.getProperty("user.home") + System.getProperty("file.separator") + ".taecel");
             if (!file.exists()) {
                 file.createNewFile();
                 FileWriter fw = new FileWriter(file);
@@ -108,7 +126,7 @@ public class metodosHTTP {
         } catch (Exception e) {
             System.out.println("Error al crear archivo productos:" + e.getMessage());
         }
-        
+
         return contenidoResultado;
 
     }

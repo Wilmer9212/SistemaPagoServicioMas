@@ -4,10 +4,12 @@ public class configTaecel {
 
     private String url = "https://taecel.com/";
     private String basePath = "app/api/";
-    private String key = "b9db0c5be6a058cafb675f26a1cbbdd0";
+    private String key="b9db0c5be6a058cafb675f26a1cbbdd0";
     private String nip = "80e54e50a593872c4170739309b65097";
+    public boolean bandera = false;
 
-    private String endpoint_getProducts = "getProducts";
+    public configTaecel() {
+    }
 
     public String getUrl() {
         return url;
@@ -41,19 +43,18 @@ public class configTaecel {
         this.nip = nip;
     }
 
-    public String getEndpoint_getProducts() {
-        return endpoint_getProducts;
+    public boolean isBandera() {
+        return bandera;
     }
 
-    public void setEndpoint_getProducts(String endpoint_getProducts) {
-        this.endpoint_getProducts = endpoint_getProducts;
+    public void setBandera(boolean bandera) {
+        this.bandera = bandera;
     }
 
-    @Override
-    public String toString() {
-        return "configTaecel{" + "url=" + url + ", basePath=" + basePath + ", key=" + key + ", nip=" + nip + ", endpoint_getProducts=" + endpoint_getProducts + '}';
-    }
     
+    
+
+
     
 
 }

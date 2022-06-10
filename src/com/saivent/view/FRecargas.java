@@ -6,9 +6,11 @@
 package com.saivent.view;
 
 import com.google.gson.Gson;
+import com.saivent.util.Fichero;
 import com.saivent.util.ImageTable;
 import com.saivent.util.MetodosValidar;
 import com.sistema.util.Hilo;
+import com.sistema.util.configTaecel;
 import com.taecel.conexionservicio.metodosHTTP;
 import com.taecel.modelo.ProductsDTO;
 import com.taecel.modelo.StatusDTO;
@@ -21,6 +23,9 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -51,10 +56,13 @@ public class FRecargas extends javax.swing.JInternalFrame {
     Timer time;
     ActionListener ac;
     int x = 0;
+    JDialog dialogov;
+    JDialog jdKey = new JDialog();
 
     public FRecargas() {
         initComponents();
         diseñoVentana();
+        //jDKey();
     }
 
     public void diseñoVentana() {
@@ -96,12 +104,20 @@ public class FRecargas extends javax.swing.JInternalFrame {
         loading = new javax.swing.JDialog();
         jProgressBar1 = new javax.swing.JProgressBar();
         porcentaje = new javax.swing.JLabel();
+        keys = new javax.swing.JDialog();
+        jLabel7 = new javax.swing.JLabel();
+        key = new javax.swing.JTextField();
+        secretKey = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        saveSecret = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cbProductos = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnsalir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -269,8 +285,60 @@ public class FRecargas extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jLabel7.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel7.setText("Key:");
+
+        jLabel8.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel8.setText("secretKey:");
+
+        saveSecret.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Save.png"))); // NOI18N
+        saveSecret.setText("Guardar");
+        saveSecret.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveSecretActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout keysLayout = new javax.swing.GroupLayout(keys.getContentPane());
+        keys.getContentPane().setLayout(keysLayout);
+        keysLayout.setHorizontalGroup(
+            keysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(keysLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(keysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(keysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(key)
+                    .addComponent(secretKey, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, keysLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(saveSecret)
+                .addGap(143, 143, 143))
+        );
+        keysLayout.setVerticalGroup(
+            keysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(keysLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(keysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(keysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(secretKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(saveSecret)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.setBackground(new java.awt.Color(0, 111, 111));
+
         jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        jLabel1.setText("Seleccione :");
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel1.setText("SELECCIONE:");
 
         cbProductos.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         cbProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tiempo Aire", "Paquete" }));
@@ -305,6 +373,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        btnsalir.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir ventana.png"))); // NOI18N
         btnsalir.setText("CERRAR");
         btnsalir.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -317,6 +386,14 @@ public class FRecargas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel2.setText("BOLSA TIEMPO AIRE : $");
+
+        jLabel6.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel6.setText("0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -325,8 +402,12 @@ public class FRecargas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addComponent(cbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addContainerGap(247, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -339,9 +420,11 @@ public class FRecargas extends javax.swing.JInternalFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -454,7 +537,6 @@ public class FRecargas extends javax.swing.JInternalFrame {
                             JLabel label = new JLabel();
                             Object[] fila = new Object[2];
                             carriersModelo carrier = carriers.get(i);
-                            System.out.println("" + carrier.getCategoria());
                             if (carrier.getCategoria().toLowerCase().contains("paque")) {
                                 try {
                                     System.setProperty("http.agent", "Chrome");
@@ -499,9 +581,9 @@ public class FRecargas extends javax.swing.JInternalFrame {
 
         try {
             llenarComboProductos(jTable1.getValueAt(fila, 0).toString(), cbProductos.getSelectedItem().toString().toUpperCase());
-            JDialog dialogov = new JDialog(jdVender, "MONTO RECARGA", true);
+            dialogov = new JDialog(jdVender, "MONTO RECARGA", true);
             dialogov.add(jdVender.getContentPane());
-            dialogov.setSize(310, 400);
+            dialogov.setSize(310, 420);
             dialogov.setLocationRelativeTo(null);
             ///Border bordejpanel = new TitledBorder(new EtchedBorder(), jTable1.getValueAt(fila, 0).toString());
             //pnlVentas.setBorder(bordejpanel);
@@ -540,20 +622,34 @@ public class FRecargas extends javax.swing.JInternalFrame {
                     } else {
                         System.out.println("" + jLabelCodProducto.getText() + "," + txtConfirmarNumero.getText() + "," + cbMontoCompa.getSelectedItem().toString());
                         TransaccionDTO transaction = metodos.getTransaccion(jLabelCodProducto.getText(), txtConfirmarNumero.getText(), cbMontoCompa.getSelectedItem().toString());
-                        System.out.println("Transaction:" + transaction);
+                      
                         StatusDTO estatus = metodos.getStatus(transaction.getData().getTransID());
-                        if (!estatus.isSuccess()) {
-                             
-                            /*if (transaction.getError() > 0) {
-                                System.out.println("Entro aqui");
-                                JOptionPane.showMessageDialog(null, "Codigo de error:" + transaction.getError() + "\n"
-                                        + "Descripcion:" + transaction.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+                        if (transaction.isSuccess()) {
+                            if (estatus.isSuccess()) {
+                                JOptionPane.showMessageDialog(null, "¡¡¡" + estatus.getMessage() + "!!!" + "\n"
+                                        + "Folio:" + estatus.getData().getFolio() + "\n"
+                                        + "Fecha:" + estatus.getData().getFecha());
+                                dialogov.setVisible(false);
+                                txtNumero.setText("");
+                                txtConfirmarNumero.setText("");
+                                cbMontoCompa.setSelectedIndex(0);
                             } else {
-                                JOptionPane.showMessageDialog(null, "¡¡¡" + transaction.getMessage() + "!!! \n"
-                                        + transaction.getData().getTransID(), "", JOptionPane.OK_OPTION, icono);
-                            }*/
-                        }else{
-                            
+                                System.out.println("Estatus:");
+                                txtNumero.setText(""+estatus);
+                                txtConfirmarNumero.setText("");
+                                cbMontoCompa.setSelectedIndex(0);
+                                dialogov.setVisible(false);
+                                txtNumero.setText("");
+                                txtConfirmarNumero.setText("");
+                                cbMontoCompa.setSelectedIndex(0);
+                                JOptionPane.showMessageDialog(null, estatus.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+                            txtNumero.setText("");
+                            txtConfirmarNumero.setText("");
+                            cbMontoCompa.setSelectedIndex(0);
+                            dialogov.setVisible(false);
+                            JOptionPane.showMessageDialog(null, transaction.getMessage(), "", JOptionPane.ERROR_MESSAGE);
                         }
 
                     }
@@ -576,6 +672,11 @@ public class FRecargas extends javax.swing.JInternalFrame {
     private void txtNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyReleased
         new MetodosValidar().soloNumeros(txtNumero, 10);
     }//GEN-LAST:event_txtNumeroKeyReleased
+
+    private void saveSecretActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSecretActionPerformed
+        guardarKeys(key.getText(), secretKey.getText());
+        jdKey.setVisible(false);
+    }//GEN-LAST:event_saveSecretActionPerformed
 
     public void llenarComboProductos(String compa, String serv) {
         cbMontoCompa.removeAllItems();
@@ -642,15 +743,67 @@ public class FRecargas extends javax.swing.JInternalFrame {
         jLabelCodProducto.setText("");
     }
 
+    public void guardarKeys(String key, String secretKey) {
+        String raiz = System.getProperty("user.home");
+        String separa = System.getProperty("file.separator");
+
+        try {
+            String ruta = raiz + separa + ".red1";
+            String ckey = "key=" + key + "\n"
+                    + "nip=" + secretKey;
+
+            File file = new File(ruta);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(ckey);
+            bw.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar claves:" + e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /*public void jDKey() {
+        String raiz = System.getProperty("user.home");
+        String separa = System.getProperty("file.separator");
+
+        try {
+            System.out.println("try");
+            configTaecel confuracion = new configTaecel();
+            System.out.println("CONFIGURATION:"+confuracion.bandera);
+            if(confuracion.bandera){
+            if (confuracion.obtenerTxt() == null) {
+                if(confuracion.getKey().equals("") && confuracion.getNip().equals("")){                    
+                jdKey = new JDialog(keys, "KEYS", true);
+                jdKey.add(keys.getContentPane());
+                jdKey.setSize(410, 150);
+                jdKey.setLocationRelativeTo(null);
+                jdKey.setVisible(true);
+                }
+            }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al buscar archivo");
+        }
+
+    }*/
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnsalir;
     private javax.swing.JComboBox<String> cbMontoCompa;
     public javax.swing.JComboBox<String> cbProductos;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelCodProducto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -664,6 +817,8 @@ public class FRecargas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlabelComisionServicio;
     private javax.swing.JLabel jlabelCostoProducto;
     private javax.swing.JLabel jlabelVigencia;
+    private javax.swing.JTextField key;
+    private javax.swing.JDialog keys;
     private javax.swing.JLabel lblComisionServicio;
     private javax.swing.JLabel lblCostoProducto;
     private javax.swing.JLabel lblNota;
@@ -672,6 +827,8 @@ public class FRecargas extends javax.swing.JInternalFrame {
     private javax.swing.JDialog loading;
     private javax.swing.JPanel pnlVentas;
     private javax.swing.JLabel porcentaje;
+    private javax.swing.JButton saveSecret;
+    private javax.swing.JTextField secretKey;
     private javax.swing.JTextField txtConfirmarNumero;
     private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables

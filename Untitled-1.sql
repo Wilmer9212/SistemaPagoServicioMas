@@ -157,3 +157,9 @@ primary key(idtipo)
 
 INSERT INTO tiposventa VALUES(1,'CLIENTE');
 INSERT INTO tiposventa VALUES(2,'PUBLICO');
+
+
+DROP TABLE IF EXISTS nombre_negocio;
+CREATE TABLE nombre_negocio(
+   nombre text
+);

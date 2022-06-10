@@ -1,5 +1,6 @@
 package com.saivent.principal;
 
+import com.saivent.reportes.FReporteProductos;
 import com.saivent.reportes.FReporteVentas;
 import com.saivent.util.bloquear;
 import com.saivent.view.FCategorias;
@@ -13,6 +14,8 @@ import com.saivent.view.FRecargas;
 
 import com.saivent.view.FUnidadesM;
 import com.saivent.view.FVentas;
+import com.saivent.view.FVentas11;
+import com.sistema.controller.NegocioController;
 import com.sistema.controller.UsuariosController;
 import com.sistema.modelo.UsuarioDTO;
 import java.awt.GridBagConstraints;
@@ -29,6 +32,7 @@ public class Run extends javax.swing.JFrame {
 
     boolean banderaProcesos = false;
     JDialog jd = new JDialog();
+
     public Run() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -96,10 +100,11 @@ public class Run extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jmenuReporte = new javax.swing.JMenu();
-        itemRPVentas = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        itemRProductos = new javax.swing.JMenuItem();
+        itemRPVentas = new javax.swing.JMenuItem();
         jmenuMantenimiento = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -112,6 +117,7 @@ public class Run extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Key.png"))); // NOI18N
 
@@ -173,7 +179,7 @@ public class Run extends javax.swing.JFrame {
         txtmsj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtmsj.setText("Usuario:");
 
-        jPanel2.setBackground(new java.awt.Color(52, 130, 148));
+        jPanel2.setBackground(new java.awt.Color(0, 111, 111));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -338,16 +344,6 @@ public class Run extends javax.swing.JFrame {
         jmenuReporte.setText("Reportes");
         jmenuReporte.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
 
-        itemRPVentas.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        itemRPVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/VENTASS (1).png"))); // NOI18N
-        itemRPVentas.setText("Ventas");
-        itemRPVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemRPVentasActionPerformed(evt);
-            }
-        });
-        jmenuReporte.add(itemRPVentas);
-
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-factura-30.png"))); // NOI18N
         jMenu6.setText("Servicios");
         jMenu6.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
@@ -361,6 +357,26 @@ public class Run extends javax.swing.JFrame {
         jMenu6.add(jMenuItem6);
 
         jmenuReporte.add(jMenu6);
+
+        itemRProductos.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        itemRProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/reporte-de-negocios.png"))); // NOI18N
+        itemRProductos.setText("Productos");
+        itemRProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRProductosActionPerformed(evt);
+            }
+        });
+        jmenuReporte.add(itemRProductos);
+
+        itemRPVentas.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        itemRPVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/VENTASS (1).png"))); // NOI18N
+        itemRPVentas.setText("Ventas");
+        itemRPVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRPVentasActionPerformed(evt);
+            }
+        });
+        jmenuReporte.add(itemRPVentas);
 
         jMenuBar1.add(jmenuReporte);
 
@@ -456,6 +472,16 @@ public class Run extends javax.swing.JFrame {
 
         jmenuMantenimiento.add(jMenu7);
 
+        jMenuItem15.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/config32x32.png"))); // NOI18N
+        jMenuItem15.setText("Nombre negocio");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jmenuMantenimiento.add(jMenuItem15);
+
         jMenuBar1.add(jmenuMantenimiento);
 
         setJMenuBar(jMenuBar1);
@@ -487,7 +513,7 @@ public class Run extends javax.swing.JFrame {
         bloquear();
     }//GEN-LAST:event_bntBloquearActionPerformed
 
-    
+
     private void jPanel3ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel3ComponentResized
 
     }//GEN-LAST:event_jPanel3ComponentResized
@@ -530,7 +556,7 @@ public class Run extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-       limpiarJDesktopFrame();
+        limpiarJDesktopFrame();
         municipios();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
@@ -540,12 +566,12 @@ public class Run extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-       limpiarJDesktopFrame();
+        limpiarJDesktopFrame();
         categorias();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-       limpiarJDesktopFrame();
+        limpiarJDesktopFrame();
         estados();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
@@ -565,15 +591,15 @@ public class Run extends javax.swing.JFrame {
 
     private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
         char c = evt.getKeyChar();
-        if (c == KeyEvent.VK_ENTER) {   
-             if(validarDesbloquear()){
+        if (c == KeyEvent.VK_ENTER) {
+            if (validarDesbloquear()) {
                 desbloquear();
-                jd.setVisible(false); 
+                jd.setVisible(false);
                 jPasswordField1.setText("");
-            }else{
-                JOptionPane.showMessageDialog(null,"ERROR AL VERIFICAR SU CONTRASEÑA","",JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR AL VERIFICAR SU CONTRASEÑA", "", JOptionPane.ERROR_MESSAGE);
             }
-            
+
         }
     }//GEN-LAST:event_jPasswordField1KeyTyped
 
@@ -581,6 +607,26 @@ public class Run extends javax.swing.JFrame {
         limpiarJDesktopFrame();
         reporteVentas();
     }//GEN-LAST:event_itemRPVentasActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        NegocioController negocio = new NegocioController();
+        try {
+            String nombre = JOptionPane.showInputDialog("INGRESA NOMBRE PARA TU NEGOCIO");
+            boolean negocio_save = negocio.save(nombre.toUpperCase());
+            if (negocio_save) {
+                JOptionPane.showMessageDialog(null, "REGISTRO EXITOSO", "", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR AL REGISTRAR CONTACTE PROVEEDOR", "", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al guardar nombre del negocio:" + e.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void itemRProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRProductosActionPerformed
+      limpiarJDesktopFrame();
+      reporteProductos();
+    }//GEN-LAST:event_itemRProductosActionPerformed
 
     public void controllerProcesos() {
         banderaProcesos = true;
@@ -599,7 +645,7 @@ public class Run extends javax.swing.JFrame {
 
     //Si presiono recursos -> ventas
     public void ventas() {
-        FVentas fv = new FVentas();
+        FVentas11 fv = new FVentas11();
         fv.setSize(jDesktopPane1.getWidth(), jDesktopPane1.getHeight());
         fv.setVisible(true);
         jDesktopPane1.add(fv);
@@ -645,21 +691,21 @@ public class Run extends javax.swing.JFrame {
     }
 
     public void bloquear() {
-        jd = new JDialog(this,"DESBLOQUEAR",false);
+        jd = new JDialog(this, "DESBLOQUEAR", false);
         jd.add(JDBloquear.getContentPane());
         jd.setVisible(true);
         JDBloquear.setTitle("INGRESA CONTRASEÑA");
-        jd.setSize(380,75);
+        jd.setSize(380, 75);
         jd.setLocationRelativeTo(null);
-        jd.setDefaultCloseOperation(0);      
-    
+        jd.setDefaultCloseOperation(0);
+
         jMenuBar1.setEnabled(false);
         jmenuOperaciones.setEnabled(false);
         jmenuMantenimiento.setEnabled(false);
         jmenuReporte.setEnabled(false);
         btnSalir.setEnabled(false);
         bntBloquear.setEnabled(false);
-        
+
         this.setEnabled(false);
     }
 
@@ -758,6 +804,14 @@ public class Run extends javax.swing.JFrame {
         fv.setVisible(true);
         jDesktopPane1.add(fv);
     }
+
+    public void reporteProductos() {
+        FReporteProductos fv = new FReporteProductos();
+        fv.setSize(jDesktopPane1.getWidth(), jDesktopPane1.getHeight());
+        fv.setVisible(true);
+        jDesktopPane1.add(fv);
+    }
+
     public void limpiarJDesktopFrame() {
         jDesktopPane1.removeAll();
     }
@@ -803,6 +857,7 @@ public class Run extends javax.swing.JFrame {
     private javax.swing.JButton bntBloquear;
     private javax.swing.JButton btnSalir;
     private javax.swing.JMenuItem itemRPVentas;
+    private javax.swing.JMenuItem itemRProductos;
     public javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -816,6 +871,7 @@ public class Run extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

@@ -26,8 +26,8 @@ public class conexion {
             // Database connect
             // Conectamos con la base de datos
             con = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/sivent",
-                    "postgres", "root");
+                    "jdbc:postgresql://localhost:5432/test",
+                    "postgres", "red1");
             
            if(con != null){
               // System.out.println("Connection Exitosa....");

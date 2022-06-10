@@ -248,6 +248,7 @@ public class FProducto extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabelCat = new javax.swing.JLabel();
         cbcategoria = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
         plista = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         btnnuevo = new javax.swing.JButton();
@@ -259,20 +260,21 @@ public class FProducto extends javax.swing.JInternalFrame {
         tbproductos = new javax.swing.JTable();
         padquisicion = new javax.swing.JLabel();
 
+        pnlDatos.setBackground(new java.awt.Color(0, 111, 111));
         pnlDatos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        btnaceptar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btnaceptar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/aceptar.png"))); // NOI18N
-        btnaceptar.setText("Aceptar");
+        btnaceptar.setText("ACEPTAR");
         btnaceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnaceptarActionPerformed(evt);
             }
         });
 
-        btncancelar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btncancelar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancelar.png"))); // NOI18N
-        btncancelar.setText("Cancelar");
+        btncancelar.setText("CANCELAR");
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncancelarActionPerformed(evt);
@@ -300,6 +302,7 @@ public class FProducto extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        pcontenido.setBackground(new java.awt.Color(0, 111, 111));
         pcontenido.setForeground(new java.awt.Color(102, 255, 102));
 
         txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -317,17 +320,21 @@ public class FProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel1.setText("Codigo");
+        jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel1.setText("CODIGO");
 
-        jLabel7.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel7.setText("Nombre");
+        jLabel7.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel7.setText("NOMBRE");
 
-        jLabel8.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel8.setText("Unidad Medida");
+        jLabel8.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel8.setText("UNIDAD MEDIDA");
 
-        jLabel6.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel6.setText("Precio Cliente");
+        jLabel6.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel6.setText("PRECIO CLIENTE");
 
         txtcod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -339,17 +346,21 @@ public class FProducto extends javax.swing.JInternalFrame {
 
         cbproveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
 
-        jLabel9.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel9.setText("Precio Publico");
+        jLabel9.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel9.setText("PRECIO PUBLICO");
 
-        jLabel11.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel11.setText("Cantidad");
+        jLabel11.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel11.setText("CANTIDAD");
 
-        jLabel10.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel10.setText("Proveedor");
+        jLabel10.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel10.setText("PROVEEDOR");
 
-        jLabelCat.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabelCat.setText("Categoria");
+        jLabelCat.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabelCat.setForeground(new java.awt.Color(254, 254, 254));
+        jLabelCat.setText("CATEGORIA");
 
         cbcategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
 
@@ -359,37 +370,35 @@ public class FProducto extends javax.swing.JInternalFrame {
             pcontenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pcontenidoLayout.createSequentialGroup()
                 .addGroup(pcontenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pcontenidoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(pcontenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel11)
-                            .addGroup(pcontenidoLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(3, 3, 3))
-                            .addComponent(jLabel10)))
-                    .addGroup(pcontenidoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pcontenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel1)))
+                    .addGroup(pcontenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pcontenidoLayout.createSequentialGroup()
+                            .addGap(67, 67, 67)
+                            .addComponent(jLabel7))
+                        .addGroup(pcontenidoLayout.createSequentialGroup()
+                            .addGap(46, 46, 46)
+                            .addGroup(pcontenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel10)
+                                .addGroup(pcontenidoLayout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(3, 3, 3)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pcontenidoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pcontenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pcontenidoLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(3, 3, 3))
-                            .addComponent(jLabelCat, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jLabelCat, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(30, 30, 30)
                 .addGroup(pcontenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbproveedor, 0, 483, Short.MAX_VALUE)
+                    .addComponent(cbproveedor, 0, 498, Short.MAX_VALUE)
                     .addComponent(spcantidad)
                     .addComponent(spppublico)
                     .addComponent(sppcliente)
                     .addComponent(cbunidad, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtnombre)
                     .addComponent(txtcod)
-                    .addComponent(cbcategoria, 0, 483, Short.MAX_VALUE))
+                    .addComponent(cbcategoria, 0, 498, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
         pcontenidoLayout.setVerticalGroup(
@@ -430,6 +439,11 @@ public class FProducto extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jLabel4.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("PRODUCTOS");
+
         javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
         pnlDatos.setLayout(pnlDatosLayout);
         pnlDatosLayout.setHorizontalGroup(
@@ -440,26 +454,33 @@ public class FProducto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlDatosLayout.setVerticalGroup(
             pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDatosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pcontenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addComponent(pcontenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
+        plista.setBackground(new java.awt.Color(17, 140, 140));
         plista.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         plista.setEnabled(false);
 
-        jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel3.setText("BUSCAR");
+        jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel3.setText("PRODUCTO");
 
-        btnnuevo.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        btnnuevo.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/nuevo.png"))); // NOI18N
         btnnuevo.setText("NUEVO");
         btnnuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -474,7 +495,7 @@ public class FProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        btnmodificar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        btnmodificar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/modiicar.png"))); // NOI18N
         btnmodificar.setText("MODIFICAR");
         btnmodificar.addActionListener(new java.awt.event.ActionListener() {
@@ -483,7 +504,7 @@ public class FProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        btneliminar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        btneliminar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btneliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eliminar.png"))); // NOI18N
         btneliminar.setText("ELIMINAR");
         btneliminar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -497,7 +518,7 @@ public class FProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        btnsalir.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btnsalir.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/salir ventana.png"))); // NOI18N
         btnsalir.setText("CERRAR");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -554,7 +575,7 @@ public class FProducto extends javax.swing.JInternalFrame {
                         .addComponent(btneliminar)
                         .addGap(31, 31, 31)
                         .addComponent(padquisicion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
                         .addComponent(btnsalir)))
                 .addContainerGap())
         );
@@ -566,8 +587,8 @@ public class FProducto extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(plistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsalir)
                     .addComponent(btneliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -633,6 +654,7 @@ public class FProducto extends javax.swing.JInternalFrame {
                         limpiarC();
                         llenarTbProductos("");
                         desabPanCon();
+                        btnnuevo.setEnabled(true);
                     } else {
                         new MetodosValidar().error();
                     }
@@ -817,6 +839,7 @@ public class FProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

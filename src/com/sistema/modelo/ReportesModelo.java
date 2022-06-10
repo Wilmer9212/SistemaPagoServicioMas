@@ -11,12 +11,13 @@ import java.util.List;
  *
  * @author Elliot
  */
-public class ReporteVentasDTO {
+public class ReportesModelo {
     
     private String nombreNegocio;
     private String fechaInicial;
     private String fechaFinal;
     private List<DetalleVentaDTO>detallesVenta;
+    private List<ProductoDTO>productos;
 
     public String getNombreNegocio() {
         return nombreNegocio;
@@ -50,10 +51,20 @@ public class ReporteVentasDTO {
         this.detallesVenta = detallesVenta;
     }
 
+    public List<ProductoDTO> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<ProductoDTO> productos) {
+        this.productos = productos;
+    }
+
     @Override
     public String toString() {
-        return "ReporteVentasDTO{" + "nombreNegocio=" + nombreNegocio + ", fechaInicial=" + fechaInicial + ", fechaFinal=" + fechaFinal + ", detallesVenta=" + detallesVenta + '}';
+        return "ReporteVentasDTO{" + "nombreNegocio=" + nombreNegocio + ", fechaInicial=" + fechaInicial + ", fechaFinal=" + fechaFinal + ", detallesVenta=" + detallesVenta + ", productos=" + productos + '}';
     }
+    
+   
     
     
     

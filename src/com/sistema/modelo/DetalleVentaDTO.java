@@ -56,6 +56,12 @@ public class DetalleVentaDTO {
     public void setCliente(String cliente) {
         this.cliente = cliente;
     }
+
+    @Override
+    public String toString() {
+        return "DetalleVentaDTO{" + "ticket=" + ticket + ", producto=" + producto + ", totalProducto=" + totalProducto + ", total=" + total + ", cliente=" + cliente + '}';
+    }
+    
     
     
 }
