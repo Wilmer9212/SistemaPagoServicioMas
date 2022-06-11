@@ -119,11 +119,15 @@ public class FRecargas extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
+        jPanel2.setBackground(new java.awt.Color(0, 111, 111));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jlVenta.setBackground(new java.awt.Color(0, 111, 111));
         jlVenta.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jlVenta.setForeground(new java.awt.Color(255, 255, 255));
         jlVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Monto ->");
 
         cbMontoCompa.setFont(new java.awt.Font("Noto Sans", 3, 12)); // NOI18N
@@ -135,14 +139,11 @@ public class FRecargas extends javax.swing.JInternalFrame {
             }
         });
 
-        pnlVentas.setBackground(new java.awt.Color(253, 251, 251));
+        pnlVentas.setBackground(new java.awt.Color(0, 111, 111));
         pnlVentas.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        pnlVentas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
-        jLabel4.setText("Numero :");
-        pnlVentas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 30));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("NUMERO:");
 
         txtNumero.setToolTipText("ingresa tu numero\n");
         txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -150,12 +151,9 @@ public class FRecargas extends javax.swing.JInternalFrame {
                 txtNumeroKeyReleased(evt);
             }
         });
-        pnlVentas.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 193, -1));
 
-        jLabel5.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
-        jLabel5.setText("confirma:");
-        pnlVentas.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("CONFIRMA:");
 
         txtConfirmarNumero.setToolTipText("confirmar tu numero\n");
         txtConfirmarNumero.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -163,62 +161,132 @@ public class FRecargas extends javax.swing.JInternalFrame {
                 txtConfirmarNumeroKeyReleased(evt);
             }
         });
-        pnlVentas.add(txtConfirmarNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 63, 193, -1));
 
-        lblCostoProducto.setFont(new java.awt.Font("Noto Sans", 3, 12)); // NOI18N
-        lblCostoProducto.setForeground(new java.awt.Color(1, 1, 1));
-        lblCostoProducto.setText("Costo del Producto :");
-        pnlVentas.add(lblCostoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 120, 20));
+        lblCostoProducto.setForeground(new java.awt.Color(255, 255, 255));
+        lblCostoProducto.setText("COSTO PRODUCTO:");
 
-        lblComisionServicio.setFont(new java.awt.Font("Noto Sans", 3, 12)); // NOI18N
-        lblComisionServicio.setForeground(new java.awt.Color(1, 1, 1));
-        lblComisionServicio.setText("Comision por Servicio :");
-        pnlVentas.add(lblComisionServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        lblComisionServicio.setForeground(new java.awt.Color(255, 255, 255));
+        lblComisionServicio.setText("COMISION:");
 
-        lblVigencia.setFont(new java.awt.Font("Noto Sans", 3, 12)); // NOI18N
-        lblVigencia.setForeground(new java.awt.Color(1, 1, 1));
-        lblVigencia.setText("Vigencia :");
-        pnlVentas.add(lblVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+        lblVigencia.setForeground(new java.awt.Color(255, 255, 255));
+        lblVigencia.setText("VIGENCIA:");
 
-        lblNota.setFont(new java.awt.Font("Noto Sans", 3, 12)); // NOI18N
-        lblNota.setForeground(new java.awt.Color(1, 1, 1));
+        lblNota.setForeground(new java.awt.Color(255, 255, 255));
         lblNota.setText("Nota :");
-        pnlVentas.add(lblNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 40, -1));
 
-        jlabelCostoProducto.setForeground(new java.awt.Color(1, 1, 1));
+        jlabelCostoProducto.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jlabelCostoProducto.setForeground(new java.awt.Color(255, 255, 255));
         jlabelCostoProducto.setText("jLabel6");
-        pnlVentas.add(jlabelCostoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 130, 20));
 
-        jlabelComisionServicio.setForeground(new java.awt.Color(1, 1, 1));
+        jlabelComisionServicio.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jlabelComisionServicio.setForeground(new java.awt.Color(255, 255, 255));
         jlabelComisionServicio.setText("jLabel6");
-        pnlVentas.add(jlabelComisionServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 130, -1));
 
-        jlabelVigencia.setForeground(new java.awt.Color(1, 1, 1));
+        jlabelVigencia.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jlabelVigencia.setForeground(new java.awt.Color(255, 255, 255));
         jlabelVigencia.setText("jLabel6");
-        pnlVentas.add(jlabelVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 200, -1));
 
         jTextArea1.setColumns(20);
+        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        pnlVentas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, 50));
-
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/OK.png"))); // NOI18N
+        jButton1.setText("RECARGAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        pnlVentas.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, -1, -1));
 
-        lblVigencia1.setFont(new java.awt.Font("Noto Sans", 3, 12)); // NOI18N
-        lblVigencia1.setForeground(new java.awt.Color(1, 1, 1));
-        lblVigencia1.setText("Nombre producto :");
-        pnlVentas.add(lblVigencia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 110, -1));
+        lblVigencia1.setForeground(new java.awt.Color(255, 255, 255));
+        lblVigencia1.setText("NOMBRE PRODUCTO:");
 
-        jLabelCodProducto.setForeground(new java.awt.Color(1, 1, 1));
+        jLabelCodProducto.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabelCodProducto.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCodProducto.setText("jLabel6");
-        pnlVentas.add(jLabelCodProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 100, -1));
+
+        javax.swing.GroupLayout pnlVentasLayout = new javax.swing.GroupLayout(pnlVentas);
+        pnlVentas.setLayout(pnlVentasLayout);
+        pnlVentasLayout.setHorizontalGroup(
+            pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVentasLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlVentasLayout.createSequentialGroup()
+                        .addGroup(pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlVentasLayout.createSequentialGroup()
+                                .addComponent(lblVigencia)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlabelVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlVentasLayout.createSequentialGroup()
+                                .addComponent(lblCostoProducto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlabelCostoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlVentasLayout.createSequentialGroup()
+                                .addComponent(lblComisionServicio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlabelComisionServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlVentasLayout.createSequentialGroup()
+                                .addComponent(lblVigencia1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(pnlVentasLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(17, 17, 17)
+                        .addComponent(txtNumero))
+                    .addGroup(pnlVentasLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(7, 7, 7)
+                        .addComponent(txtConfirmarNumero))
+                    .addGroup(pnlVentasLayout.createSequentialGroup()
+                        .addComponent(lblNota, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVentasLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(67, 67, 67))
+        );
+        pnlVentasLayout.setVerticalGroup(
+            pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVentasLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlVentasLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel5))
+                    .addComponent(txtConfirmarNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCostoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlabelCostoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblComisionServicio)
+                    .addComponent(jlabelComisionServicio))
+                .addGap(4, 4, 4)
+                .addGroup(pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblVigencia)
+                    .addComponent(jlabelVigencia))
+                .addGap(4, 4, 4)
+                .addGroup(pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblVigencia1)
+                    .addComponent(jLabelCodProducto))
+                .addGap(14, 14, 14)
+                .addGroup(pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlVentasLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblNota))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -245,7 +313,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
                     .addComponent(cbMontoCompa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -579,16 +647,17 @@ public class FRecargas extends javax.swing.JInternalFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int fila = jTable1.getSelectedRow();
 
-        try {
+        try {           
             llenarComboProductos(jTable1.getValueAt(fila, 0).toString(), cbProductos.getSelectedItem().toString().toUpperCase());
-            dialogov = new JDialog(jdVender, "MONTO RECARGA", true);
-            dialogov.add(jdVender.getContentPane());
-            dialogov.setSize(310, 420);
-            dialogov.setLocationRelativeTo(null);
+            jdVender.setTitle("DETALLES RECARGA");
+            jdVender.setSize(350, 428);
+            jdVender.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Message.png")).getImage());
+            jdVender.setLocationRelativeTo(null);
             ///Border bordejpanel = new TitledBorder(new EtchedBorder(), jTable1.getValueAt(fila, 0).toString());
             //pnlVentas.setBorder(bordejpanel);
             jlVenta.setText(cbProductos.getSelectedItem() + "," + jTable1.getValueAt(fila, 0).toString());
-            dialogov.setVisible(true);
+            jdVender.setVisible(true);
+            jdVender.setModal(true);
             jLabelCodProducto.setText(cbMontoCompa.getSelectedItem().toString());
 
         } catch (Exception e) {
@@ -688,7 +757,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
             for (int i = 0; i < modelosProducto.size(); i++) {
                 productoModel producto = modelosProducto.get(i);
                 if (producto.getBolsaID().equals("1") && producto.getCarrier().equalsIgnoreCase(compa) && producto.getCategoria().toUpperCase().contains(serv)) {
-                    cbMontoCompa.addItem(producto.getMonto());
+                    cbMontoCompa.addItem(producto.getMonto().toUpperCase());
                 }
             }
 
@@ -718,12 +787,13 @@ public class FRecargas extends javax.swing.JInternalFrame {
         }
     }
 
-    public void showBarProgress(boolean bandera) {
+    public void showBarProgres(boolean bandera) {
         try {
-            JDialog dialogov = new JDialog(loading, "MONTO RECARGA", true);
+            JDialog dialogov = new JDialog(loading, "DATOS RECARGA", true);
             dialogov.add(loading.getContentPane());
-            dialogov.setSize(430, 90);
+            dialogov.setSize(480, 140);
             dialogov.setLocationRelativeTo(null);
+            dialogov.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Message.png")).getImage());
             ///Border bordejpanel = new TitledBorder(new EtchedBorder(), jTable1.getValueAt(fila, 0).toString());
             //pnlVentas.setBorder(bordejpanel);
 

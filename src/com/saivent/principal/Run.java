@@ -2,7 +2,6 @@ package com.saivent.principal;
 
 import com.saivent.reportes.FReporteProductos;
 import com.saivent.reportes.FReporteVentas;
-import com.saivent.util.bloquear;
 import com.saivent.view.FCategorias;
 import com.saivent.view.FClientes;
 import com.saivent.view.FEstados;
@@ -14,7 +13,6 @@ import com.saivent.view.FRecargas;
 
 import com.saivent.view.FUnidadesM;
 import com.saivent.view.FVentas;
-import com.saivent.view.FVentas11;
 import com.sistema.controller.NegocioController;
 import com.sistema.controller.UsuariosController;
 import com.sistema.modelo.UsuarioDTO;
@@ -24,6 +22,7 @@ import java.awt.event.WindowEvent;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -38,6 +37,10 @@ public class Run extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         DecorarBTN();
         setMenuBar();
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/carro_vacio.png")).getImage());
+        menuServicio.setEnabled(false);
+        itemPagoServicio.setEnabled(false);
+        itemUsuarios.setEnabled(false);
     }
 
     int contBtn1 = 0;
@@ -98,9 +101,9 @@ public class Run extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        itemPagoServicio = new javax.swing.JMenuItem();
         jmenuReporte = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
+        menuServicio = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         itemRProductos = new javax.swing.JMenuItem();
@@ -108,7 +111,7 @@ public class Run extends javax.swing.JFrame {
         jmenuMantenimiento = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        itemUsuarios = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -328,14 +331,14 @@ public class Run extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem7);
 
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/How-to.png"))); // NOI18N
-        jMenuItem8.setText("Pago de servicios");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        itemPagoServicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/How-to.png"))); // NOI18N
+        itemPagoServicio.setText("Pago de servicios");
+        itemPagoServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                itemPagoServicioActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem8);
+        jMenu5.add(itemPagoServicio);
 
         jmenuOperaciones.add(jMenu5);
 
@@ -344,19 +347,19 @@ public class Run extends javax.swing.JFrame {
         jmenuReporte.setText("Reportes");
         jmenuReporte.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
 
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-factura-30.png"))); // NOI18N
-        jMenu6.setText("Servicios");
-        jMenu6.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        menuServicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-factura-30.png"))); // NOI18N
+        menuServicio.setText("Servicios");
+        menuServicio.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pie chart.png"))); // NOI18N
         jMenuItem5.setText("Ventas");
-        jMenu6.add(jMenuItem5);
+        menuServicio.add(jMenuItem5);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Report.png"))); // NOI18N
         jMenuItem6.setText("Pago de servicios");
-        jMenu6.add(jMenuItem6);
+        menuServicio.add(jMenuItem6);
 
-        jmenuReporte.add(jMenu6);
+        jmenuReporte.add(menuServicio);
 
         itemRProductos.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         itemRProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/reporte-de-negocios.png"))); // NOI18N
@@ -397,9 +400,9 @@ public class Run extends javax.swing.JFrame {
         jMenu1.setText("Personas");
         jMenu1.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/People.png"))); // NOI18N
-        jMenuItem3.setText("Usuarios");
-        jMenu1.add(jMenuItem3);
+        itemUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/People.png"))); // NOI18N
+        itemUsuarios.setText("Usuarios");
+        jMenu1.add(itemUsuarios);
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/personal1.png"))); // NOI18N
         jMenuItem4.setText("Clientes");
@@ -585,9 +588,9 @@ public class Run extends javax.swing.JFrame {
         proveedores();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void itemPagoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPagoServicioActionPerformed
         limpiarJDesktopFrame();
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_itemPagoServicioActionPerformed
 
     private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
         char c = evt.getKeyChar();
@@ -645,7 +648,7 @@ public class Run extends javax.swing.JFrame {
 
     //Si presiono recursos -> ventas
     public void ventas() {
-        FVentas11 fv = new FVentas11();
+        FVentas fv = new FVentas();
         fv.setSize(jDesktopPane1.getWidth(), jDesktopPane1.getHeight());
         fv.setVisible(true);
         jDesktopPane1.add(fv);
@@ -856,13 +859,14 @@ public class Run extends javax.swing.JFrame {
     private javax.swing.JDialog JDBloquear;
     private javax.swing.JButton bntBloquear;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JMenuItem itemPagoServicio;
     private javax.swing.JMenuItem itemRPVentas;
     private javax.swing.JMenuItem itemRProductos;
+    private javax.swing.JMenuItem itemUsuarios;
     public javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     public javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -873,12 +877,10 @@ public class Run extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -890,6 +892,7 @@ public class Run extends javax.swing.JFrame {
     private javax.swing.JMenu jmenuOperaciones;
     private javax.swing.JMenu jmenuReporte;
     public javax.swing.JLabel lblUsuario;
+    private javax.swing.JMenu menuServicio;
     public javax.swing.JLabel txtmsj;
     // End of variables declaration//GEN-END:variables
 }

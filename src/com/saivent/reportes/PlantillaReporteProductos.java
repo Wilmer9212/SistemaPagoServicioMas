@@ -26,7 +26,6 @@ import com.sistema.modelo.ReportesModelo;
 import com.sistema.modelo.UnidadesMedidaDTO;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -94,7 +93,6 @@ public class PlantillaReporteProductos {
     }
 
     public Document gerarDoc(String ruta) {
-        System.out.println("DTo:"+dto);
         // Se crea el documento
         Document documento = new Document();
         try {
@@ -104,8 +102,7 @@ public class PlantillaReporteProductos {
             FileOutputStream archivo = new FileOutputStream(ruta);
             Paragraph TituloReporte = new Paragraph("REPORTE PRODUCTOS", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLACK));
             Paragraph Empresa = new Paragraph(dto.getNombreNegocio(), FontFactory.getFont("arial", 15, Font.BOLD, BaseColor.BLACK));
-            Paragraph FechaReporte = new Paragraph("Reporte del : " + dto.getFechaInicial() + " al " + dto.getFechaFinal(), FontFactory.getFont("arial", 10, Font.NORMAL, BaseColor.BLACK));
-
+         
             //Creado encabezados
             Paragraph codigo = new Paragraph("CODIGO", FontFactory.getFont("arial", 9, Font.BOLD, BaseColor.WHITE));
             Paragraph nombre = new Paragraph("NOMBRE", FontFactory.getFont("arial", 9, Font.BOLD, BaseColor.WHITE));
@@ -126,15 +123,11 @@ public class PlantillaReporteProductos {
             // Se abre el documento.
             TituloReporte.setAlignment(1);
             Empresa.setAlignment(1);
-            FechaReporte.setAlignment(2);
             documento.open();
             documento.add(TituloReporte);
             documento.add(Empresa);
             documento.add(Chunk.NEWLINE);
-            documento.add(FechaReporte);
-            documento.add(Chunk.NEWLINE);
-            
-            
+          
             PdfPTable tabla = new PdfPTable(9);
             tabla.setWidthPercentage(100);
             PdfPCell celdaCodigo = new PdfPCell(codigo);
@@ -208,7 +201,7 @@ public class PlantillaReporteProductos {
                 celdaNombreContenido.setBorder(0);
                 celdaNombreContenido.setHorizontalAlignment(Paragraph.ALIGN_CENTER);
                 
-                PdfPCell celdaPrecioContenido = new PdfPCell(new Paragraph(String.valueOf(producto.getPreciocliente()), FontFactory.getFont("arial", 9, Font.BOLD, BaseColor.BLACK)));
+                PdfPCell celdaPrecioContenido = new PdfPCell(new Paragraph(String.valueOf(producto.getPrecio()), FontFactory.getFont("arial", 9, Font.BOLD, BaseColor.BLACK)));
                 celdaPrecioContenido.setBorder(0);
                 celdaPrecioContenido.setHorizontalAlignment(Paragraph.ALIGN_CENTER);
                 

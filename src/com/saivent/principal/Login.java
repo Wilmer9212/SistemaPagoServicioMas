@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +29,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/carro_vacio.png")).getImage());
     }
 
     @SuppressWarnings("unchecked")
@@ -45,13 +47,16 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Usuario"));
+        jPanel3.setBackground(new java.awt.Color(0, 111, 111));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS INGRESO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jLabel3.setText("Usuario :");
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("USUARIO :");
 
-        jLabel4.setText("Contraseña :");
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("CONTRASEÑA:");
 
-        inicio.setText("Acceder");
+        inicio.setText("ACCEDER");
         inicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inicioActionPerformed(evt);

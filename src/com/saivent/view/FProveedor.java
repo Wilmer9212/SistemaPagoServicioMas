@@ -9,9 +9,11 @@ import com.saivent.util.MetodosValidar;
 import com.saivent.util.Validaciones;
 import com.sistema.controller.ProveedorController;
 import com.sistema.modelo.ProveedorDTO;
+import java.awt.Dimension;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -31,6 +33,14 @@ public class FProveedor extends javax.swing.JInternalFrame {
         initComponents();
         Desabilitar();
         carga_informacion_Prov("");
+
+        Dimension DimensionBarra = null;
+        JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        DimensionBarra = Barra.getPreferredSize();
+        Barra.setSize(0, 0);
+        Barra.setPreferredSize(new Dimension(0, 0));
+        repaint();
     }
 
     private void carga_informacion_Prov(String nombre) {
@@ -473,25 +483,25 @@ public class FProveedor extends javax.swing.JInternalFrame {
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         int fila = tbcontenido.getSelectedRow();
-            
-            try {
-                int confirmar = JOptionPane.showConfirmDialog(null, "¿ELIMINAR DATOS?", "", JOptionPane.YES_NO_OPTION);
-                if (confirmar == JOptionPane.YES_NO_OPTION) {
-                    boolean b = proveedorController.delete(Integer.parseInt(txtcodigo.getText()));
-                    if(b){
+
+        try {
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿ELIMINAR DATOS?", "", JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_NO_OPTION) {
+                boolean b = proveedorController.delete(Integer.parseInt(txtcodigo.getText()));
+                if (b) {
                     Desabilitar();
                     limpiarC();
                     btnmodificar.setEnabled(false);
                     btneliminar.setEnabled(false);
                     carga_informacion_Prov("");
                     new MetodosValidar().ok_eliminar();
-                    }else{
-                        new MetodosValidar().error_eliminar();
-                    }
+                } else {
+                    new MetodosValidar().error_eliminar();
                 }
-            } catch (Exception ex) {
-                System.out.println("Error al eliminar:"+ex.getMessage());
             }
+        } catch (Exception ex) {
+            System.out.println("Error al eliminar:" + ex.getMessage());
+        }
     }//GEN-LAST:event_btneliminarActionPerformed
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
         ProveedorDTO prov = new ProveedorDTO();
