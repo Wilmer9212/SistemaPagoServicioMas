@@ -9,8 +9,10 @@ import com.google.gson.Gson;
 import com.saivent.util.Fichero;
 import com.saivent.util.ImageTable;
 import com.saivent.util.MetodosValidar;
+import com.sistema.modelo.SaldoDTOLocal;
 import com.sistema.util.Hilo;
 import com.sistema.util.configTaecel;
+import com.taecel.conexionservicio.conexionhttpLocal;
 import com.taecel.conexionservicio.metodosHTTP;
 import com.taecel.modelo.ProductsDTO;
 import com.taecel.modelo.StatusDTO;
@@ -27,14 +29,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -57,12 +56,14 @@ public class FRecargas extends javax.swing.JInternalFrame {
     ActionListener ac;
     int x = 0;
     JDialog dialogov;
-    JDialog jdKey = new JDialog();
+    conexionhttpLocal locaService = new conexionhttpLocal();
 
     public FRecargas() {
         initComponents();
         diseñoVentana();
-        //jDKey();
+        leerSaldo();
+       btnRecargar.setEnabled(false);
+
     }
 
     public void diseñoVentana() {
@@ -98,7 +99,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
         jlabelVigencia = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btnRecargar = new javax.swing.JButton();
         lblVigencia1 = new javax.swing.JLabel();
         jLabelCodProducto = new javax.swing.JLabel();
         loading = new javax.swing.JDialog();
@@ -117,7 +118,9 @@ public class FRecargas extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         btnsalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        totalSaldoRecarga = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lblIdUser = new javax.swing.JLabel();
 
         jPanel2.setBackground(new java.awt.Color(0, 111, 111));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -191,11 +194,11 @@ public class FRecargas extends javax.swing.JInternalFrame {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/OK.png"))); // NOI18N
-        jButton1.setText("RECARGAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRecargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/OK.png"))); // NOI18N
+        btnRecargar.setText("RECARGAR");
+        btnRecargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRecargarActionPerformed(evt);
             }
         });
 
@@ -246,7 +249,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane2))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVentasLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnRecargar)
                 .addGap(67, 67, 67))
         );
         pnlVentasLayout.setVerticalGroup(
@@ -284,7 +287,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
                         .addComponent(lblNota))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnRecargar)
                 .addContainerGap())
         );
 
@@ -458,9 +461,17 @@ public class FRecargas extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setText("BOLSA TIEMPO AIRE : $");
 
-        jLabel6.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel6.setText("0");
+        totalSaldoRecarga.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        totalSaldoRecarga.setForeground(new java.awt.Color(254, 254, 254));
+        totalSaldoRecarga.setText("0");
+
+        jLabel9.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel9.setText("ID USUARIO: ");
+
+        lblIdUser.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        lblIdUser.setForeground(new java.awt.Color(254, 254, 254));
+        lblIdUser.setText("00001");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -474,8 +485,12 @@ public class FRecargas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addComponent(totalSaldoRecarga)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblIdUser)
+                .addContainerGap(116, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -490,7 +505,9 @@ public class FRecargas extends javax.swing.JInternalFrame {
                     .addComponent(cbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalSaldoRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -557,8 +574,8 @@ public class FRecargas extends javax.swing.JInternalFrame {
                                     fila[1] = label;
                                     jTable1.setRowHeight(110);
                                     dtm.addRow(fila);
-                                } catch (MalformedURLException ex) {
-                                    Logger.getLogger(FRecargas.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (Exception ex) {
+                                    System.out.println("Error al cargar imagen:" + ex.getMessage());
                                 }
                             }
                         }
@@ -621,8 +638,8 @@ public class FRecargas extends javax.swing.JInternalFrame {
                                     fila[1] = label;
                                     jTable1.setRowHeight(110);
                                     dtm.addRow(fila);
-                                } catch (MalformedURLException ex) {
-                                    Logger.getLogger(FRecargas.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (Exception ex) {
+                                    System.out.println("Error al cargar imagen:" + ex.getMessage());
                                 }
                             }
                         }
@@ -641,13 +658,12 @@ public class FRecargas extends javax.swing.JInternalFrame {
             time = new Timer(100, ac);
             time.start();
         }
-
+        leerSaldo();
     }//GEN-LAST:event_cbProductosActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int fila = jTable1.getSelectedRow();
-
-        try {           
+        try {
             llenarComboProductos(jTable1.getValueAt(fila, 0).toString(), cbProductos.getSelectedItem().toString().toUpperCase());
             jdVender.setTitle("DETALLES RECARGA");
             jdVender.setSize(350, 428);
@@ -657,7 +673,6 @@ public class FRecargas extends javax.swing.JInternalFrame {
             //pnlVentas.setBorder(bordejpanel);
             jlVenta.setText(cbProductos.getSelectedItem() + "," + jTable1.getValueAt(fila, 0).toString());
             jdVender.setVisible(true);
-            jdVender.setModal(true);
             jLabelCodProducto.setText(cbMontoCompa.getSelectedItem().toString());
 
         } catch (Exception e) {
@@ -666,12 +681,16 @@ public class FRecargas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void cbMontoCompaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMontoCompaActionPerformed
-
-        try {
-            String[] cadenaServ = jlVenta.getText().split(",");
-            setDetallesTA(cadenaServ[1].toUpperCase(), cadenaServ[0].toUpperCase());
-        } catch (Exception e) {
-            System.out.println("Error al obtener desc:" + e.getMessage());
+        if (cbMontoCompa.getSelectedIndex() > 0) {
+            btnRecargar.setEnabled(true);
+            try {
+                String[] cadenaServ = jlVenta.getText().split(",");
+                setDetallesTA(cadenaServ[1].toUpperCase(), cadenaServ[0].toUpperCase());
+            } catch (Exception e) {
+                System.out.println("Error al obtener desc:" + e.getMessage());
+            }
+        }else{
+             btnRecargar.setEnabled(false);
         }
 
 
@@ -681,30 +700,33 @@ public class FRecargas extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btnsalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Icon icono = new ImageIcon(getClass().getResource("/Imagenes/oki.png"));
+    private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
         try {
+
             if (!txtNumero.getText().equals("") && !txtConfirmarNumero.equals("") && !jLabelCodProducto.getText().equals("")) {
                 if (txtNumero.getText().length() >= 10 || txtConfirmarNumero.getText().length() >= 10) {
                     if (!txtConfirmarNumero.getText().equals(txtNumero.getText())) {
+
                         JOptionPane.showMessageDialog(null, "LOS NUMEROS NO COINCIDEN", "", JOptionPane.ERROR_MESSAGE);
                     } else {
                         System.out.println("" + jLabelCodProducto.getText() + "," + txtConfirmarNumero.getText() + "," + cbMontoCompa.getSelectedItem().toString());
                         TransaccionDTO transaction = metodos.getTransaccion(jLabelCodProducto.getText(), txtConfirmarNumero.getText(), cbMontoCompa.getSelectedItem().toString());
-                      
+
                         StatusDTO estatus = metodos.getStatus(transaction.getData().getTransID());
                         if (transaction.isSuccess()) {
                             if (estatus.isSuccess()) {
                                 JOptionPane.showMessageDialog(null, "¡¡¡" + estatus.getMessage() + "!!!" + "\n"
                                         + "Folio:" + estatus.getData().getFolio() + "\n"
+                                        + "Saldo actual:" + saldoActual(Double.parseDouble(cbMontoCompa.getSelectedItem().toString())) + ""
                                         + "Fecha:" + estatus.getData().getFecha());
                                 dialogov.setVisible(false);
                                 txtNumero.setText("");
                                 txtConfirmarNumero.setText("");
                                 cbMontoCompa.setSelectedIndex(0);
+                                leerSaldo();
                             } else {
                                 System.out.println("Estatus:");
-                                txtNumero.setText(""+estatus);
+                                txtNumero.setText("" + estatus);
                                 txtConfirmarNumero.setText("");
                                 cbMontoCompa.setSelectedIndex(0);
                                 dialogov.setVisible(false);
@@ -732,7 +754,8 @@ public class FRecargas extends javax.swing.JInternalFrame {
             System.out.println("Error al enviar recarga:" + e.getMessage());
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_btnRecargarActionPerformed
 
     private void txtConfirmarNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmarNumeroKeyReleased
         new MetodosValidar().soloNumeros(txtConfirmarNumero, 10);
@@ -744,7 +767,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
 
     private void saveSecretActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSecretActionPerformed
         guardarKeys(key.getText(), secretKey.getText());
-        jdKey.setVisible(false);
+
     }//GEN-LAST:event_saveSecretActionPerformed
 
     public void llenarComboProductos(String compa, String serv) {
@@ -783,7 +806,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Error al cargar montos:" + e.getMessage());
+            System.out.println("Error al cargar montos Detalles:" + e.getMessage());
         }
     }
 
@@ -835,6 +858,22 @@ public class FRecargas extends javax.swing.JInternalFrame {
         }
     }
 
+    public void leerSaldo() {
+        SaldoDTOLocal modeloSaldo = locaService.consultarSaldo(Integer.parseInt(lblIdUser.getText().trim()));
+        totalSaldoRecarga.setText(String.valueOf(modeloSaldo.getTotal()));
+    }
+
+    public double saldoActual(double vendido) {
+        int iduser = Integer.parseInt(lblIdUser.getText());
+        double total = Double.parseDouble(totalSaldoRecarga.getText()) - vendido;
+        try {
+            SaldoDTOLocal saldoLocal = locaService.guardarSaldo(iduser, total);
+            total = saldoLocal.getTotal();
+        } catch (Exception e) {
+        }
+        return total;
+    }
+
     /*public void jDKey() {
         String raiz = System.getProperty("user.home");
         String separa = System.getProperty("file.separator");
@@ -860,20 +899,19 @@ public class FRecargas extends javax.swing.JInternalFrame {
 
     }*/
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRecargar;
     private javax.swing.JButton btnsalir;
     private javax.swing.JComboBox<String> cbMontoCompa;
     public javax.swing.JComboBox<String> cbProductos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelCodProducto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -891,6 +929,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
     private javax.swing.JDialog keys;
     private javax.swing.JLabel lblComisionServicio;
     private javax.swing.JLabel lblCostoProducto;
+    private javax.swing.JLabel lblIdUser;
     private javax.swing.JLabel lblNota;
     private javax.swing.JLabel lblVigencia;
     private javax.swing.JLabel lblVigencia1;
@@ -899,6 +938,7 @@ public class FRecargas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel porcentaje;
     private javax.swing.JButton saveSecret;
     private javax.swing.JTextField secretKey;
+    private javax.swing.JLabel totalSaldoRecarga;
     private javax.swing.JTextField txtConfirmarNumero;
     private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables

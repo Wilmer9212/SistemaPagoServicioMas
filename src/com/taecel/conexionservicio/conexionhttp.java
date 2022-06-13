@@ -18,7 +18,6 @@ public class conexionhttp {
     public JSONObject urlConnect(String metodo, String url, String extra1) {
         JSONObject response = null;
         try {
-            System.out.println("Con:"+con.getKey()+","+con.getKey());
             RequestBody body = RequestBody.create(mediaType, "key=" + con.getKey() + "&nip=" + con.getNip() + extra1);
             Request request = new Request.Builder()
                     .url(url)

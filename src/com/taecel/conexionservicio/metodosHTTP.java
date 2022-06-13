@@ -7,14 +7,12 @@ import com.taecel.modelo.BalanceDTO;
 import com.taecel.modelo.ProductsDTO;
 import com.taecel.modelo.StatusDTO;
 import com.taecel.modelo.TransaccionDTO;
-import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import javax.swing.JOptionPane;
-import org.json.JSONException;
 
 public class metodosHTTP {
 
