@@ -43,7 +43,7 @@ public class ClientesController {
                 cliente.setApmaterno(rs.getString(4));
                 cliente.setDomicilio(rs.getString(5));
                 cliente.setMail(rs.getString(6));
-                cliente.setTelefono(rs.getInt(7));
+                cliente.setTelefono(rs.getString(7));
                 cliente.setActivo(rs.getBoolean(8));
                 cliente.setGenero(rs.getString(9));
                 cliente.setIdcolonia(rs.getInt(10));
@@ -72,7 +72,7 @@ public class ClientesController {
                 cliente.setApmaterno(rs.getString(4));
                 cliente.setDomicilio(rs.getString(5));
                 cliente.setMail(rs.getString(6));
-                cliente.setTelefono(rs.getInt(7));
+                 cliente.setTelefono(rs.getString(7));
                 cliente.setActivo(rs.getBoolean(8));
                 cliente.setGenero(rs.getString(9));
                 cliente.setIdcolonia(rs.getInt(10));
@@ -98,7 +98,7 @@ public class ClientesController {
                 cliente.setApmaterno(rs.getString(4));
                 cliente.setDomicilio(rs.getString(5));
                 cliente.setMail(rs.getString(6));
-                cliente.setTelefono(rs.getInt(7));
+                 cliente.setTelefono(rs.getString(7));
                 cliente.setActivo(rs.getBoolean(8));
                 cliente.setGenero(rs.getString(9));
                 cliente.setIdcolonia(rs.getInt(10));
@@ -122,7 +122,7 @@ public class ClientesController {
             ps.setString(4, cliente.getApmaterno());
             ps.setString(5, cliente.getDomicilio());
             ps.setString(6, cliente.getMail());
-            ps.setInt(7,cliente.getTelefono());
+            ps.setString(7 ,cliente.getTelefono());
             ps.setBoolean(8, cliente.isActivo());
             ps.setString(9, cliente.getGenero());
             ps.setInt(10, cliente.getIdcolonia());
@@ -155,7 +155,7 @@ public class ClientesController {
             ps.setString(3, cliente.getApmaterno());
             ps.setString(4, cliente.getDomicilio());
             ps.setString(5, cliente.getMail());
-            ps.setInt(6,cliente.getTelefono());
+            ps.setString(6, cliente.getTelefono());
             ps.setBoolean(7, cliente.isActivo());
             ps.setString(8, cliente.getGenero());
             ps.setInt(9, cliente.getIdcolonia());

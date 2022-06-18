@@ -574,9 +574,9 @@ public class FClientes extends javax.swing.JInternalFrame {
             cliente.setDomicilio(cbcol.getSelectedItem().toString() + "," + cbmuni.getSelectedItem().toString() + "," + cbestado.getSelectedItem().toString());
             cliente.setMail(txtemail.getText());
             if(!txttelefono.getText().equals("")){
-               cliente.setTelefono(Integer.parseInt(txttelefono.getText()));
+               cliente.setTelefono(txttelefono.getText());
             } else{
-                cliente.setTelefono(0);
+                cliente.setTelefono("0");
             }             
             cliente.setGenero(cbgenero.getSelectedItem().toString());
             ColoniaDTO colonia = new LocalidadesController().coloniaByNombre(cbcol.getSelectedItem().toString());
@@ -609,9 +609,9 @@ public class FClientes extends javax.swing.JInternalFrame {
             cliente.setDomicilio(cbcol.getSelectedItem().toString() + "," + cbmuni.getSelectedItem().toString() + "," + cbestado.getSelectedItem().toString());
             cliente.setMail(txtemail.getText());
             if(!txttelefono.getText().equals("")){
-               cliente.setTelefono(Integer.parseInt(txttelefono.getText()));
+               cliente.setTelefono(txttelefono.getText());
             } else{
-                cliente.setTelefono(0);
+                cliente.setTelefono("0");
             }  
             cliente.setGenero(cbgenero.getSelectedItem().toString());
             ColoniaDTO colonia = new LocalidadesController().coloniaByNombre(cbcol.getSelectedItem().toString());

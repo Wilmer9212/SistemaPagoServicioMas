@@ -50,7 +50,6 @@ public class FVentas extends javax.swing.JInternalFrame {
     DefaultTableModel dtm = new DefaultTableModel();
     DefaultTableModel dtmTicket = new DefaultTableModel();
 
-    String part1 = "", part2 = "";
 
     String hora, minutos, segundos, ampm;
     Calendar calendario;

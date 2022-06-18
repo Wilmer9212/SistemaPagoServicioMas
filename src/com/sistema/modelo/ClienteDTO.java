@@ -16,7 +16,7 @@ public class ClienteDTO {
     private String appaterno;
     private String apmaterno;
     private String domicilio;
-    private Integer telefono;
+    private String telefono;
     private String mail;
     private boolean activo;
     private String genero;    
@@ -65,11 +65,11 @@ public class ClienteDTO {
         this.domicilio = domicilio;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
