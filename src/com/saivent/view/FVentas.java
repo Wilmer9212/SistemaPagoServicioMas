@@ -1623,7 +1623,7 @@ public class FVentas extends javax.swing.JInternalFrame {
             for (int i = 0; i < clientes.size(); i++) {
                 Object[] obj = new Object[4];
                 obj[0] = clientes.get(i).getIdcliente();
-                obj[1] = clientes.get(i).getNombre() + " " + clientes.get(i).getAppaterno() + " " + clientes.get(i).getApmaterno();
+                obj[1] = clientes.get(i).getNombre();
                 obj[2] = clientes.get(i).getDomicilio();
                 obj[3] = clientes.get(i).getTelefono();
                 modelo.addRow(obj);

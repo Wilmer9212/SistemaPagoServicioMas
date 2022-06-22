@@ -7,6 +7,10 @@ package com.sistema.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,19 +19,28 @@ import javax.swing.JOptionPane;
  */
 public class conexion {
 
-    Connection con = null;
-    public Connection connectDatabase()  {
+    public Connection connectDatabase() {
+        String db = "gateway";
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://127.0.0.1:3306/test";
+        //String url = "jdbc:mysql://localhost:3306/gateway?autoReconnect=true&amp;failOverReadOnly=false&amp;maxReconnects=10&amp;removeAbandonedTimeout=60&amp;testWhileIdle=true&amp;timeBetweenEvictionRunsMillis=300000";
+        Connection con = null;
+
         try {
-           try {
-                Class.forName("org.postgresql.Driver");
+            /* try {
+                //Class.forName("org.postgresql.Driver");
+                Class.forName("com.mysql.jdbc.Driver");
+                
             } catch (ClassNotFoundException ex) {
                 System.out.println("Error al registrar el driver de PostgreSQL: " + ex);
             }   
             // Database connect
             // Conectamos con la base de datos
             con = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/test",
+                    "jdbc:postgresql://localhost:5432/sivent",
                     "postgres", "root");
+           
             
            if(con != null){
               // System.out.println("Connection Exitosa....");
@@ -40,11 +53,16 @@ public class conexion {
                } catch (Exception e) {
                }
               
-           }
-                
+           }*/
+
+            Class.forName("com.mysql.jdbc.Driver"); 
+           con = DriverManager.getConnection(url, user, pass);
+
         } catch (java.sql.SQLException sqle) {
             System.out.println("Error: " + sqle);
-        }        
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return con;
     }
 }

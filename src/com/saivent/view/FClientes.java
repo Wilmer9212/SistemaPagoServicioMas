@@ -551,7 +551,7 @@ public class FClientes extends javax.swing.JInternalFrame {
             for (int i = 0; i < listC.size(); i++) {
                 dtm.addRow(o);
                 dtm.setValueAt(listC.get(i).getIdcliente(), i, 0);
-                dtm.setValueAt(listC.get(i).getNombre() + " " + listC.get(i).getAppaterno() + " " + listC.get(i).getApmaterno(), i, 1);
+                dtm.setValueAt(listC.get(i).getNombre(), i, 1);
                 dtm.setValueAt(listC.get(i).getDomicilio(), i, 2);
                 dtm.setValueAt(listC.get(i).getMail(), i, 3);
                 dtm.setValueAt(listC.get(i).getTelefono(), i, 4);
@@ -569,8 +569,6 @@ public class FClientes extends javax.swing.JInternalFrame {
         try {
             cliente.setIdcliente(Integer.parseInt(txtcodigo.getText()));
             cliente.setNombre(txtnombre.getText());
-            cliente.setAppaterno(txtAppaterno.getText());
-            cliente.setApmaterno(txtApmaterno.getText());
             cliente.setDomicilio(cbcol.getSelectedItem().toString() + "," + cbmuni.getSelectedItem().toString() + "," + cbestado.getSelectedItem().toString());
             cliente.setMail(txtemail.getText());
             if(!txttelefono.getText().equals("")){
@@ -604,8 +602,6 @@ public class FClientes extends javax.swing.JInternalFrame {
         try {
             cliente.setIdcliente(Integer.parseInt(txtcodigo.getText()));
             cliente.setNombre(txtnombre.getText());
-            cliente.setAppaterno(txtAppaterno.getText());
-            cliente.setApmaterno(txtApmaterno.getText());
             cliente.setDomicilio(cbcol.getSelectedItem().toString() + "," + cbmuni.getSelectedItem().toString() + "," + cbestado.getSelectedItem().toString());
             cliente.setMail(txtemail.getText());
             if(!txttelefono.getText().equals("")){

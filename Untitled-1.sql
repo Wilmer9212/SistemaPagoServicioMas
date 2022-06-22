@@ -3,11 +3,9 @@ DROP TABLE IF EXISTS clientes;
 CREATE TABLE clientes(
 idcliente integer not null,
 nombre text not null,
-appaterno text not null,
-apmaterno text,
 domicilio text,
 email text,
-telefono integer,
+telefono varchar(45),
 activo boolean,
 sexo   varchar(45),
 idcolonia integer not null,

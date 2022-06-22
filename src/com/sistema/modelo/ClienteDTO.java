@@ -13,13 +13,11 @@ public class ClienteDTO {
 
     private Integer idcliente;
     private String nombre;
-    private String appaterno;
-    private String apmaterno;
     private String domicilio;
     private String telefono;
     private String mail;
     private boolean activo;
-    private String genero;    
+    private String genero;
     private Integer idcolonia;
 
     public ClienteDTO() {
@@ -39,22 +37,6 @@ public class ClienteDTO {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getAppaterno() {
-        return appaterno;
-    }
-
-    public void setAppaterno(String appaterno) {
-        this.appaterno = appaterno;
-    }
-
-    public String getApmaterno() {
-        return apmaterno;
-    }
-
-    public void setApmaterno(String apmaterno) {
-        this.apmaterno = apmaterno;
     }
 
     public String getDomicilio() {
@@ -107,8 +89,7 @@ public class ClienteDTO {
 
     @Override
     public String toString() {
-        return "ClienteDTO{" + "idcliente=" + idcliente + ", nombre=" + nombre + ", appaterno=" + appaterno + ", apmaterno=" + apmaterno + ", domicilio=" + domicilio + ", telefono=" + telefono + ", mail=" + mail + ", activo=" + activo + ", genero=" + genero + ", idcolonia=" + idcolonia + '}';
+        return "ClienteDTO{" + "idcliente=" + idcliente + ", nombre=" + nombre + ", domicilio=" + domicilio + ", telefono=" + telefono + ", mail=" + mail + ", activo=" + activo + ", genero=" + genero + ", idcolonia=" + idcolonia + '}';
     }
-     
-    
+
 }

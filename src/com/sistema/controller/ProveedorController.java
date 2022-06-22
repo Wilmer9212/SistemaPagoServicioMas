@@ -46,7 +46,8 @@ public class ProveedorController {
                 proveedor.setIdproveedor(rs.getInt(1));
                 proveedor.setNombre(rs.getString(2));
                 proveedor.setTelefono(rs.getString(3));
-                proveedor.setMail(rs.getString(4));
+                proveedor.setMail(rs.getString(4));                
+                
                 lista.add(proveedor);
             }
             connect.close();
@@ -104,8 +105,8 @@ public class ProveedorController {
             ps = connect.prepareStatement(sql);
             ps.setInt(1, proveedor.getIdproveedor());
             ps.setString(2, proveedor.getNombre());
-            ps.setString(3, proveedor.getMail());
-            ps.setString(4, String.valueOf(proveedor.getTelefono()));
+            ps.setString(3, String.valueOf(proveedor.getTelefono()));
+            ps.setString(4, proveedor.getMail());           
             ps.executeUpdate();
             connect.close();
             bandera = true;

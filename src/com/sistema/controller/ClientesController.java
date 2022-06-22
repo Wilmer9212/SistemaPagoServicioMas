@@ -23,10 +23,10 @@ public class ClientesController {
     PreparedStatement ps;
     String sql = "";
     ResultSet rs;
-    
+
     public List<ClienteDTO> findAll(String valor) {
         if (!valor.equals("")) {
-            sql = "SELECT * FROM clientes WHERE nombre LIKE '%"+valor+"%'";
+            sql = "SELECT * FROM clientes WHERE nombre LIKE '%" + valor + "%'";
         } else {
             sql = "SELECT * FROM clientes";
         }
@@ -34,25 +34,23 @@ public class ClientesController {
         try {
             connect = con.connectDatabase();
             stmt = connect.createStatement();
-              rs= stmt.executeQuery(sql);
+            rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 ClienteDTO cliente = new ClienteDTO();
                 cliente.setIdcliente(rs.getInt(1));
                 cliente.setNombre(rs.getString(2));
-                cliente.setAppaterno(rs.getString(3));
-                cliente.setApmaterno(rs.getString(4));
-                cliente.setDomicilio(rs.getString(5));
-                cliente.setMail(rs.getString(6));
-                cliente.setTelefono(rs.getString(7));
-                cliente.setActivo(rs.getBoolean(8));
-                cliente.setGenero(rs.getString(9));
-                cliente.setIdcolonia(rs.getInt(10));
-                
+                cliente.setDomicilio(rs.getString(3));
+                cliente.setMail(rs.getString(4));
+                cliente.setTelefono(rs.getString(5));
+                cliente.setActivo(rs.getBoolean(6));
+                cliente.setGenero(rs.getString(7));
+                cliente.setIdcolonia(rs.getInt(8));
+
                 listaClientes.add(cliente);
             }
             connect.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener lista de tipos venta:" + ex.getMessage());
+            System.out.println("Error al obtener lista de clientes:" + ex.getMessage());
         }
 
         return listaClientes;
@@ -68,14 +66,12 @@ public class ClientesController {
             while (rs.next()) {
                 cliente.setIdcliente(rs.getInt(1));
                 cliente.setNombre(rs.getString(2));
-                cliente.setAppaterno(rs.getString(3));
-                cliente.setApmaterno(rs.getString(4));
-                cliente.setDomicilio(rs.getString(5));
-                cliente.setMail(rs.getString(6));
-                 cliente.setTelefono(rs.getString(7));
-                cliente.setActivo(rs.getBoolean(8));
-                cliente.setGenero(rs.getString(9));
-                cliente.setIdcolonia(rs.getInt(10));
+                cliente.setDomicilio(rs.getString(3));
+                cliente.setMail(rs.getString(4));
+                cliente.setTelefono(rs.getString(5));
+                cliente.setActivo(rs.getBoolean(6));
+                cliente.setGenero(rs.getString(7));
+                cliente.setIdcolonia(rs.getInt(8));
             }
             connect.close();
         } catch (Exception e) {
@@ -92,16 +88,14 @@ public class ClientesController {
             stmt = connect.createStatement();
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                 cliente.setIdcliente(rs.getInt(1));
+                cliente.setIdcliente(rs.getInt(1));
                 cliente.setNombre(rs.getString(2));
-                cliente.setAppaterno(rs.getString(3));
-                cliente.setApmaterno(rs.getString(4));
-                cliente.setDomicilio(rs.getString(5));
-                cliente.setMail(rs.getString(6));
-                 cliente.setTelefono(rs.getString(7));
-                cliente.setActivo(rs.getBoolean(8));
-                cliente.setGenero(rs.getString(9));
-                cliente.setIdcolonia(rs.getInt(10));
+                cliente.setDomicilio(rs.getString(3));
+                cliente.setMail(rs.getString(4));
+                cliente.setTelefono(rs.getString(5));
+                cliente.setActivo(rs.getBoolean(6));
+                cliente.setGenero(rs.getString(7));
+                cliente.setIdcolonia(rs.getInt(8));
             }
             connect.close();
         } catch (Exception e) {
@@ -114,18 +108,17 @@ public class ClientesController {
         boolean bandera = false;
         connect = con.connectDatabase();
         try {
-            sql = "INSERT INTO clientes VALUES(?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO clientes VALUES(?,?,?,?,?,?,?,?)";
             ps = connect.prepareStatement(sql);
             ps.setInt(1, cliente.getIdcliente());
             ps.setString(2, cliente.getNombre());
-            ps.setString(3,cliente.getAppaterno());
-            ps.setString(4, cliente.getApmaterno());
-            ps.setString(5, cliente.getDomicilio());
-            ps.setString(6, cliente.getMail());
-            ps.setString(7 ,cliente.getTelefono());
-            ps.setBoolean(8, cliente.isActivo());
-            ps.setString(9, cliente.getGenero());
-            ps.setInt(10, cliente.getIdcolonia());
+            ps.setString(3, cliente.getDomicilio());
+            ps.setString(4, cliente.getMail());
+             ps.setString(5, cliente.getTelefono());
+            ps.setBoolean(6, cliente.isActivo());
+            ps.setString(7, cliente.getGenero());
+            ps.setInt(8, cliente.getIdcolonia());
+           
             ps.executeUpdate();
             connect.close();
             bandera = true;
@@ -140,25 +133,21 @@ public class ClientesController {
         connect = con.connectDatabase();
         try {
             sql = "UPDATE clientes set nombre=?,"
-                                    + "appaterno=?,"
-                                    + "apmaterno=?,"
-                                    + "domicilio=?,"
-                                    + "email=?,"
-                                    + "telefono=?,"
-                                    + "activo=?,"
-                                    + "sexo=?,"
-                                    + "idcolonia=? WHERE idcliente=?";
+                    + "domicilio=?,"
+                    + "email=?,"
+                    + "telefono=?,"
+                    + "activo=?,"
+                    + "sexo=?,"
+                    + "idcolonia=? WHERE idcliente=?";
             ps = connect.prepareStatement(sql);
-            ps.setInt(10, cliente.getIdcliente());
+            ps.setInt(8, cliente.getIdcliente());
             ps.setString(1, cliente.getNombre());
-            ps.setString(2,cliente.getAppaterno());
-            ps.setString(3, cliente.getApmaterno());
-            ps.setString(4, cliente.getDomicilio());
-            ps.setString(5, cliente.getMail());
-            ps.setString(6, cliente.getTelefono());
-            ps.setBoolean(7, cliente.isActivo());
-            ps.setString(8, cliente.getGenero());
-            ps.setInt(9, cliente.getIdcolonia());
+            ps.setString(2, cliente.getDomicilio());
+            ps.setString(3, cliente.getMail());
+            ps.setString(4, cliente.getTelefono());
+            ps.setBoolean(5, cliente.isActivo());
+            ps.setString(6, cliente.getGenero());
+            ps.setInt(7, cliente.getIdcolonia());
             ps.executeUpdate();
             connect.close();
             bandera = true;
