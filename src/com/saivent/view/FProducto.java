@@ -439,7 +439,7 @@ public class FProducto extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jLabel4.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("PRODUCTOS");

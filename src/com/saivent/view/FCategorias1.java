@@ -73,9 +73,9 @@ public class FCategorias1 extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 111, 111));
+        jPanel1.setBackground(new java.awt.Color(85, 112, 148));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
@@ -86,7 +86,7 @@ public class FCategorias1 extends javax.swing.JFrame {
         jLabel2.setBackground(new java.awt.Color(254, 254, 254));
         jLabel2.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel2.setText("CODIGO");
+        jLabel2.setText("Codigo :");
 
         txtdescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -97,7 +97,7 @@ public class FCategorias1 extends javax.swing.JFrame {
         jLabel3.setBackground(new java.awt.Color(254, 254, 254));
         jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel3.setText("DESCRIPCION");
+        jLabel3.setText("Descripcion :");
 
         btnaceptar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnaceptar.setText("ACEPTAR");
@@ -124,7 +124,7 @@ public class FCategorias1 extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(254, 254, 254));
         jLabel4.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel4.setText("DESCRIPCION");
+        jLabel4.setText("Descricpion :");
 
         btnnuevo.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/nuevo.png"))); // NOI18N
@@ -250,19 +250,19 @@ public class FCategorias1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnaceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnaceptar)
                     .addComponent(jLabel2))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btncancelar))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnnuevo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

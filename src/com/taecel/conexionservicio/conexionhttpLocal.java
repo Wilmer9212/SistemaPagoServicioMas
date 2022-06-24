@@ -2,6 +2,7 @@ package com.taecel.conexionservicio;
 
 import com.google.gson.Gson;
 import com.sistema.modelo.SaldoDTOLocal;
+import javax.swing.JOptionPane;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 import org.json.JSONObject;
@@ -19,7 +20,7 @@ public class conexionhttpLocal {
             JSONObject response = new JSONObject(peticionHttpGet(basePath + "consultar/id=" + id));
             saldo = gson.fromJson(response.toString(), SaldoDTOLocal.class);
         } catch (Exception ex) {
-            System.out.println("Error al consultar registros de saldo:" + ex.getMessage());
+            JOptionPane.showMessageDialog(null,"SIN ACCESO A SERVICIOS DE RECARGAS, CONTACTE SU PROVEEDOR","",JOptionPane.ERROR_MESSAGE);
         }
         return saldo;
     }

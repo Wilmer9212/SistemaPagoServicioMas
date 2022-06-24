@@ -93,7 +93,7 @@ public class VentasController {
         connect = con.connectDatabase();
         try {
             if (fechaInit != null && fechaFin!=null) {
-                sql = "SELECT * FROM detalles_venta dv INNER JOIN ventas_realizadas vr USING(idticket) WHERE to_char(date(vr.fecha),'yyyy-MM-dd') BETWEEN '"+fechaInit+"' AND '"+fechaFin+"' ORDER BY idticket";
+                sql = "SELECT * FROM detalles_venta dv INNER JOIN ventas_realizadas vr USING(idticket) WHERE CAST(date(vr.fecha) AS CHAR(10)) BETWEEN '"+fechaInit+"' AND '"+fechaFin+"' ORDER BY idticket";
             } else {
                 sql = "SELECT * FROM detalles_venta dv INNER JOIN ventas_realizadas vr USING(idticket) ORDER BY vr.idticket";
             }

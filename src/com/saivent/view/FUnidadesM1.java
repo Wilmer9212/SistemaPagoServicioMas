@@ -30,6 +30,8 @@ public class FUnidadesM1 extends javax.swing.JFrame {
         initComponents();
         llenarUnidades("");
         desabilitar();
+        this.setLocationRelativeTo(null);
+       
     }
 
    
@@ -75,9 +77,10 @@ public class FUnidadesM1 extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(0, 111, 111));
+        jPanel1.setBackground(new java.awt.Color(85, 112, 148));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
@@ -87,7 +90,7 @@ public class FUnidadesM1 extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel2.setText("CODIGO");
+        jLabel2.setText("Codigo :");
 
         txtdescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -97,7 +100,7 @@ public class FUnidadesM1 extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel3.setText("DESCRIPCION");
+        jLabel3.setText("Descripcion :");
 
         btnaceptar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnaceptar.setText("ACEPTAR");
@@ -123,7 +126,7 @@ public class FUnidadesM1 extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel4.setText("DESCRIPCION");
+        jLabel4.setText("Descripcion :");
 
         btnnuevo.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/nuevo.png"))); // NOI18N
@@ -230,7 +233,7 @@ public class FUnidadesM1 extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btncancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
                             .addComponent(btnaceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 2, Short.MAX_VALUE))
+                        .addGap(0, 6, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );

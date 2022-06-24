@@ -29,5 +29,11 @@ public class SaldoDTOLocal {
     public void setTotal(double total) {
         this.total = total;
     }
+
+    @Override
+    public String toString() {
+        return "SaldoDTOLocal{" + "id=" + id + ", total=" + total + '}';
+    }
+    
     
 }

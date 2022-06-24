@@ -55,10 +55,10 @@ public class FEstados1 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbestado = new javax.swing.JTable();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(17, 140, 140));
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 111, 111));
+        jPanel1.setBackground(new java.awt.Color(85, 112, 148));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
@@ -68,7 +68,7 @@ public class FEstados1 extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel2.setText("CODIGO");
+        jLabel2.setText("Codigo :");
 
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -78,7 +78,7 @@ public class FEstados1 extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel3.setText("NOMBRE");
+        jLabel3.setText("Nombre :");
 
         btnaceptar.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnaceptar.setText("ACEPTAR");
@@ -104,7 +104,7 @@ public class FEstados1 extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel4.setText("NOMBRE");
+        jLabel4.setText("Nombre :");
 
         btnnuevo.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/nuevo.png"))); // NOI18N
@@ -208,7 +208,7 @@ public class FEstados1 extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnaceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 35, Short.MAX_VALUE))
+                        .addGap(0, 34, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
