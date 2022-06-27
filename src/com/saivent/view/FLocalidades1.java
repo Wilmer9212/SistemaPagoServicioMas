@@ -63,7 +63,8 @@ public class FLocalidades1 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cbmun = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(85, 112, 148));
 

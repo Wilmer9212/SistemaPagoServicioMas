@@ -74,6 +74,7 @@ public class FCategorias1 extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(85, 112, 148));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());

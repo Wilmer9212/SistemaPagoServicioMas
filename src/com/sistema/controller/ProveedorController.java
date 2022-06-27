@@ -44,7 +44,7 @@ public class ProveedorController {
             while (rs.next()) {
                 ProveedorDTO proveedor = new ProveedorDTO();
                 proveedor.setIdproveedor(rs.getInt(1));
-                proveedor.setNombre(rs.getString(2));
+                proveedor.setNombre(rs.getString(2).trim());
                 proveedor.setTelefono(rs.getString(3));
                 proveedor.setMail(rs.getString(4));                
                 
@@ -66,9 +66,9 @@ public class ProveedorController {
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 proveedor.setIdproveedor(rs.getInt(1));
-                proveedor.setNombre(rs.getString(2));
-                proveedor.setTelefono(rs.getString(3));
-                proveedor.setMail(rs.getString(4));
+                proveedor.setNombre(rs.getString(2).trim());
+                proveedor.setTelefono(rs.getString(3).trim());
+                proveedor.setMail(rs.getString(4).trim());
             }
             connect.close();
         } catch (Exception ex) {
@@ -86,9 +86,9 @@ public class ProveedorController {
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 proveedor.setIdproveedor(rs.getInt(1));
-                proveedor.setNombre(rs.getString(2));
-                proveedor.setTelefono(rs.getString(3));
-                proveedor.setMail(rs.getString(4));
+                proveedor.setNombre(rs.getString(2).trim());
+                proveedor.setTelefono(rs.getString(3).trim());
+                proveedor.setMail(rs.getString(4).trim());
             }
             connect.close();
         } catch (Exception ex) {
@@ -104,9 +104,9 @@ public class ProveedorController {
             sql = "INSERT INTO proveedores VALUES(?,?,?,?)";
             ps = connect.prepareStatement(sql);
             ps.setInt(1, proveedor.getIdproveedor());
-            ps.setString(2, proveedor.getNombre());
+            ps.setString(2, proveedor.getNombre().trim());
             ps.setString(3, String.valueOf(proveedor.getTelefono()));
-            ps.setString(4, proveedor.getMail());           
+            ps.setString(4, proveedor.getMail().trim());           
             ps.executeUpdate();
             connect.close();
             bandera = true;

@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JLabel;
 
 /**
  *
@@ -32,7 +33,6 @@ public class NegocioController {
         connect = con.connectDatabase();
         try {
             sql = "SELECT nombre FROM nombre_negocio LIMIT 1";
-
             stmt = connect.createStatement();
             rs = stmt.executeQuery(sql);
             while (rs.next()) {

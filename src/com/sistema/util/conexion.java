@@ -22,8 +22,8 @@ public class conexion {
     public Connection connectDatabase() {
         String db = "gateway";
         String user = "root";
-        String pass = "root";
-        String url = "jdbc:mysql://127.0.0.1:3306/test";
+        String pass = "red1";
+        String url = "jdbc:mysql://127.0.0.1:3306/agroquimicos";
         //String url = "jdbc:mysql://localhost:3306/gateway?autoReconnect=true&amp;failOverReadOnly=false&amp;maxReconnects=10&amp;removeAbandonedTimeout=60&amp;testWhileIdle=true&amp;timeBetweenEvictionRunsMillis=300000";
         Connection con = null;
 

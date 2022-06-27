@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -48,7 +49,7 @@ public class FReporteVentas1 extends javax.swing.JFrame {
 
         diseñarJDateChooser(jDateChooser1);
         diseñarJDateChooser(jDateChooser2);
-        llenarNombreNegocio();
+        llenarNombreNegocio(jLabel1);
         construirTabla();
         this.setLocationRelativeTo(null);
 
@@ -70,6 +71,8 @@ public class FReporteVentas1 extends javax.swing.JFrame {
         btnPrint = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(85, 112, 148));
 
@@ -337,10 +340,10 @@ public class FReporteVentas1 extends javax.swing.JFrame {
         return dto;
     }
 
-    public void llenarNombreNegocio() {
+    public void llenarNombreNegocio(JLabel label) {
         NegocioController negocio = new NegocioController();
         try {
-            jLabel1.setText(negocio.nombre().toLowerCase());
+            label.setText(negocio.nombre().toLowerCase());
         } catch (Exception e) {
             System.out.println("Error al obtener nombre neogcio:" + e.getMessage());
         }

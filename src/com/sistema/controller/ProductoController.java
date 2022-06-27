@@ -41,7 +41,7 @@ public class ProductoController {
             while (rs.next()) {
                 ProductoDTO producto = new ProductoDTO();
                 producto.setIdproducto(rs.getInt(1));
-                producto.setNombre(rs.getString(2));
+                producto.setNombre(rs.getString(2).trim());
                 producto.setPrecio(rs.getDouble(3));
                 producto.setPreciocliente(rs.getDouble(4));
                 producto.setStock(rs.getInt(5));
@@ -78,7 +78,7 @@ public class ProductoController {
             while (rs.next()) {
                 ProductoDTO producto = new ProductoDTO();
                 producto.setIdproducto(rs.getInt(1));
-                producto.setNombre(rs.getString(2));
+                producto.setNombre(rs.getString(2).trim());
                 producto.setPrecio(rs.getDouble(3));
                 producto.setPreciocliente(rs.getDouble(4));
                 producto.setStock(rs.getInt(5));
@@ -106,7 +106,7 @@ public class ProductoController {
             while (rs.next()) {
                 producto = new ProductoDTO();
                 producto.setIdproducto(rs.getInt(1));
-                producto.setNombre(rs.getString(2));
+                producto.setNombre(rs.getString(2).trim());
                 producto.setPrecio(rs.getDouble(3));
                 producto.setPreciocliente(rs.getDouble(4));
                 producto.setStock(rs.getInt(5));
@@ -133,7 +133,7 @@ public class ProductoController {
             while (rs.next()) {
                 producto = new ProductoDTO();
                 producto.setIdproducto(rs.getInt(1));
-                producto.setNombre(rs.getString(2));
+                producto.setNombre(rs.getString(2).trim());
                 producto.setPrecio(rs.getDouble(3));
                 producto.setPreciocliente(rs.getDouble(4));
                 producto.setStock(rs.getInt(5));
@@ -173,7 +173,7 @@ public class ProductoController {
             sql = "INSERT INTO productos VALUES(?,?,?,?,?,?,?,?,?,?)";
             ps = connect.prepareStatement(sql);
             ps.setInt(1, producto.getIdproducto());
-            ps.setString(2, producto.getNombre());
+            ps.setString(2, producto.getNombre().trim());
             ps.setDouble(3, producto.getPrecio());
             ps.setDouble(4, producto.getPreciocliente());
             ps.setInt(5, producto.getStock());
@@ -197,7 +197,7 @@ public class ProductoController {
         try {
             sql = "UPDATE productos set nombre=?,precio=?,preciocliente=?,stock=?,activarpreciocliente=?,preciodeproveedor=?,idcategoria=?,idproveedor=?,idunidadm=? WHERE idproducto=?";
             ps = connect.prepareStatement(sql);
-            ps.setString(1, producto.getNombre());
+            ps.setString(1, producto.getNombre().trim());
             ps.setDouble(2, producto.getPrecio());
             ps.setDouble(3,producto.getPreciocliente());
             ps.setInt(4,producto.getStock());

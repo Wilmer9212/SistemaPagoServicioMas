@@ -7,13 +7,16 @@ import java.awt.event.ActionListener;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class Login1 extends javax.swing.JFrame {
 
     UsuariosController usersController = new UsuariosController();
-
+    NewJFrame framePrincipal = new NewJFrame();
+    String user = "";
+             
     private Timer tiempo;
     int contador;
     int segundos = 30;
@@ -21,30 +24,13 @@ public class Login1 extends javax.swing.JFrame {
     public Login1() {
         initComponents();
         this.setLocationRelativeTo(null);
-        txtCorreo.setText("admin@gmail.com");
-        txtPass.setText("admin");
+        txtCorreo.setText("root");
+        //txtPass.setText("admin");
         barra.setVisible(false);
-    }
-
-    public class BarraProgreso implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            contador++;
-            barra.setValue(contador);
-            if (contador == 100) {
-                tiempo.stop();
-                if (barra.getValue() == 100) {
-                    NewJFrame sis = new NewJFrame();
-                    sis.setVisible(true);
-                    dispose();
-                }
-            }
-        }
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/carro_vacio.png")).getImage());
     }
 
    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -238,6 +224,7 @@ public class Login1 extends javax.swing.JFrame {
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         validaContraseña(txtCorreo.getText(),txtPass.getText());
+        
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
@@ -256,18 +243,21 @@ public class Login1 extends javax.swing.JFrame {
     public boolean validaContraseña(String nombre, String password) {     
         try {
             if (!"".equals(nombre) || !"".equals(password)) {
-                UsuarioDTO user = usersController.usuarioByNombre(nombre.trim());
-                if (user.getPassword() != null) {
-                    if (user.getPassword().equals(getMD5(password))) {
+                UsuarioDTO userDb = usersController.usuarioByNombre(nombre.trim());
+                if (userDb.getPassword() != null) {
+                    if (userDb.getPassword().equals(getMD5(password))) {
+                        user = userDb.getNombre();
                         barra.setVisible(true);
                         contador = -1;
                         barra.setValue(0);
                         barra.setStringPainted(true);
                         tiempo = new Timer(segundos, new BarraProgreso());
-                        tiempo.start();
+                        tiempo.start();                        
+                    }else{
+                       JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrecta","",JOptionPane.ERROR_MESSAGE);       
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Correo o la Contraseña incorrecta");
+                    JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrecta","",JOptionPane.ERROR_MESSAGE);
                 }
             }
         } catch (Exception e) {
@@ -282,7 +272,6 @@ public class Login1 extends javax.swing.JFrame {
             byte[] messageDigest = md.digest(input.getBytes());
             BigInteger number = new BigInteger(1, messageDigest);
             String hashtext = number.toString(16);
-
             while (hashtext.length() < 32) {
                 hashtext = "0" + hashtext;
             }
@@ -292,6 +281,24 @@ public class Login1 extends javax.swing.JFrame {
         }
     }
 
+    
+     public class BarraProgreso implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            contador++;
+            barra.setValue(contador);
+            if (contador == 100) {
+                tiempo.stop();
+                if (barra.getValue() == 100) {
+                    framePrincipal.usuarioCaja.setText(user);
+                    framePrincipal.setVisible(true);
+                    dispose();
+                }
+            }
+        }
+    }
+     
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
