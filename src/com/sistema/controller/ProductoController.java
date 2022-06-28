@@ -32,7 +32,7 @@ public class ProductoController {
         connect = con.connectDatabase();
         try {
             if (nombre.trim().equals("")) {
-                sql = "SELECT * FROM productos LIMIT 10";
+                sql = "SELECT * FROM productos order by idproducto";
             } else {
                 sql = "SELECT * FROM productos WHERE nombre LIKE '%" + nombre.toUpperCase() + "%'";
             }

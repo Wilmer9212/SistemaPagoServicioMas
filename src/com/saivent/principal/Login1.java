@@ -245,6 +245,7 @@ public class Login1 extends javax.swing.JFrame {
             if (!"".equals(nombre) || !"".equals(password)) {
                 UsuarioDTO userDb = usersController.usuarioByNombre(nombre.trim());
                 if (userDb.getPassword() != null) {
+                    System.out.println("Password db :"+userDb.getPassword()+",pass log:"+password);
                     if (userDb.getPassword().equals(getMD5(password))) {
                         user = userDb.getNombre();
                         barra.setVisible(true);
