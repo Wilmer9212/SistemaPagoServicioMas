@@ -9,26 +9,29 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Elliot
+ * @author wilmer
  */
 public class ConexionMysql {
 
-    public Connection conect() {
+    public Connection connectDatabase() {
+        String user = "root";
+        String pass = "red1";
+        String url = "jdbc:mysql://127.0.0.1:3306/agroquimicos";
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/sivent", "will", "Kakaroto1993");
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("show databases;");
-            System.out.println("Connected");
-        } catch (Exception e) {
-            System.out.println(e);
+            con = DriverManager.getConnection(url, user, pass);
+        } catch (java.sql.SQLException sqle) {
+            System.out.println("Error: " + sqle);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return con;
     }
-
 }

@@ -4099,7 +4099,7 @@ public class NewJFrame extends javax.swing.JFrame {
             jDialogProducto.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Shopping_cart.png")).getImage());
             jDialogProducto.setModal(true);
             jDialogProducto.setTitle("LISTA PRODUCTOS");
-            jDialogProducto.setSize(556, 400);
+            jDialogProducto.setSize(550, 400);
             jDialogProducto.setLocationRelativeTo(null);
             jDialogProducto.setVisible(true);
 
@@ -5166,7 +5166,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jd.add(JDBloquear.getContentPane());
         jd.setVisible(true);
         JDBloquear.setTitle("INGRESA CONTRASEÑA");
-        jd.setSize(380, 75);
+        jd.setSize(380,85);
         jd.setLocationRelativeTo(null);
         jd.setDefaultCloseOperation(0);
 
