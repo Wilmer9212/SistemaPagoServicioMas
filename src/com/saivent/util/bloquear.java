@@ -47,7 +47,7 @@ public class bloquear extends JDialog {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if(c == KeyEvent.VK_ENTER){
-                    UsuarioDTO user = controller.usuarioByNombre(usuario);
+                    UsuarioDTO user = null;// controller.usuarioByNombre(usuario);
                     System.out.println("passosos:"+user.getNombre());
                     if(user!=null){
                        

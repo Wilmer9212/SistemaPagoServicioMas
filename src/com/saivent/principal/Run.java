@@ -14,8 +14,6 @@ import com.saivent.view.FRecargas;
 import com.saivent.view.FUnidadesM;
 import com.saivent.view.FVentas;
 import com.sistema.controller.NegocioController;
-import com.sistema.controller.UsuariosController;
-import com.sistema.modelo.UsuarioDTO;
 import java.awt.GridBagConstraints;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
@@ -663,7 +661,7 @@ public class Run extends javax.swing.JFrame {
     }
 
     public boolean validarDesbloquear() {
-        boolean bandera = false;
+      /*  boolean bandera = false;
         try {
             UsuarioDTO user = new UsuariosController().usuarioByNombre(lblUsuario.getText().trim());
             if (user != null) {
@@ -674,7 +672,8 @@ public class Run extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Error al buscar el usuario:" + e.getMessage());
         }
-        return bandera;
+        return bandera;*/
+      return false;
     }
 
     public static String getMD5(String input) {

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -243,11 +244,10 @@ public class Login1 extends javax.swing.JFrame {
     public boolean validaContraseña(String nombre, String password) {     
         try {
             if (!"".equals(nombre) || !"".equals(password)) {
-                UsuarioDTO userDb = usersController.usuarioByNombre(nombre.trim());
-                if (userDb.getPassword() != null) {
-                    System.out.println("Password db :"+userDb.getPassword()+",pass log:"+password);
-                    if (userDb.getPassword().equals(getMD5(password))) {
-                        user = userDb.getNombre();
+                List<UsuarioDTO> userDb = usersController.usuariosAll(nombre.trim());
+                if (userDb.get(0).getPassword() != null) {                    
+                    if (userDb.get(0).getPassword().equals(getMD5(password))) {
+                        user = userDb.get(0).getNombre();
                         barra.setVisible(true);
                         contador = -1;
                         barra.setValue(0);

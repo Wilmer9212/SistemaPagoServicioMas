@@ -14,6 +14,8 @@ public class UsuarioDTO {
     private Integer id;
     private String nombre;
     private String password;
+    private String correo;
+    private String rol;
 
     public Integer getId() {
         return id;
@@ -39,6 +41,23 @@ public class UsuarioDTO {
         this.password = password;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+   
+    
     @Override
     public String toString() {
         return "UsuarioDTO{" + "id=" + id + ", nombre=" + nombre + ", password=" + password + '}';

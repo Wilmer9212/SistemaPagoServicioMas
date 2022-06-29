@@ -48,6 +48,7 @@ import com.taecel.modelo.TransaccionDTO;
 import com.taecel.modelo.carriersModelo;
 import com.taecel.modelo.productoModel;
 import java.awt.AWTEvent;
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dialog;
 import java.awt.Font;
@@ -89,6 +90,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -129,6 +131,13 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         jTabbedPane1.setUI(new javax.swing.plaf.metal.MetalTabbedPaneUI() {
             protected void paintTabArea(Graphics g, int tabPlacement, int selectedIndex) {
+                jTabbedPane1.setEnabledAt(0, false);
+                jTabbedPane1.setEnabledAt(1, false);
+                jTabbedPane1.setEnabledAt(2, false);
+                jTabbedPane1.setEnabledAt(3, false);
+                jTabbedPane1.setEnabledAt(4, false);
+                jTabbedPane1.setEnabledAt(5, false);
+                jTabbedPane1.setEnabledAt(6, false);
             }
         });
         diseñarVentana();
@@ -290,7 +299,7 @@ public class NewJFrame extends javax.swing.JFrame {
         tbTicket.setModel(dtmTicket);
         //llamo el metodo para cargar los metodos de venta
         llenarCBM();
-          setIconImage(new ImageIcon(getClass().getResource("/Imagenes/carro_vacio.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/carro_vacio.png")).getImage());
         //Txt cliente inicia con valor xxx por si es venta a publico el cliente se van con XXXXXXXXXXXXXXXXXXXX
         txtCliente.setText("XXXXXXXXXXXXXXXXXXXXXXXXX");
         //como mi ticket inicia vacio mi boton debe estar inabilitado
@@ -301,6 +310,7 @@ public class NewJFrame extends javax.swing.JFrame {
         btnAdd.setEnabled(false);
         inicioFrame();
         btnConfig.setEnabled(false);
+        //btnUsuarios.setEnabled(false);
     }
 
     /**
@@ -528,29 +538,28 @@ public class NewJFrame extends javax.swing.JFrame {
         lblIdUser = new javax.swing.JLabel();
         jPanel27 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableUsersIndex = new javax.swing.JTable();
         jLabel42 = new javax.swing.JLabel();
         j3 = new javax.swing.JLabel();
         j6 = new javax.swing.JLabel();
         j7 = new javax.swing.JLabel();
         j8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtCodigoUserIndex = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtNombreUserIndex = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        txtCorreoUserIndex = new javax.swing.JTextField();
+        txtPassUserIndex = new javax.swing.JPasswordField();
         jTextField8 = new javax.swing.JTextField();
         j9 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
-        jPasswordField3 = new javax.swing.JPasswordField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtConfirmPassUserIndex = new javax.swing.JPasswordField();
+        cbRolUserIndex = new javax.swing.JComboBox<>();
         j10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnGuardarUserIndex = new javax.swing.JButton();
+        btnModificarUserIndex = new javax.swing.JButton();
+        btnEliminarUserIndex = new javax.swing.JButton();
+        btnAddUserIndex = new javax.swing.JButton();
         jPanel29 = new javax.swing.JPanel();
         panelImg = new FondoPanel();
         lblTitulo = new javax.swing.JLabel();
@@ -3063,96 +3072,136 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("VentaRecargas", jPanel26);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel27.setBackground(new java.awt.Color(85, 112, 148));
+        jPanel27.setForeground(new java.awt.Color(255, 255, 255));
+
+        jTableUsersIndex.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "NOMBRE", "CONTRASEÑA", "CORREO", "ROL"
             }
         ));
-        jScrollPane8.setViewportView(jTable2);
+        jTableUsersIndex.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableUsersIndexMouseClicked(evt);
+            }
+        });
+        jScrollPane8.setViewportView(jTableUsersIndex);
 
         jLabel42.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
         jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel42.setText("PROVEEDORES");
+        jLabel42.setText("USUARIOS");
 
         j3.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        j3.setForeground(new java.awt.Color(255, 255, 255));
         j3.setText("DNI");
 
         j6.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        j6.setForeground(new java.awt.Color(255, 255, 255));
         j6.setText("Nombre");
 
         j7.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        j7.setForeground(new java.awt.Color(255, 255, 255));
         j7.setText("Correo");
 
         j8.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        j8.setForeground(new java.awt.Color(255, 255, 255));
         j8.setText("Contraseña");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField3.setText("jTextField3");
-        jTextField3.setMinimumSize(new java.awt.Dimension(6, 4));
-        jTextField3.setPreferredSize(new java.awt.Dimension(5, 20));
+        txtCodigoUserIndex.setEditable(false);
+        txtCodigoUserIndex.setBackground(new java.awt.Color(85, 112, 148));
+        txtCodigoUserIndex.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtCodigoUserIndex.setForeground(new java.awt.Color(255, 255, 255));
+        txtCodigoUserIndex.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCodigoUserIndex.setText("00000");
+        txtCodigoUserIndex.setBorder(null);
 
         jTextField4.setText("jTextField3");
         jTextField4.setMinimumSize(new java.awt.Dimension(6, 4));
         jTextField4.setPreferredSize(new java.awt.Dimension(5, 20));
 
-        jTextField5.setText("jTextField1");
+        txtNombreUserIndex.setBackground(new java.awt.Color(85, 112, 148));
+        txtNombreUserIndex.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtNombreUserIndex.setForeground(new java.awt.Color(255, 255, 255));
+        txtNombreUserIndex.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNombreUserIndex.setBorder(null);
 
         jTextField6.setText("jTextField3");
         jTextField6.setMinimumSize(new java.awt.Dimension(6, 4));
         jTextField6.setPreferredSize(new java.awt.Dimension(5, 20));
 
-        jTextField7.setText("jTextField1");
+        txtCorreoUserIndex.setBackground(new java.awt.Color(85, 112, 148));
+        txtCorreoUserIndex.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtCorreoUserIndex.setForeground(new java.awt.Color(255, 255, 255));
+        txtCorreoUserIndex.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCorreoUserIndex.setBorder(null);
 
-        jPasswordField2.setText("jPasswordField2");
+        txtPassUserIndex.setBackground(new java.awt.Color(85, 112, 148));
+        txtPassUserIndex.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtPassUserIndex.setForeground(new java.awt.Color(255, 255, 255));
+        txtPassUserIndex.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPassUserIndex.setBorder(null);
 
         jTextField8.setText("jTextField8");
 
         j9.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        j9.setForeground(new java.awt.Color(255, 255, 255));
         j9.setText("Confirma contraseña");
 
         jTextField9.setText("jTextField8");
 
-        jPasswordField3.setText("jPasswordField2");
+        txtConfirmPassUserIndex.setBackground(new java.awt.Color(85, 112, 148));
+        txtConfirmPassUserIndex.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtConfirmPassUserIndex.setForeground(new java.awt.Color(255, 255, 255));
+        txtConfirmPassUserIndex.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtConfirmPassUserIndex.setBorder(null);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbRolUserIndex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Vendedor" }));
 
         j10.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        j10.setForeground(new java.awt.Color(255, 255, 255));
         j10.setText("Rol ");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/aceptar.png"))); // NOI18N
-        jButton1.setText("Guardar");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/modiicar.png"))); // NOI18N
-        jButton4.setText("Modificar");
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eliminar.png"))); // NOI18N
-        jButton5.setText("Eliminar");
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarUserIndex.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnGuardarUserIndex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/aceptar.png"))); // NOI18N
+        btnGuardarUserIndex.setText("Guardar");
+        btnGuardarUserIndex.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGuardarUserIndex.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnGuardarUserIndex.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGuardarUserIndex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnGuardarUserIndexActionPerformed(evt);
             }
         });
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Create.png"))); // NOI18N
+        btnModificarUserIndex.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnModificarUserIndex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/modiicar.png"))); // NOI18N
+        btnModificarUserIndex.setText("Modificar");
+        btnModificarUserIndex.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnModificarUserIndex.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnModificarUserIndex.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        btnEliminarUserIndex.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnEliminarUserIndex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eliminar.png"))); // NOI18N
+        btnEliminarUserIndex.setText("Eliminar");
+        btnEliminarUserIndex.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEliminarUserIndex.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnEliminarUserIndex.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEliminarUserIndex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarUserIndexActionPerformed(evt);
+            }
+        });
+
+        btnAddUserIndex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Create.png"))); // NOI18N
+        btnAddUserIndex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddUserIndexActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
@@ -3163,41 +3212,42 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel27Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(j10))
-                        .addGroup(jPanel27Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jButton1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel27Layout.createSequentialGroup()
                             .addGap(9, 9, 9)
                             .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNombreUserIndex, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCorreoUserIndex, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPassUserIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtConfirmPassUserIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(j3)
                                 .addComponent(j6)
                                 .addComponent(j7)
                                 .addComponent(j8)
                                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(j9)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel27Layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(j10))))
+                        .addGroup(jPanel27Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(cbRolUserIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel27Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(txtCodigoUserIndex)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnAddUserIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel27Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnGuardarUserIndex)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnModificarUserIndex)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminarUserIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+                .addGap(11, 11, 11))
         );
         jPanel27Layout.setVerticalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3208,47 +3258,45 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel27Layout.createSequentialGroup()
                         .addComponent(j3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCodigoUserIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAddUserIndex))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(j6)
-                        .addGap(4, 4, 4)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(txtNombreUserIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(j7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(txtCorreoUserIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(j8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(txtPassUserIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(j9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(txtConfirmPassUserIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(j10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(j10)
+                        .addGap(3, 3, 3)
+                        .addComponent(cbRolUserIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(118, Short.MAX_VALUE))
+                            .addComponent(btnEliminarUserIndex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnModificarUserIndex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnGuardarUserIndex)))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
+                .addGap(118, 118, 118))
         );
 
         jTabbedPane1.addTab("ReporteVentas", jPanel27);
@@ -3413,7 +3461,9 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfigActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-     jTabbedPane1.setSelectedIndex(5);
+        cargarUsuarios("");
+        desabilitarControlesUsuarios();
+        jTabbedPane1.setSelectedIndex(5);
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void txtclientesbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtclientesbKeyReleased
@@ -3618,9 +3668,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         if (jComboBox2.getSelectedItem().toString().toUpperCase().contains("RECARGA")) {
-           // if (leerSaldoRecargas()) {
-                btnRecargar.setEnabled(false);
-                jTabbedPane1.setSelectedIndex(4);
+            // if (leerSaldoRecargas()) {
+            btnRecargar.setEnabled(false);
+            jTabbedPane1.setSelectedIndex(4);
             //}
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
@@ -3972,9 +4022,9 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnmodificarProductosIndexActionPerformed
 
     private void txtBuscarProductosIndexKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductosIndexKeyReleased
-        llenarTbProductos(txtBuscarProductosIndex.getText(), 2);        
+        llenarTbProductos(txtBuscarProductosIndex.getText(), 2);
         txtBuscarProductosIndex.setText(this.txtBuscarProductosIndex.getText().toUpperCase());
-          
+
     }//GEN-LAST:event_txtBuscarProductosIndexKeyReleased
 
     private void btnnuevoProductosIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoProductosIndexActionPerformed
@@ -4223,24 +4273,24 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void btnGenerarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarVentaActionPerformed
         generarVenta();
-        
+
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         if (!txtCantidad.getText().equals("") && Integer.parseInt(txtCantidad.getText().trim()) > 0) {
             ProductoDTO prod = productoController.productoById(Integer.parseInt(txtCodVenta.getText()));
             if (prod.getStock() >= Integer.parseInt(txtCantidad.getText())) {
-                  
-                   int totalTicket = totalEnTicket(Integer.parseInt(txtCodVenta.getText()));
-                     if ((totalTicket + Integer.parseInt(txtCantidad.getText())) <= prod.getStock()) {
-                        insertarDatosTicket();
-                        btnVender.setEnabled(true);
-                        txtCantidad.setText("");
-                        limpiarPrincipal(false);
-                        btnGenerarVenta.setEnabled(true);
-                    }else{
-                        JOptionPane.showMessageDialog(null,"TOTAL DE EXISTENCIAS PARA "+prod.getNombre()+" es:"+prod.getStock(),"",JOptionPane.WARNING_MESSAGE);
-                    }
+
+                int totalTicket = totalEnTicket(Integer.parseInt(txtCodVenta.getText()));
+                if ((totalTicket + Integer.parseInt(txtCantidad.getText())) <= prod.getStock()) {
+                    insertarDatosTicket();
+                    btnVender.setEnabled(true);
+                    txtCantidad.setText("");
+                    limpiarPrincipal(false);
+                    btnGenerarVenta.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "TOTAL DE EXISTENCIAS PARA " + prod.getNombre() + " es:" + prod.getStock(), "", JOptionPane.WARNING_MESSAGE);
+                }
             } else {
                 new MetodosValidar().advertencia("VERIFIQUE EXISTENCIAS");
             }
@@ -4260,10 +4310,10 @@ public class NewJFrame extends javax.swing.JFrame {
                         insertarDatosTicket();
                         txtCantidad.setText("");
                         limpiarPrincipal(false);
-                        btnGenerarVenta.setEnabled(true); 
+                        btnGenerarVenta.setEnabled(true);
                         txtCantidad.setEditable(false);
-                    }else{
-                        JOptionPane.showMessageDialog(null,"TOTAL DE EXISTENCIAS PARA "+prod.getNombre()+" es:"+prod.getStock(),"",JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "TOTAL DE EXISTENCIAS PARA " + prod.getNombre() + " es:" + prod.getStock(), "", JOptionPane.WARNING_MESSAGE);
                     }
 
                 } else {
@@ -4365,9 +4415,57 @@ public class NewJFrame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_sALIRActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btnEliminarUserIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUserIndexActionPerformed
+        int confirmar = JOptionPane.showConfirmDialog(null, "¿Eliminar Registros?", "", JOptionPane.YES_NO_OPTION);
+        if (confirmar == JOptionPane.YES_OPTION) {
+            boolean bandera = new UsuariosController().detelete(Integer.parseInt(txtCodigoUserIndex.getText()));
+            if (bandera) {
+                new MetodosValidar().ok_eliminar();
+                cargarUsuarios("");
+                desabilitarControlesUsuarios();
+            }
+        }
+    }//GEN-LAST:event_btnEliminarUserIndexActionPerformed
+
+    private void jTableUsersIndexMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsersIndexMouseClicked
+        int f = jTableUsersIndex.getSelectedRow();
+        try {
+            txtCodigoUserIndex.setText(jTableUsersIndex.getValueAt(f, 0).toString());
+            txtNombreUserIndex.setText(jTableUsersIndex.getValueAt(f, 1).toString());
+            txtCorreoUserIndex.setText(jTableUsersIndex.getValueAt(f, 3).toString());
+            txtPassUserIndex.setText(jTableUsersIndex.getValueAt(f, 2).toString());
+            txtConfirmPassUserIndex.setText(jTableUsersIndex.getValueAt(f, 2).toString());
+            cbRolUserIndex.setSelectedItem(jTableUsersIndex.getValueAt(f, 4).toString());
+        } catch (Exception e) {
+            System.out.println("Error al recabar datos:" + e.getMessage());
+        }
+
+    }//GEN-LAST:event_jTableUsersIndexMouseClicked
+
+    private void btnAddUserIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUserIndexActionPerformed
+        habilitarControlesUsuarios();
+        habilitarBotonesUsuario();
+    }//GEN-LAST:event_btnAddUserIndexActionPerformed
+
+    private void btnGuardarUserIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarUserIndexActionPerformed
+        UsuarioDTO user = new UsuarioDTO();
+        user.setNombre(txtNombreUserIndex.getText());
+        user.setCorreo(txtCorreoUserIndex.getText());
+        user.setPassword(getMD5(txtPassUserIndex.getText()));
+        user.setRol(cbRolUserIndex.getSelectedItem().toString());
+        if (valEntradasUsuario()) {
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Guardar Registros?", "", JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_OPTION) {
+
+                boolean bandera = new UsuariosController().save(user);
+                if (bandera) {
+                    new MetodosValidar().ok();
+                    cargarUsuarios("");
+                }
+            }
+
+        }
+    }//GEN-LAST:event_btnGuardarUserIndexActionPerformed
 
     public void inicioFrame() {
         //txtSubTotal.setEditable(false);
@@ -4685,7 +4783,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     public void generarVenta() {
-        
+
         Random r = new Random();
         int random = r.nextInt(90000) + 10000;
         int opcion = JOptionPane.showConfirmDialog(null, "¿CONFIRMAR VENTA?", "", JOptionPane.YES_NO_OPTION);
@@ -4720,7 +4818,7 @@ public class NewJFrame extends javax.swing.JFrame {
             for (int y = 0; y < tbTicket.getRowCount(); y++) {
                 ProductoDTO producto = productoController.productoById(Integer.parseInt(tbTicket.getValueAt(y, 0).toString()));
                 int eliminarProductos = productoController.modificarProductoStock(Integer.parseInt(tbTicket.getValueAt(y, 0).toString()), producto.getStock() - Integer.parseInt(tbTicket.getValueAt(y, 3).toString()));
-                  
+
                 DetalleVentaDTO detalle_venta = new DetalleVentaDTO();
                 detalle_venta.setTicket(venta.getIdticket());
                 detalle_venta.setProducto(producto.getNombre());
@@ -4729,10 +4827,10 @@ public class NewJFrame extends javax.swing.JFrame {
                 detalle_venta.setCliente(txtCliente.getText());
                 listaReporte.add(detalle_venta);
                 insertaDetalles = venController.insertarDetalleVenta(detalle_venta);
-               
+
             }
             rpNota.setDetallesVenta(listaReporte);
-            
+
             if (insertaRegistro > 0 && insertaDetalles > 0) {
                 Icon icono = new ImageIcon(getClass().getResource("/Imagenes/applicated.gif"));
                 JOptionPane.showMessageDialog(null, "VENTA EXITOSA" + "\n"
@@ -4749,9 +4847,9 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
 
                 }
-            }            
+            }
         }
-       
+
     }
 
     public String fecha() {
@@ -4772,11 +4870,11 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     public void vaciarTicketMethod() {
-        System.out.println("contador:"+dtmTicket.getRowCount());
+        System.out.println("contador:" + dtmTicket.getRowCount());
         for (int x = 0; x < tbTicket.getRowCount(); x++) {
-            System.out.println("si:"+x);
+            System.out.println("si:" + x);
             dtmTicket.removeRow(x);
-            x -=1;
+            x -= 1;
         }
     }
 
@@ -5242,6 +5340,46 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }//MetodoParaValidarCajasDeTexto
 
+    public boolean valEntradasUsuario() {
+        String mensaje = "";
+        boolean estado = true;
+
+        if (this.txtNombreUserIndex.getText().isEmpty() == true) {
+            mensaje += "NO SE INGRRESO NOMBRE \n";
+            estado = false;
+        }
+
+        if (txtCorreoUserIndex.getText().isEmpty() == true) {
+            mensaje += "NO SE INGRESO CORREO \n";
+            estado = false;
+        } else {
+            if (valcorreo(txtCorreoUserIndex.getText()) == false) {
+                mensaje += "VERIFICA DIRECCION DE CORREO @ \n";
+                estado = false;
+            }
+        }
+
+        if (txtPassUserIndex.getText().isEmpty() == true) {
+            mensaje += "NO SE INGRESO CONTREASEÑA \n";
+            estado = false;
+        }
+
+        if (!txtConfirmPassUserIndex.getText().equals(txtPassUserIndex.getText())) {
+            mensaje += "LAS CONTRASEÑAS NO COINCIDEN \n";
+            estado = false;
+        } else {
+            if (txtConfirmPassUserIndex.getText().length() < 6) {
+                mensaje += "CONTRASEÑA NO CUMPLE CON LONGITUD MINIMA 6 \n";
+                estado = false;
+            }
+        }
+        if (mensaje.length() > 0) {
+            JOptionPane.showMessageDialog(null, mensaje, "", JOptionPane.WARNING_MESSAGE);
+        }
+        return estado;
+
+    }//MetodoParaValidarCajasDeTexto
+
     public void limpiarControlesProducto() {//MetodoLimpiarCajaasDeTexto
         txtnombreProductoIndex.setText("");
         cbunidadProductoIndex.setSelectedIndex(0);
@@ -5354,8 +5492,8 @@ public class NewJFrame extends javax.swing.JFrame {
         int to = 0;
         if (tbTicket.getRowCount() > 0) {
             for (int i = 0; i < tbTicket.getRowCount(); i++) {
-               if (Integer.parseInt(tbTicket.getValueAt(i,0).toString()) == codigoBusqueda) {
-                    to = Integer.parseInt(tbTicket.getValueAt(i,3).toString());
+                if (Integer.parseInt(tbTicket.getValueAt(i, 0).toString()) == codigoBusqueda) {
+                    to = Integer.parseInt(tbTicket.getValueAt(i, 3).toString());
                 }
             }
         }
@@ -5378,7 +5516,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jd.add(JDBloquear.getContentPane());
         jd.setVisible(true);
         JDBloquear.setTitle("INGRESA CONTRASEÑA");
-        jd.setSize(380,85);
+        jd.setSize(380, 85);
         jd.setLocationRelativeTo(null);
         jd.setDefaultCloseOperation(0);
 
@@ -5395,9 +5533,9 @@ public class NewJFrame extends javax.swing.JFrame {
     public boolean validarDesbloquear() {
         boolean bandera = false;
         try {
-            UsuarioDTO user = new UsuariosController().usuarioByNombre(usuarioCaja.getText().trim());
+            List<UsuarioDTO> user = new UsuariosController().usuariosAll(usuarioCaja.getText().trim());
             if (user != null) {
-                if (user.getPassword().equals(getMD5(jPasswordField1.getText().trim()))) {
+                if (user.get(0).getPassword().equals(getMD5(jPasswordField1.getText().trim()))) {
                     bandera = true;
                 }
             }
@@ -5439,17 +5577,70 @@ public class NewJFrame extends javax.swing.JFrame {
         txtPrecioVenta.setText("");
         txtStockDisponible.setText("");
         btnAdd.setEnabled(false);
-       
+
         btnGenerarVenta.setEnabled(false);
         txtnombre.setText("");
         dniCliente.setText("");
         btnVaciarTicket.setEnabled(false);
-        if(bandera){
+        if (bandera) {
             vaciarTicketMethod();
             txtTotal.setText("0.0");
         }
-        
+
     }
+
+    public void cargarUsuarios(String nombre) {
+        DefaultTableModel dtmUsers = new DefaultTableModel();
+        String[] titulos = {"DNI", "NOMBRE", "CONTRASEÑA", "CORREO", "ROL"};
+        dtmUsers.setColumnIdentifiers(titulos);
+        try {
+            List<UsuarioDTO> users = new UsuariosController().usuariosAll(nombre);
+            Object[] ob = new Object[6];
+            for (int i = 0; i < users.size(); i++) {
+                ob[0] = users.get(i).getId();
+                ob[1] = users.get(i).getNombre();
+                ob[2] = users.get(i).getPassword();
+                ob[3] = users.get(i).getCorreo();
+                ob[4] = users.get(i).getRol();
+                dtmUsers.addRow(ob);
+            }
+            jTableUsersIndex.setModel(dtmUsers);
+            JTableHeader header = jTableUsersIndex.getTableHeader();
+            header.setOpaque(false);
+            header.setBackground(new Color(0, 110, 255));
+            header.setForeground(Color.white);
+        } catch (Exception e) {
+            System.out.println("Error al llenar usuarios:" + e.getMessage());
+        }
+
+    }
+
+    public void desabilitarControlesUsuarios() {
+        txtCodigoUserIndex.setEnabled(false);
+        txtNombreUserIndex.setEnabled(false);
+        txtCorreoUserIndex.setEnabled(false);
+        txtPassUserIndex.setEnabled(false);
+        txtConfirmPassUserIndex.setEnabled(false);
+        cbRolUserIndex.setEnabled(false);
+    }
+
+    public void habilitarControlesUsuarios() {
+        txtCodigoUserIndex.setEnabled(true);
+        txtNombreUserIndex.setEnabled(true);
+        txtCorreoUserIndex.setEnabled(true);
+        txtPassUserIndex.setEnabled(true);
+        txtConfirmPassUserIndex.setEnabled(true);
+        cbRolUserIndex.setEnabled(true);
+    }
+
+    public void habilitarBotonesUsuario() {
+        btnAddUserIndex.setEnabled(false);
+        btnEliminarUserIndex.setEnabled(false);
+        btnModificarUserIndex.setText("CANCELAR");
+        btnModificarUserIndex.setIcon(new ImageIcon(getClass().getResource("/recursos/cancelar.png")));
+    }
+
+    
 
     /**
      * @param args the command line arguments
@@ -5500,9 +5691,13 @@ public class NewJFrame extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser Midate;
     private javax.swing.JButton bntBloquear;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddUserIndex;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnConfig;
+    private javax.swing.JButton btnEliminarUserIndex;
     private javax.swing.JButton btnGenerarVenta;
+    private javax.swing.JButton btnGuardarUserIndex;
+    private javax.swing.JButton btnModificarUserIndex;
     private javax.swing.JButton btnNuevaVenta;
     private javax.swing.JButton btnNuevaVenta1;
     private javax.swing.JButton btnNuevaVenta2;
@@ -5533,6 +5728,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnsalir;
     private javax.swing.JComboBox<String> cbMontoCompa;
     public javax.swing.JComboBox<String> cbProductos;
+    private javax.swing.JComboBox<String> cbRolUserIndex;
     private javax.swing.JComboBox<String> cbTipoVenta;
     private javax.swing.JComboBox<String> cbcategoriaProductosIndex;
     private javax.swing.JComboBox<String> cbcolClienteIndex;
@@ -5554,13 +5750,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel j7;
     private javax.swing.JLabel j8;
     private javax.swing.JLabel j9;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JDialog jDialogClientes;
     private javax.swing.JDialog jDialogProducto;
@@ -5641,8 +5832,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
@@ -5656,15 +5845,11 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     public javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableUsersIndex;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JDialog jdVenderSaldo;
@@ -5720,10 +5905,15 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtCodVenta;
     private javax.swing.JTextField txtCodigoProveedorIndex;
+    private javax.swing.JTextField txtCodigoUserIndex;
+    private javax.swing.JPasswordField txtConfirmPassUserIndex;
     private javax.swing.JTextField txtConfirmarNumero;
+    private javax.swing.JTextField txtCorreoUserIndex;
     private javax.swing.JTextField txtDescripcionVenta;
     private javax.swing.JTextField txtEmpresaProveedorIndex;
+    private javax.swing.JTextField txtNombreUserIndex;
     private javax.swing.JTextField txtNumero;
+    private javax.swing.JPasswordField txtPassUserIndex;
     private javax.swing.JTextField txtPrecioVenta;
     private javax.swing.JTextField txtProductoB;
     private javax.swing.JTextField txtStockDisponible;
