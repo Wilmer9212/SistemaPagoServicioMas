@@ -4461,6 +4461,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 if (bandera) {
                     new MetodosValidar().ok();
                     cargarUsuarios("");
+                    limipiarControlesUsuario();
+                    desabilitarControlesUsuarios();
                 }
             }
 
@@ -5639,6 +5641,17 @@ public class NewJFrame extends javax.swing.JFrame {
         btnModificarUserIndex.setText("CANCELAR");
         btnModificarUserIndex.setIcon(new ImageIcon(getClass().getResource("/recursos/cancelar.png")));
     }
+    
+     public void limipiarControlesUsuario() {
+        txtCodigoUserIndex.setText("000");
+        txtNombreUserIndex.setText("");
+        txtCorreoUserIndex.setText("");
+        txtPassUserIndex.setText("");
+        txtConfirmPassUserIndex.setText("");
+        btnModificarUserIndex.setIcon(new ImageIcon(getClass().getResource("/recursos/modificar.png")));
+    }
+    
+    
 
     
 
