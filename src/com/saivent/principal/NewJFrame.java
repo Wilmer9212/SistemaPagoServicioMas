@@ -1760,12 +1760,12 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(5, 5, 5)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)))
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(35, 35, 35))
+                .addGap(50, 50, 50))
         );
 
         jPanel6.setBackground(new java.awt.Color(85, 112, 148));
@@ -3210,7 +3210,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(j3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, Short.MAX_VALUE)
                             .addComponent(jTextField1))
                         .addGap(0, 0, 0)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3336,7 +3336,7 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImgLayout.createSequentialGroup()
                 .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(panelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(bntBloquear, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                    .addComponent(bntBloquear, javax.swing.GroupLayout.PREFERRED_SIZE, 74, Short.MAX_VALUE)
                     .addGroup(panelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnNuevaVenta2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnNuevaVenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4223,15 +4223,16 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void btnGenerarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarVentaActionPerformed
         generarVenta();
-        limpiarPrincipal(true);
+        
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         if (!txtCantidad.getText().equals("") && Integer.parseInt(txtCantidad.getText().trim()) > 0) {
             ProductoDTO prod = productoController.productoById(Integer.parseInt(txtCodVenta.getText()));
             if (prod.getStock() >= Integer.parseInt(txtCantidad.getText())) {
-                    int totalTicket = totalEnTicket(Integer.parseInt(txtCodVenta.getText()));
-                    if ((totalTicket + Integer.parseInt(txtCantidad.getText())) <= prod.getStock()) {
+                  
+                   int totalTicket = totalEnTicket(Integer.parseInt(txtCodVenta.getText()));
+                     if ((totalTicket + Integer.parseInt(txtCantidad.getText())) <= prod.getStock()) {
                         insertarDatosTicket();
                         btnVender.setEnabled(true);
                         txtCantidad.setText("");
@@ -4258,8 +4259,9 @@ public class NewJFrame extends javax.swing.JFrame {
                     if ((totalTicket + Integer.parseInt(txtCantidad.getText())) <= prod.getStock()) {
                         insertarDatosTicket();
                         txtCantidad.setText("");
-                         limpiarPrincipal(false);
-                         btnGenerarVenta.setEnabled(true);                       
+                        limpiarPrincipal(false);
+                        btnGenerarVenta.setEnabled(true); 
+                        txtCantidad.setEditable(false);
                     }else{
                         JOptionPane.showMessageDialog(null,"TOTAL DE EXISTENCIAS PARA "+prod.getNombre()+" es:"+prod.getStock(),"",JOptionPane.WARNING_MESSAGE);
                     }
@@ -4326,7 +4328,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 if (prod.getStock() > 0) {
                     txtCantidad.setText("0");
                     txtCantidad.setEditable(true);
-                    limpiarPrincipal(false);
+                    txtCantidad.setEditable(true);
+                    //limpiarPrincipal(false);
                 } else {
                     new MetodosValidar().advertencia("VERIFIQUE EXISTENCIAS");
                 }
@@ -4682,6 +4685,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     public void generarVenta() {
+        
         Random r = new Random();
         int random = r.nextInt(90000) + 10000;
         int opcion = JOptionPane.showConfirmDialog(null, "¿CONFIRMAR VENTA?", "", JOptionPane.YES_NO_OPTION);
@@ -4716,7 +4720,7 @@ public class NewJFrame extends javax.swing.JFrame {
             for (int y = 0; y < tbTicket.getRowCount(); y++) {
                 ProductoDTO producto = productoController.productoById(Integer.parseInt(tbTicket.getValueAt(y, 0).toString()));
                 int eliminarProductos = productoController.modificarProductoStock(Integer.parseInt(tbTicket.getValueAt(y, 0).toString()), producto.getStock() - Integer.parseInt(tbTicket.getValueAt(y, 3).toString()));
-
+                  
                 DetalleVentaDTO detalle_venta = new DetalleVentaDTO();
                 detalle_venta.setTicket(venta.getIdticket());
                 detalle_venta.setProducto(producto.getNombre());
@@ -4725,16 +4729,17 @@ public class NewJFrame extends javax.swing.JFrame {
                 detalle_venta.setCliente(txtCliente.getText());
                 listaReporte.add(detalle_venta);
                 insertaDetalles = venController.insertarDetalleVenta(detalle_venta);
-
+               
             }
             rpNota.setDetallesVenta(listaReporte);
-
+            
             if (insertaRegistro > 0 && insertaDetalles > 0) {
                 Icon icono = new ImageIcon(getClass().getResource("/Imagenes/applicated.gif"));
                 JOptionPane.showMessageDialog(null, "VENTA EXITOSA" + "\n"
                         + "TIKCET:" + venta.getIdticket() + "\n"
                         + "TOTAL:" + txtTotal.getText() + "\n"
                         + "FECHA:" + fecha(), "", JOptionPane.PLAIN_MESSAGE, icono);
+                limpiarPrincipal(true);
                 int opcionr = JOptionPane.showConfirmDialog(null, "¿IMPRIMIR NOTA?", "", JOptionPane.YES_NO_OPTION);
                 if (opcionr == JOptionPane.YES_OPTION) {
                     if (cbTipoVenta.getSelectedItem().toString().contains("CLIE")) {
@@ -4744,9 +4749,9 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
 
                 }
-            }
-            vaciarTicketMethod();
+            }            
         }
+       
     }
 
     public String fecha() {
@@ -4767,8 +4772,11 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     public void vaciarTicketMethod() {
-        for (int i = 0; i < tbTicket.getRowCount(); i++) {
-            dtmTicket.removeRow(i);
+        System.out.println("contador:"+dtmTicket.getRowCount());
+        for (int x = 0; x < tbTicket.getRowCount(); x++) {
+            System.out.println("si:"+x);
+            dtmTicket.removeRow(x);
+            x -=1;
         }
     }
 
@@ -5067,7 +5075,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }
 
-    /*=======================FINISH CLIENTE========================*/
+    /*=======================FINISH CLIENTE=====================*/
  /*======================INICIA PROVEEDOR=======================*/
     private void carga_informacion_Prov(String nombre) {
         List<ProveedorDTO> listaProv = null;
@@ -5346,8 +5354,8 @@ public class NewJFrame extends javax.swing.JFrame {
         int to = 0;
         if (tbTicket.getRowCount() > 0) {
             for (int i = 0; i < tbTicket.getRowCount(); i++) {
-                if (Integer.parseInt(tbTicket.getValueAt(0, i).toString()) == codigoBusqueda) {
-                    to = Integer.parseInt(tbTicket.getValueAt(i, 3).toString());
+               if (Integer.parseInt(tbTicket.getValueAt(i,0).toString()) == codigoBusqueda) {
+                    to = Integer.parseInt(tbTicket.getValueAt(i,3).toString());
                 }
             }
         }
@@ -5431,13 +5439,14 @@ public class NewJFrame extends javax.swing.JFrame {
         txtPrecioVenta.setText("");
         txtStockDisponible.setText("");
         btnAdd.setEnabled(false);
-        txtTotal.setText("0.0");
+       
         btnGenerarVenta.setEnabled(false);
         txtnombre.setText("");
         dniCliente.setText("");
         btnVaciarTicket.setEnabled(false);
         if(bandera){
             vaciarTicketMethod();
+            txtTotal.setText("0.0");
         }
         
     }

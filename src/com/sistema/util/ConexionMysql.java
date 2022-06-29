@@ -21,8 +21,8 @@ public class ConexionMysql {
 
     public Connection connectDatabase() {
         String user = "root";
-        String pass = "red1";
-        String url = "jdbc:mysql://127.0.0.1:3306/agroquimicos";
+        String pass = "root";
+        String url = "jdbc:mysql://127.0.0.1:3306/sivent";
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
